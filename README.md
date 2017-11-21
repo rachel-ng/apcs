@@ -2,7 +2,7 @@
 
 Rachel Ng, Pd. 10
 
-Directories
+#Directories#
   - 01SuperArray
   - 02OrderedSuperArray
   - 03WordSearch
