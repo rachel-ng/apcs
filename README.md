@@ -1,5 +1,3 @@
 # MKS21X
 
-Rachel Ng 
-
-Pd. 10
+Rachel Ng, Pd. 10
