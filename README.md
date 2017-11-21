@@ -2,11 +2,7 @@
 
 APCS Pd. 10
 
-
-
-
-
-# Directories
+Directories
 
   - 01SuperArray
   - 02OrderedSuperArray
