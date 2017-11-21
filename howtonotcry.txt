@@ -1,0 +1,12 @@
+1. pull before starting
+2. push after finishing
+
+
+to clone 
+	git clone (ssh link)
+
+to add 
+	git add (file name/path)
+
+to commit
+	git commit -m "(comment)"
