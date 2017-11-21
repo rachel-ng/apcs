@@ -2,7 +2,8 @@
 
 APCS Pd. 10
 
-# Directories
+# Important Stuff
+
   - 01SuperArray
   - 02OrderedSuperArray
   - 03WordSearch
