@@ -9,4 +9,4 @@ to add
 	git add (file name/path)
 
 to commit
-	git commit -m "(comment)"
+	git commit -m "(a comment, hopefully something that's actually useful)"
