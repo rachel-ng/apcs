@@ -10,4 +10,4 @@ Directories
   - 05Library
 
 Stuff 
-  - hownottocry.txt
+  - howtonotcry.txt
