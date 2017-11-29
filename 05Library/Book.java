@@ -7,7 +7,7 @@ public class Book {
 	
     }
     
-    public Book (String auth, String titl, String bookNum) {
+    public Book (String titl, String auth, String bookNum) {
 	title = titl;
 	author = auth;
 	ISBN = bookNum;
