@@ -6,5 +6,5 @@ Directories
   - 01SuperArray
   - 02OrderedSuperArray
   - 03WordSearch
-  - 04ReversedCharSequence
+  - 04ReversedCharSeq
   - 05Library
