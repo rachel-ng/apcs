@@ -1,6 +1,6 @@
-# [**MKS21X**](http://www.stuycs.org/courses/apcs/k/notes)
+# **MKS21X**
 
-APCS Pd. 10
+[APCS Pd. 10](http://www.stuycs.org/courses/apcs/k/notes)
 
 Directories
   - 01SuperArray
