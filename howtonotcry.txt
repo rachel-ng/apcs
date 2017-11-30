@@ -2,7 +2,8 @@
 2. remember to add and commit changes
 	a. write useful comments when commiting 
 	b. you may want to push afterwards so it shows up in github
-?. push after finishing
+3. push after finishing
+?. profit
 
 to clone 
 	git clone (ssh link)
