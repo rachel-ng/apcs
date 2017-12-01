@@ -13,3 +13,8 @@ to add
 
 to commit
 	git commit -m "(comment)"
+	
+	
+	
+	
+	
