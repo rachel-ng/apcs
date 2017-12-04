@@ -8,6 +8,8 @@ Directories
   - 03WordSearch
   - 04ReversedCharSeq
   - 05Library
+  - 06SuperArrayIterator
+  - 07Barcode
 
 Stuff 
   - howtonotcry.txt
