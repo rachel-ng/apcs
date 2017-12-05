@@ -1,4 +1,4 @@
-public abstract class Barcode implements Comparable<Barcode>{
+public class Barcode{
     private String _zip;
     String[] code = new String[] {"||:::", ":::||", "::|:|", "::||:", ":|::|", ":|:|:", ":||::", "|:::|", "|::|:", "|:|::", "||:::"};
 
@@ -8,7 +8,9 @@ public abstract class Barcode implements Comparable<Barcode>{
 	if (zip.length() != 5) {
 	    throw new IllegalArgumentException();
 	}
-	_zip = zip;
+	else {
+	    _zip = zip;
+	}
     }
 
     public String getZip () {
@@ -16,11 +18,11 @@ public abstract class Barcode implements Comparable<Barcode>{
     }
 
     public String getCode () {
-	return converted(_zip);
+	return toCode(_zip);
     }
 
     public String toString () {
-	return getCode() + "\n" + getZip() + checkSum() + "\tEMACS STOP DELETING MY CODE ASDFGHJKL";
+	return getCode() + " (" +  getZip() + checkSum() + ")"+ "\nEMACS STOP DELETING MY CODE ASDFGHJKL";
     }
 
     public int checkSum () {
@@ -36,14 +38,25 @@ public abstract class Barcode implements Comparable<Barcode>{
 	return code[num];
     }
 
-    private String converted (String zip) {
-	String zipco = zip;
+    private static String toCode (String zip) {
 	String bar = "|";
 	int num = 0;
-	for (int i = 0; i < zipco.length(); i++) {
-	    bar += converter(Integer.parseInt(zip.substring(i,i+1)));
+	if (zip.length() != 5) {
+	    throw new IllegalArgumentException();
 	}
-	return bar + converter(checkSum()) +  "|";
+	
+	else {
+	    for (int i = 0; i < zip.length(); i++) {
+		bar += converter(Integer.parseInt(zip.substring(i,i+1)));
+	    }
+	    return bar + converter(checkSum()) +  "|";
+	}
+    }
+
+    public String toZip (String code) {
+	if (code.length() != 32) {
+	    throw new IllegalArgumentException();
+	}
     }
 
     //    public int compareTo (Barcode other) {
