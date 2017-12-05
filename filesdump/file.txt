@@ -1,0 +1,14 @@
+galaxy
+supernova
+star
+sun
+moon
+planet
+dwarf
+satellite
+eclipse
+blackhole
+solar
+lunar
+comet
+meteorite
