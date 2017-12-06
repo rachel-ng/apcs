@@ -1,4 +1,4 @@
-public class Barcode{
+public class Barcode implements Comparable<Barcode>{
 
     private String _zip;
     private String barcode;
@@ -109,7 +109,11 @@ public class Barcode{
 	return zip.substring(0,5);
     }
 
-    //public int compareTo (Barcode other) {
-    //return this.getZip().compareTo(other.getZip());
-    //}
+    public boolean equal (Barcode other) {
+	return this.getZip().compareTo(other.getZip()) == 0;
+    }
+    
+    public int compareTo (Barcode other) {
+	return this.getZip().compareTo(other.getZip());
+    }
 }
