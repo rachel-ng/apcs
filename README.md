@@ -12,6 +12,6 @@ Directories
   - 07Barcode
 
 Stuff 
-  - howtonotcry.txt
+  - howtonotcry.txt [jk just cry]
 
 ~*sends help*~
