@@ -7,6 +7,12 @@ public class Driver {
 	System.out.println(halp.toZip(halp.getCode()));
 	System.out.println(halp.equal(meh));
 	System.out.println(halp.toString());
+
+	System.out.println(meh.getZip() + "\t" + halp.checkSum());
+	System.out.println(meh.getCode());
+	System.out.println(meh.toZip(meh.getCode()));
+	System.out.println(meh.equal(halp));
+	System.out.println(meh.toString());	
     }
 }
 	   
