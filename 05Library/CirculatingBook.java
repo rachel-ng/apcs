@@ -2,10 +2,10 @@ public class CirculatingBook extends LibraryBook {
     private String currentHolder;
     private String dueDate;
 
-    public CirculatingBook (String au, String ti, String is, String cn, String ch, String dd) {
+    public CirculatingBook (String au, String ti, String is, String cn) {
 	super(au, ti, is, cn);
-	currentHolder = ch;
-	dueDate = dd;
+	currentHolder = null;
+	dueDate = null;
     }
 
     public String getCurrentHolder () {
@@ -25,8 +25,8 @@ public class CirculatingBook extends LibraryBook {
     }
 
     public void checkout (String patron, String due) {
-	setCurrentHolder(patron);
-	setDueDate(due);
+	currentHolder = patron;
+	dueDate = due;
     }
 
     public void returned () {
@@ -44,6 +44,6 @@ public class CirculatingBook extends LibraryBook {
     }
 
     public String toString () {
-	return super.toString() + ", " + circulationStatus() + ", "  + currentHolder + ", " + dueDate;
+	return super.toString() + ", " + circulationStatus() ;
     }
 }
