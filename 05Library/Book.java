@@ -3,14 +3,12 @@ public class Book {
     private String title;
     private String ISBN;
 
-    public null Book () {
-	
-    }
+    public Book () {}
     
-    public Book (String titl, String auth, String bookNum) {
-	title = titl;
-	author = auth;
-	ISBN = bookNum;
+    public Book (String au, String ti, String is) {
+	author = au;
+	title = ti;
+	ISBN = is;
     }
 
     public String getAuthor () {
@@ -25,20 +23,20 @@ public class Book {
 	return ISBN;
     }
     
-    public void setAuthor (String auth) {
-	author = auth;
+    public void setAuthor (String au) {
+	this.author = au;
     }
 
-    public void setTitle (String titl) {
-	title = titl;
+    public void setTitle (String ti) {
+	this.title = ti;
     }
 
-    public void setISBN (String bookNum) {
-	ISBN = bookNum;
+    public void setISBN (String is) {
+	this.ISBN = is;
     }
 
     public String toString () {
-	return "Title: " + title + "\nAuthor: " + author + "\nISBN: " + ISBN; 
+	return title + ", " + author + ", " + ISBN; 
     }
     
 }
