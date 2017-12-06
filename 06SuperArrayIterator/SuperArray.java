@@ -1,10 +1,12 @@
+import java.util.*;
+
 public class SuperArray {
     private String[] data;
     private int size; 
 
     public SuperArray () {
-	String[] data = new String[10];
-	int size = 0;
+	data = new String[10];
+	size = 0;
     }
 
     public void clear () {
@@ -116,10 +118,8 @@ public class SuperArray {
 	size -= 1;
 	return toReturn;	
     }
-	   
-    public boolean remove (String element) {
-	int index = indexOf(element);
-	remove(index);
-	return true;
+
+    public Iterator<String> iterator() {
+	return new SuperArrayIterator(data, 0, size() - 1);
     }
 }
