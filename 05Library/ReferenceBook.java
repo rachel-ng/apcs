@@ -27,7 +27,7 @@ public class ReferenceBook extends LibraryBook {
     }
 
     public String toString () {
-	return getTitle() + ", " + getAuthor() + ", " + getISBN() + ", " + circulationStatus() + ", " + getCallNumber() + ", " + getCollection();
+	return super.toString() + ", " + circulationStatus() + ", " + getCallNumber() + ", " + getCollection();
     }
 
 }
