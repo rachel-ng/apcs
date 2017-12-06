@@ -1,7 +1,7 @@
 public class ReferenceBook extends LibraryBook {
     private String collection;
 
-    public LibraryBook (String au, String ti, String is, String cn, String co) {
+    public ReferenceBook (String au, String ti, String is, String cn, String co) {
 	super(au, ti, is, cn);
 	collection = co;
     }
