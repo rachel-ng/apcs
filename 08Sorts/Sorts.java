@@ -43,7 +43,7 @@ public class Sorts{
 		    min = data[x];
 		    num = x;
 		}
-		if (data[i] > min) {
+		if (min < data[i]) {
 		    data[num] = data[i];
 		    data[i] = min;
 		}
@@ -51,7 +51,7 @@ public class Sorts{
 	}
     }
 	
-    /*
+    
     public static void main (String[]artie){
         int[] randish = new int[5];
         for(int i = 0 ; i < randish.length; i++){
@@ -62,5 +62,5 @@ public class Sorts{
         selectionSort(randish);
 	System.out.println(Arrays.toString(randish));
     }
-    */
+    
 }
