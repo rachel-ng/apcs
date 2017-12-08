@@ -51,6 +51,18 @@ public class Sorts{
 	}
     }
 
+    public static void insertionSort (int[] data) {
+	int num = 0;
+	while (num < data.length) {
+	    int i = num;
+	    while (i > 0 && data[i] > data[i-1]) {
+		swap(data,i,i-1);
+		i = i - 1;
+	    }
+	    num ++;
+	}
+    }
+
     /*
     public static void main (String[]artie){
         int[] randish = new int[5];
