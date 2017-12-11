@@ -78,11 +78,7 @@ public class Sorts{
         for(int i = 0 ; i < randish.length; i++){
             randish[i] =(int)(Math.random()*100);
         }
-
-	int[] randish1 = randish;
-	int[] randish2 = randish; 
 	
-	/*
 	int[] randish1 = new int[5];
         for(int i = 0 ; i < randish1.length; i++){
             randish1[i] =(int)(Math.random()*100);
@@ -92,8 +88,7 @@ public class Sorts{
         for(int i = 0 ; i < randish2.length; i++){
             randish2[i] =(int)(Math.random()*100);
         }
-	*/
-
+	
         System.out.println(Arrays.toString(randish));
         selectionSort(randish);
 	System.out.println(Arrays.toString(randish));
@@ -101,9 +96,11 @@ public class Sorts{
 	System.out.println(Arrays.toString(randish1));
         insertionSort(randish1);
 	System.out.println(Arrays.toString(randish1));
+
 	/*
 	System.out.println(Arrays.toString(randish2));
         bubbleSort(randish2);
-	System.out.println(Arrays.toString(randish2));*/
+	System.out.println(Arrays.toString(randish2));
+	*/
     }
 }
