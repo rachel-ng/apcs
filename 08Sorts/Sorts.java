@@ -2,10 +2,9 @@ import java.util.Arrays;
 
 public class Sorts{
     public static String name (){
-	return "01.Ng.Rachel";
+	return "10,Ng,Rachel";
     }
     
-    /* 
     public static boolean isSorted (int[]ary){
         for(int i = 0; i < ary.length - 1 ; i++){
 	    if(ary[i] > ary[i+1]){
@@ -31,7 +30,6 @@ public class Sorts{
 	ary[a] = ary[b];
         ary[b] = c;
     }  
-    */
 
     public static void selectionSort (int[] data) {
 	int num = 0;
@@ -53,9 +51,10 @@ public class Sorts{
 
     public static void insertionSort (int[] data) {
 	int num = 0;
+	
 	while (num < data.length) {
 	    int i = num;
-	    while (i > 0 && data[i] > data[i-1]) {
+	    while (i > 0 && data[i] < data[i-1]) {
 		swap(data,i,i-1);
 		i = i - 1;
 	    }
@@ -63,16 +62,23 @@ public class Sorts{
 	}
     }
 
-    /*
     public static void main (String[]artie){
         int[] randish = new int[5];
         for(int i = 0 ; i < randish.length; i++){
             randish[i] =(int)(Math.random()*100);
         }
 
+	int[] randish1 = new int[5];
+        for(int i = 0 ; i < randish1.length; i++){
+            randish1[i] =(int)(Math.random()*100);
+        }
+
         System.out.println(Arrays.toString(randish));
         selectionSort(randish);
 	System.out.println(Arrays.toString(randish));
+
+	System.out.println(Arrays.toString(randish1));
+        insertionSort(randish1);
+	System.out.println(Arrays.toString(randish1));
     }
-    */
 }
