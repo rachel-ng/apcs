@@ -16,4 +16,9 @@ to commit
 
 to pull / push
 	git pull (before starting work)
-	git push (when you finish work) 
+	git push (when you finish work)
+
+other things:
+- [google](www.google.com) is your friend
+- yes, it's too late to drop all of your classes, move to the andes and live with llamas now
+- no, don't let ting convince you to buy $200 worth of tea at 2am
