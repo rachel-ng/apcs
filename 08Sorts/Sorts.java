@@ -73,7 +73,7 @@ public class Sorts{
 	}
     }
 
-    public static void main (String[]artie){
+    public static void main (String[]arg){
         int[] randish = new int[5];
         for(int i = 0 ; i < randish.length; i++){
             randish[i] =(int)(Math.random()*100);
