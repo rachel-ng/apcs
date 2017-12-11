@@ -13,8 +13,7 @@ to add
 
 to commit
 	git commit -m "(comment)"
-	
-	
-	
-	
-	
+
+to pull / push
+	git pull (before starting work)
+	git push (when you finish work) 
