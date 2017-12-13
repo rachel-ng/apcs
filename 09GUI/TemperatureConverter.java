@@ -17,7 +17,7 @@ public class TemperatureConverter extends JFrame {
 	this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 	pane = this.getContentPane();
-	pane.setLayour(new FlowLayout());
+	pane.setLayout(new FlowLayout());
 
 	a = new JButton("Convert");
 	l = new JLabel("Temperature");
@@ -31,5 +31,6 @@ public class TemperatureConverter extends JFrame {
 	pane.add(c);
     }
 
+    public static void main (
     
 }
