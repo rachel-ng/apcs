@@ -1,3 +1,32 @@
-public interface ReversedCharSeq implements CharSequence{
-    System.out.println("Send help."); 
+public class ReversedCharSeq implements CharSequence{
+    String data; 
+
+    public ReversedCharSeq(ReversedCharSequence r) {
+	data = r.toString(); 
+    }
+
+    public ReversedCharSeq subSequence (int start, int end) {
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

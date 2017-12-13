@@ -1,4 +1,4 @@
-public class temperature {
+public class Temperature {
     public static double CtoF (double t) {
 	return (t * 1.8) + 32;
     }

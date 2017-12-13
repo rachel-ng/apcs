@@ -11,7 +11,11 @@ public class ButtonsWork extends JFrame {
 
     public void actionPerformed (ActionEvent e) {
 	String s = e.getActionCommand();
-	// System.out.println(s);
+	System.out.println(s);
+	if (s.equals("ByteMe")) {
+	    t.setText("What do you want?");
+	}
+	
     }
     
     public ButtonsWork() {
@@ -25,14 +29,12 @@ public class ButtonsWork extends JFrame {
 	b = new JButton("ByteMe");
 	c = new JCheckBox("OverClocked");
 	t = new JTextField(15);
-
-	b.addActionListener(this);
-	c.addActionListener(this);
-	t.addActionListener(this);
-	
       	pane.add(t);
 	pane.add(c);
 	pane.add(b);
+	b.addActionListener();
+	c.addActionListener();
+	t.addActionListener();
 
     }
 
