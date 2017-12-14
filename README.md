@@ -14,6 +14,6 @@ Directories
   - 09GUI
 
 Stuff 
-  - howtonotcry.txt [jk just cry]
+  - [howtonotcry.txt](https://github.com/rachel-ng/MKS21X/blob/master/howtonotcry.txt) [jk just cry]
 
 ~*sends help*~
