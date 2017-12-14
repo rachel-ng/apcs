@@ -14,6 +14,9 @@ to add
 to commit
 	git commit -m "(comment)"
 
+to remove
+	git rm (file name/path)
+
 to pull / push
 	git pull (before starting work)
 	git push (when you finish work)
@@ -22,12 +25,8 @@ other things:
 - [google](www.google.com) is your friend
 - yes, it's too late to drop all of your classes, move to the andes and live with alpacas now
 	- ok stop searching up the differences between alpacas and llamas it's 2am 
-- no, don't let ting convince you to buy $200 worth of tea at 2am
 - dO yOuR hOmEwOrK
 	- tRy YoUr BeSt
-- mother (teresa) knows best 
-- eugene is asian jesus
-- do not play league with nate at 3am 
 
 
 
