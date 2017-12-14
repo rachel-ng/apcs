@@ -11,6 +11,7 @@ Directories
   - 06SuperArrayIterator
   - 07Barcode
   - 08Sorts
+  - 09GUI
 
 Stuff 
   - howtonotcry.txt [jk just cry]
