@@ -14,8 +14,8 @@ Directories
   - 09GUI
 
 Stuff 
-  - [howtonotcry.txt](https://github.com/rachel-ng/MKS21X/blob/master/howtonotcry.txt) [jk just cry]
+  - [howtonotcry.txt](https://github.com/rachel-ng/MKS21X/blob/master/asdfghjkl/howtonotcry.txt) [jk just cry]
 
-rng writes a [rng](https://github.com/rachel-ng/MKS21X/blob/master/rng.java) to generate the [number of tears](https://github.com/rachel-ng/MKS21X/blob/master/tearscried.png) spilled over cs
+rng writes a [rng](https://github.com/rachel-ng/MKS21X/blob/master/asdfghjkl/rng.java) to generate the [number of tears](https://github.com/rachel-ng/MKS21X/blob/master/asdfghjkl/tearscried.png) spilled over cs
 
 ~*sends help*~
