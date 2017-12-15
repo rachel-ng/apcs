@@ -16,4 +16,6 @@ Directories
 Stuff 
   - [howtonotcry.txt](https://github.com/rachel-ng/MKS21X/blob/master/howtonotcry.txt) [jk just cry]
 
+rng writes a rng to generate the number of tears spilled over cs
+
 ~*sends help*~
