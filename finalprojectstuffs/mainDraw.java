@@ -10,6 +10,10 @@ public class mainDraw extends JComponent {
     public int x = 100;
     public int y = 100;
 
+    public void paint(Graphics g) {
+
+    }
+    
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.drawRect(x, y, 5, 5);
