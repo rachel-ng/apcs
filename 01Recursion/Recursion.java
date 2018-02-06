@@ -56,4 +56,25 @@ public class Recursion {
 	    return s;
 	}
     }
+
+    public boolean isPrime(int n) {
+        if (n == 1) {
+	    return false;
+	}
+	else {
+	    return halpPrime(n, 2);
+	}
+    }
+
+    public boolean halpPrime(int n, int mult) {
+	if (n == mult - 1) {
+	    return false;
+	}
+	if (n % mult == 0) {
+	    return true;
+	}
+	else {
+	    return halpPrime(n, mult + 1);
+	}
+    }
 }
