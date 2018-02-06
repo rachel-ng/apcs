@@ -56,10 +56,13 @@ public class Recursion {
 	    return s;
 	}
     }
-
+    
     public boolean isPrime(int n) {
+	if (n <= 0) {
+	    throw new IllegalArgumentException();
+	}
         if (n == 1) {
-	    return false;
+	    return true;
 	}
 	else {
 	    return halpPrime(n, 2);
@@ -67,11 +70,11 @@ public class Recursion {
     }
 
     public boolean halpPrime(int n, int mult) {
-	if (n == mult - 1) {
-	    return false;
+	if (n == mult + 1) {
+	    return true;
 	}
 	if (n % mult == 0) {
-	    return true;
+	    return false;
 	}
 	else {
 	    return halpPrime(n, mult + 1);
