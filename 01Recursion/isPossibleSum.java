@@ -9,7 +9,7 @@ public class isPossibleSum {
 	    System.out.println(sum);
 	    return sum == target;
 	}
-	return halp(n,target,
+	return (halp(n,target,current + 1,sum + current) || halp(n,target,current + 1,sum));
     }
 
 }
