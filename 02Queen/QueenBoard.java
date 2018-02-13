@@ -121,6 +121,13 @@ public class QueenBoard {
 	}
 	return false;
     }
+
+    public boolean halp(int c) {
+	if (c == board.length) {
+	    return true;
+	}
+	if (
+    }
     
     /*
     public int countSolutions() {
