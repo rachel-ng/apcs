@@ -1,21 +1,20 @@
 public class QueenBoard {
     private int[][] board;
-
+    
     public QueenBoard(int size) {
 	board = new int[size][size];
 	for (int r = 0; r < board.length; r++) {
-	    for (int c = 0; c < board[r].length; c++) {
+	    for (int c = 0; c < board.length; c++) {
 		board[r][c] = 0;
 	    }
 	}
     }
 
     private boolean addQueen(int r, int c) {
-	if (r < board.length && c < board[r].length) {
+	if (r < board.length && c < board.length) {
 	    if (board[r][c] == 0) {
 		board[r][c]--;
 		nope(r,c);
-		System.out.println("addQueen(" + r + "," + c + ")");
 		return true;
 	    }
 	    else {
@@ -56,11 +55,10 @@ public class QueenBoard {
     }
     
     private boolean removeQueen(int r, int c) {
-	if (r < board.length && c < board[r].length) {
+	if (r < board.length && c < board.length) {
 	    if (board[r][c] == -1) {
 		board[r][c]++;
 		abort(r,c);
-		System.out.println("removeQueen(" + r + "," + c + ")");
 		return true;
 	    }
 	    else {
@@ -102,14 +100,13 @@ public class QueenBoard {
     public String toString() {
 	String brd= "";
 	for (int r = 0; r < board.length; r ++) {
-	    for (int c = 0; c < board[r].length; c++) {
+	    for (int c = 0; c < board.length; c++) {
 		if (board[r][c] == -1) {
 		    brd += "Q ";
-		    //brd += board[r][c] + "\t";
 		}
 		else {
-		    //brd += "_ ";
-		    brd += board[r][c] + " "; //+ "\t";
+		    brd += "_ ";
+		    //brd += board[r][c] + " "; //+ "\t";
 		}
 	    }
 	    brd += "\n";
@@ -118,68 +115,108 @@ public class QueenBoard {
     }
     
     public boolean solve() {
-	if (board[0][0] != 0) {
-	    throw new IllegalStateException();
-	}
-	if (solver(0)) {
-	    System.out.println(countSolutions());
-	}
-	else {
-	    for (int r = 0; r < board.length; r++) {
-		for (int c = 0; c < board[r].length; c++) {
-		    if (board[r][c] == 0) {
-			return false;
-		    }
-		    board[r][c] = 0;
+	for (int r = 0; r < board.length; r++) {
+	    for (int c = 0; c < board.length; c++) {
+		if (board[r][c] != 0) {
+		    throw new IllegalStateException();
 		}
 	    }
 	}
-	return false;
+	return solver(0);
     }
 
-    public boolean solver(int col) {
+    private boolean solver(int col) {
 	if (col == board.length) {
 	    return true;
 	}
-	for (int rr = 0; rr < board[rr].length; rr++) {
-	    System.out.println(rr + " " + col);
-	    if (board[rr][col] == -1) {
-		col++;
-	    }
-	    if (addQueen(rr,col)) {
-		System.out.println(toString());
+	for (int r = 0; r < board.length; r++) {
+	    if (addQueen(r,col)) {
 		if (solver(col + 1)) {
 		    return true;
 		}
 	    }
-	    removeQueen(rr,col);
+	    removeQueen(r,col);
 	}
 	return false;
     }
-    
+
     public int countSolutions() {
-	int count = 0;
 	for (int r = 0; r < board.length; r++) {
-	    for (int c = 0; c < board[r].length; c++) {
-		if (board[r][c] == -1) {
-		    count++;
+	    for (int c = 0; c < board.length; c++) {
+		if (board[r][c] != 0) {
+		    throw new IllegalStateException();
 		}
-		board[r][c] = 0;
 	    }
 	}
-	// board[0][0] = 1; // used to test IllegalStateException
-	if (board[0][0] != 0) {
-	    throw new IllegalStateException();
+	return countSol(0); 
+    }
+
+    private int countSol(int col) {
+	int sol = 0;
+	if (col == board.length) {
+	    return 1;
 	}
-	return count;
+	for (int r = 0; r < board.length; r++) {
+	    if (addQueen(r,col)) {
+		sol += countSol(col + 1);
+	    }
+	    removeQueen(r,col);
+	}
+	return sol;
     }
     
-    public static void main (String[] args) {
-	QueenBoard b = new QueenBoard(5);
+    public static void main (String[] args) { // My Driver
+	QueenBoard a = new QueenBoard(10);
+	QueenBoard b = new QueenBoard(10);
+
+	// System.out.println("B R D   A\n ");
+	// System.out.println(a.toString());
+	// System.out.println(a.addQueen(1,2));
+	// System.out.println(a.toString());
+	// System.out.println(a.removeQueen(1,2));
+	// System.out.println(a.toString());
+	
 	System.out.println(b.toString());
-	System.out.println("\n- - - - -\n");
+	//System.out.println(b.solve());
 	System.out.println(b.toString());
-	System.out.println(b.solve());
-	System.out.println(b.toString());
+	System.out.println(b.countSolutions());
     }
+
+
+    /*
+    public static void main(String[] args){ // Crystal's Driver for Queen Board
+	QueenBoard b = new QueenBoard(4);
+
+	System.out.println(b.solve()); //prints true
+	System.out.println(b); //prints a valid solution
+
+	try{
+	    b.solve();
+	}catch(IllegalStateException e){
+	    System.out.println("Error: The board contains non-zero values");
+	} //prints "Error: The board contains non-zero values"
+	
+	try{
+	b.countSolutions();
+	}catch(IllegalStateException e){
+	    System.out.println("Error: The board contains non-zero values");
+	} //prints "Error: The board contains non-zero values"
+	
+	for (int i = 0; i < 12; i++){
+	    QueenBoard a = new QueenBoard(i);
+	    System.out.println("# of Solutions for " + i + ": " + a.countSolutions());
+	    /*          Expected Values
+			i --> # of Solutions   i --> # of Solutions
+			0 --> 1                      6 --> 4
+			1 --> 1                      7 --> 40
+			2 --> 0                      8 --> 92
+			3 --> 0                      9 --> 352
+			4 --> 2                    10 --> 724
+			5 --> 10                  11 --> 2680
+	    */
+    /*
+	    System.out.println(a); //prints out an empty i by i grid of underscores
+	}
+    }
+    */
 }
