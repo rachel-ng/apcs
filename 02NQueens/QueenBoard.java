@@ -15,6 +15,7 @@ public class QueenBoard {
 	    if (board[r][c] == 0) {
 		board[r][c]--;
 		nope(r,c);
+		System.out.println("addQueen(" + r + "," + c + ")");
 		return true;
 	    }
 	    else {
@@ -59,6 +60,7 @@ public class QueenBoard {
 	    if (board[r][c] == -1) {
 		board[r][c]++;
 		abort(r,c);
+		System.out.println("removeQueen(" + r + "," + c + ")");
 		return true;
 	    }
 	    else {
@@ -116,43 +118,59 @@ public class QueenBoard {
     }
     
     public boolean solve() {
-	halp(0,0);
+	if (solved(0)) {
+	    for (int r = 0; r < board.length; r++) {
+		for (int c = 0; c < board[r].length; c++) {
+		    board[r][c] = 0;
+		}
+	    }
+	}
 	if (board[0][0] != 0) {
 	    throw new IllegalStateException();
 	}
 	return false;
     }
 
-    public boolean halp(int r, int c) {
-	if (c == board.length) {
+    public boolean solved(int col) {
+	if (col == board.length) {
 	    return true;
 	}
-	if (addQueen(r,c)) {
-	    return halp(r + 1, c + 1);
+	for (int rr = 0; rr < board[rr].length; rr++) {
+	    System.out.println(rr + " " + col);
+	    addQueen(rr,col);
+	    solved(col + 1);
+	    removeQueen(rr,col);
 	}
-	return true;
+	return solved(col + 1);
     }
     
-    /*
     public int countSolutions() {
+	int count = 0;
+	for (int r = 0; r < board.length; r++) {
+	    for (int c = 0; c < board[r].length; c++) {
+		if (board[r][c] == -1) {
+		    count++;
+		}
+		board[r][c] = 0;
+	    }
+	}
+	// board[0][0] = 1; // used to test IllegalStateException
 	if (board[0][0] != 0) {
 	    throw new IllegalStateException();
 	}
+	return count;
     }
-    */
     
     public static void main (String[] args) {
 	QueenBoard b = new QueenBoard(10);
 	System.out.println(b.toString());
-	System.out.println(b.addQueen(0,0));
+	System.out.println("addQueen(0,0): " + b.addQueen(0,0));
+	System.out.println("addQueen(1,1): " + b.addQueen(1,1));
+	System.out.println("addQueen(1,3): " + b.addQueen(1,3));
+	//System.out.println("removeQueen(1,3): " + b.removeQueen(1,3));
+	System.out.println("\n- - - - -\n");
 	System.out.println(b.toString());
-	System.out.println(b.addQueen(3,2));
-	System.out.println(b.toString());
-	System.out.println(b.addQueen(1,3));
-	System.out.println(b.toString());
-	System.out.println(b.removeQueen(0,0));
-	System.out.println(b.toString());
-	System.out.println(b.solve());
+	System.out.println(b.countSolutions());
 	System.out.println(b.toString());
     }
 }
