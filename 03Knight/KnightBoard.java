@@ -16,7 +16,7 @@ public class KnightBoard {
     public boolean addKnight(int r, int c, int l) {
 	if (r < board.length && c < board[r].length) {
 	    if (board[r][c] == 0) {
-		board[r][c]--;
+		board[r][c] = l;
 		return true;
 	    }
 	    else {
@@ -28,7 +28,7 @@ public class KnightBoard {
 
     public boolean removeKnight(int r, int c) {
 	if (r < board.length && c < board[r].length) {
-	    if (board[r][c] == -1) {
+	    if (board[r][c] > 0) {
 		board[r][c] = 0;
 		return true;
 	    }
@@ -112,7 +112,7 @@ public class KnightBoard {
 	System.out.println(b.toString());
 	System.out.println(b.addKnight(1,2,2));
 	System.out.println(b.toString());
-	System.out.println(b.addKnight(0,0,3));
+	System.out.println(b.addKnight(0,1,3));
 	System.out.println(b.toString());
 	System.out.println(b.addKnight(3,3,4));
 	System.out.println(b.toString());
