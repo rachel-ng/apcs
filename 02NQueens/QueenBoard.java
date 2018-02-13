@@ -177,15 +177,6 @@ public class QueenBoard {
     public static void main (String[] args) {
 	QueenBoard b = new QueenBoard(5);
 	System.out.println(b.toString());
-	/*
-	System.out.println("addQueen(0,0): " + b.addQueen(0,0));
-	System.out.println(b.toString());
-	System.out.println("addQueen(1,1): " + b.addQueen(1,1));
-	System.out.println(b.toString());
-	System.out.println("addQueen(1,3): " + b.addQueen(1,3));
-	System.out.println(b.toString());
-	//System.out.println("removeQueen(1,3): " + b.removeQueen(1,3));
-	*/
 	System.out.println("\n- - - - -\n");
 	System.out.println(b.toString());
 	System.out.println(b.solve());
