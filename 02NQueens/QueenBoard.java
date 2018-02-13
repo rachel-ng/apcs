@@ -116,17 +116,21 @@ public class QueenBoard {
     }
     
     public boolean solve() {
+	halp(0,0);
 	if (board[0][0] != 0) {
 	    throw new IllegalStateException();
 	}
 	return false;
     }
 
-    public boolean halp(int c) {
+    public boolean halp(int r, int c) {
 	if (c == board.length) {
 	    return true;
 	}
-	if (
+	if (addQueen(r,c)) {
+	    return halp(r + 1, c + 1);
+	}
+	return true;
     }
     
     /*
@@ -138,7 +142,7 @@ public class QueenBoard {
     */
     
     public static void main (String[] args) {
-	QueenBoard b = new QueenBoard(20);
+	QueenBoard b = new QueenBoard(10);
 	System.out.println(b.toString());
 	System.out.println(b.addQueen(0,0));
 	System.out.println(b.toString());
@@ -146,8 +150,9 @@ public class QueenBoard {
 	System.out.println(b.toString());
 	System.out.println(b.addQueen(1,3));
 	System.out.println(b.toString());
-	System.out.println(b.removeQueen(1,1));
+	System.out.println(b.removeQueen(0,0));
 	System.out.println(b.toString());
 	System.out.println(b.solve());
+	System.out.println(b.toString());
     }
 }
