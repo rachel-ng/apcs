@@ -14,29 +14,7 @@ public class QueenBoard {
 	if (r < board.length && c < board[r].length) {
 	    if (board[r][c] == 0) {
 		board[r][c]--;
-		for (int rr = r + 1, cc = c + 1; rr < board.length && cc < board[rr].length; rr++, cc++) {
-		    board[rr][c]++;
-		    board[r][cc]++;
-		    board[rr][cc]++;
-		}
-		return true;
-	    }
-	    else {
-		return false;
-	    }
-	}
-	return false;
-    }
-    
-    private boolean removeQueen(int r, int c) {
-	if (r < board.length && c < board[r].length) {
-	    if (board[r][c] == -1) {
-		board[r][c]++;
-		for (int rr = r + 1, cc = c + 1; rr < board.length && cc < board[rr].length; rr++, cc++) {
-		    board[rr][c]--;
-		    board[r][cc]--;
-		    board[rr][cc]--;
-		}
+		nope(r,c);
 		return true;
 	    }
 	    else {
@@ -46,6 +24,79 @@ public class QueenBoard {
 	return false;
     }
 
+
+    private void nope(int r, int c) {
+	for (int rr = r + 1, cc = c + 1; rr < board.length && cc < board.length; rr++, cc++) {
+	    board[rr][cc]++;
+	}
+	for (int rr = r + 1; rr < board.length; rr++) {
+	    board[rr][c]++;
+	}
+	for (int cc = c + 1; cc < board.length; cc++) {
+	    board[r][cc]++;
+	}
+	for (int rr = r - 1, cc = c + 1; rr > -1 && cc < board.length; rr--, cc++) {
+	    board[rr][cc]++;
+	}
+	if (r > 0 || c > 0) {
+	    for (int rr = r - 1, cc = c - 1; rr > -1 && cc > -1; rr--, cc--) {
+		board[rr][cc]++;
+	    }
+	    for (int rr = r - 1;  rr > -1; rr--) {
+		board[rr][c]++;
+	    }
+	    for (int cc = c - 1; cc > -1; cc--) {
+		board[r][cc]++;
+	    }
+	    for (int rr = r + 1, cc = c - 1; rr > board.length && cc > -1; rr++, cc--) {
+		board[rr][cc]++;
+	    }
+	}
+    }
+    
+    private boolean removeQueen(int r, int c) {
+	if (r < board.length && c < board[r].length) {
+	    if (board[r][c] == -1) {
+		board[r][c]++;
+		abort(r,c);
+		return true;
+	    }
+	    else {
+		return false;
+	    }
+	}
+	return false;
+    }
+
+    private void abort(int r, int c) {
+	for (int rr = r + 1, cc = c + 1; rr < board.length && cc < board.length; rr++, cc++) {
+	    board[rr][cc]--;
+	}
+	for (int rr = r + 1; rr < board.length; rr++) {
+	    board[rr][c]--;
+	}
+	for (int cc = c + 1; cc < board.length; cc++) {
+	    board[r][cc]--;
+	}
+	for (int rr = r - 1, cc = c + 1; rr > -1 && cc < board.length; rr--, cc++) {
+	    board[rr][cc]--;
+	}
+	if (r > 0 || c > 0) {
+	    for (int rr = r - 1, cc = c - 1; rr > -1 && cc > -1; rr--, cc--) {
+		board[rr][cc]--;
+	    }
+	    for (int rr = r - 1;  rr > -1; rr--) {
+		board[rr][c]--;
+	    }
+	    for (int cc = c - 1; cc > -1; cc--) {
+		board[r][cc]--;
+	    }
+	    for (int rr = r + 1, cc = c - 1; rr > board.length && cc > -1; rr++, cc--) {
+		board[rr][cc]--;
+	    }
+	}
+    }
+    
     public String toString() {
 	String brd= "";
 	for (int r = 0; r < board.length; r ++) {
@@ -63,6 +114,7 @@ public class QueenBoard {
 	}
 	return brd;
     }
+    
     /*
     public boolean solve() {
 	
@@ -73,15 +125,15 @@ public class QueenBoard {
     }
     */
     public static void main (String[] args) {
-	QueenBoard b = new QueenBoard(5);
+	QueenBoard b = new QueenBoard(10);
 	System.out.println(b.toString());
-	//System.out.println(b.addQueen(1,1));
-	//System.out.println(b.toString());
+	System.out.println(b.addQueen(1,1));
+	System.out.println(b.toString());
 	System.out.println(b.addQueen(3,2));
 	System.out.println(b.toString());
 	System.out.println(b.addQueen(1,3));
 	System.out.println(b.toString());
-	//System.out.println(b.removeQueen(1,1));
-	//System.out.println(b.toString());
+	System.out.println(b.removeQueen(1,1));
+	System.out.println(b.toString());
     }
 }
