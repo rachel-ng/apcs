@@ -1,6 +1,9 @@
 public class KnightBoard {
     private int[][] board;
+    private int[] movesR = new int[] {-2, -2, 2, 2, -1, -1, 1, 1};
+    private int[] movesC = new int[] {-1, 1, -1, 1, -2, 2, -2, 2}; 
     
+	
     public KnightBoard(int startingRows,int startingCols) {
 	if (startingRows < 0 || startingCols < 0) {
 	    throw new IllegalArgumentException();
@@ -14,7 +17,7 @@ public class KnightBoard {
     }
 
     public boolean addKnight(int r, int c, int l) {
-	if (r < board.length && c < board[r].length) {
+	if (r < board.length && r > -1 && c < board[r].length && c > -1 && l < board.length * board[0].length) {
 	    if (board[r][c] == 0) {
 		board[r][c] = l;
 		return true;
@@ -27,7 +30,7 @@ public class KnightBoard {
     }
 
     public boolean removeKnight(int r, int c) {
-	if (r < board.length && c < board[r].length) {
+	if (r < board.length && r > -1 && c < board[r].length && c > -1) {
 	    if (board[r][c] > 0) {
 		board[r][c] = 0;
 		return true;
@@ -79,8 +82,11 @@ public class KnightBoard {
 	if (full()) {
 	    return true;
 	}
-	if (addKnight(row,col,level)) {
-	    
+	for (int i = 0; i < 8; i++) {
+	    System.out.println(toString());
+	    if (solveH(row + movesR[i], col + movesC[i], level++)) {
+		return true;
+	    }
 	}
 	return false;
     }
@@ -112,7 +118,8 @@ public class KnightBoard {
 	KnightBoard b = new KnightBoard(5,5);
 
 	System.out.println(b.toString());
-	
+
+	/*
 	System.out.println(b.addKnight(0,0,1));
 	System.out.println(b.toString());
 	System.out.println(b.addKnight(1,2,2));
@@ -124,10 +131,13 @@ public class KnightBoard {
 	System.out.println(b.addKnight(3,2,5));
 	System.out.println(b.toString());
 	System.out.println(b.removeKnight(3,2));
-	System.out.println("is this bitch full? " + b.full());
+	System.out.println("is this full? " + b.full());
 	System.out.println(b.toString());
+	*/
 	
-	//System.out.println(b.solve());
+	System.out.println(b.solve());
+	System.out.println(b.toString());
+
 	//System.out.println(b.countSolutions());
     }
 
