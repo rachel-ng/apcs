@@ -63,7 +63,7 @@ public class KnightBoard {
 	return brd;
     }
     
-    /*
+    
     public boolean solve() {
 	for (int r = 0; r < board.length; r++) {
 	    for (int c = 0; c < board[r].length; c++) {
@@ -72,13 +72,18 @@ public class KnightBoard {
 		}
 	    }
 	}
-	return solveH(0);
+	return solveH(0,0,0);
     }
 
     private boolean solveH(int row ,int col, int level) {
-	
+	if (full()) {
+	    return true;
+	}
+	if (addKnight(row,col,level)) {
+	    
+	}
+	return false;
     }
-    */
 
     private boolean full() {
 	for (int r = 0; r < board.length; r++) {
@@ -104,7 +109,7 @@ public class KnightBoard {
     */
     
     public static void main (String[] args) { // My Driver
-	KnightBoard b = new KnightBoard(7,7);
+	KnightBoard b = new KnightBoard(5,5);
 
 	System.out.println(b.toString());
 	
