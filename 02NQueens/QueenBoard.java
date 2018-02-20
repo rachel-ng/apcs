@@ -166,11 +166,11 @@ public class QueenBoard {
     }
     
     public static void main (String[] args) { // My Driver
-	QueenBoard b = new QueenBoard(5);
+	QueenBoard b = new QueenBoard(6);
 
 	System.out.println(b.toString());
 	//System.out.println(b.solve());
 	System.out.println(b.toString());
-	System.out.println("5 X 5:  " + b.countSolutions());
+	System.out.println(b.countSolutions());
     }
 }
