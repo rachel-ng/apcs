@@ -67,7 +67,10 @@ public class KnightBoard {
     }
     
     
-    public boolean solve() {
+    public boolean solve(int startingRow, int startingCol) {
+	if (startingRow < 0 || startingCol < 0 || startingRow > board.length - 1 || startingCol > board.length - 1) {
+	    throw new IllegalArgumentException();
+	}
 	for (int r = 0; r < board.length; r++) {
 	    for (int c = 0; c < board[r].length; c++) {
 		if (board[r][c] != 0) {
@@ -75,18 +78,23 @@ public class KnightBoard {
 		}
 	    }
 	}
-	return solveH(0,0,0);
+	return solveH(startingRow,startingCol,1);
     }
 
-    private boolean solveH(int row ,int col, int level) {
-	if (full()) {
+    private boolean solveH(int row, int col, int level) {
+	if (level == board.length * board[0].length) {
 	    return true;
 	}
-	for (int i = 0; i < 8; i++) {
-	    System.out.println(toString());
-	    if (solveH(row + movesR[i], col + movesC[i], level++)) {
-		return true;
+	for (int i = 0; i < movesR.length; i++) {
+	    if (addKnight(row + movesR[i], col + movesC[i], level ++)) {
+		if (solveH(row + movesR[i], col + movesC[i], level ++)) {
+		    return true;
+		}
+		else {
+		    board[row][col] = 0;
+		}
 	    }
+	    removeKnight(row + movesR[i],col +movesC[i]);
 	}
 	return false;
     }
@@ -101,9 +109,11 @@ public class KnightBoard {
 	}
 	return true;
     }
-    
-    /*
-    public int countSolutions() {
+
+    public int countSolutions(int startingRow, int startingCol) {
+	if (startingRow < 0 || startingCol < 0) {
+	    throw new IllegalArgumentException();
+	}
 	for (int r = 0; r < board.length; r++) {
 	    for (int c = 0; c < board[r].length; c++) {
 		if (board[r][c] != 0) {
@@ -111,8 +121,34 @@ public class KnightBoard {
 		}
 	    }
 	}
+	return countSol(startingRow,startingCol,1);
     }
-    */
+
+    private int countSol(int row, int col, int level) {
+	int sol = 0;
+	if (level == board.length * board[0].length) {
+	    // System.out.println(toString());
+	    return 1;
+	}
+	for (int i = 0; i < movesR.length; i++) {
+	    if (addKnight(row + movesR[i], col + movesC[i], level ++)) {
+		sol += countSol(row + movesR[i], col + movesC[i], level ++);
+	    }
+	    removeKnight(row + movesR[i],col +movesC[i]);
+	}
+	return sol;
+    }    
+
+    public void totalSol() {
+	int totalSol = 0;
+	for (int i = 0; i < board.length; i++){
+	    for (int j = 0; j < board[0].length; j++){
+		totalSol += countSolutions(i,j);
+	    }
+	}
+	System.out.println(totalSol);
+    }
+
     
     public static void main (String[] args) { // My Driver
 	KnightBoard b = new KnightBoard(5,5);
@@ -135,8 +171,35 @@ public class KnightBoard {
 	System.out.println(b.toString());
 	*/
 	
-	System.out.println(b.solve());
-	System.out.println(b.toString());
+	System.out.println(b.countSolutions(0,0));
+	/*
+	System.out.println(b.countSolutions(0,1));
+	System.out.println(b.countSolutions(0,2));
+	System.out.println(b.countSolutions(0,3));
+	System.out.println(b.countSolutions(0,4));
+	System.out.println(b.countSolutions(1,0));
+	System.out.println(b.countSolutions(1,1));
+	System.out.println(b.countSolutions(1,2));
+	System.out.println(b.countSolutions(1,3));
+	System.out.println(b.countSolutions(1,4));
+	System.out.println(b.countSolutions(2,0));
+	System.out.println(b.countSolutions(2,1));
+	System.out.println(b.countSolutions(2,2));
+	System.out.println(b.countSolutions(2,3));
+	System.out.println(b.countSolutions(2,4));
+	System.out.println(b.countSolutions(3,0));
+	System.out.println(b.countSolutions(3,1));
+	System.out.println(b.countSolutions(3,2));
+	System.out.println(b.countSolutions(3,3));
+	System.out.println(b.countSolutions(3,4));
+	System.out.println(b.countSolutions(4,0));
+	System.out.println(b.countSolutions(4,1));
+	System.out.println(b.countSolutions(4,2));
+	System.out.println(b.countSolutions(4,3));
+	System.out.println(b.countSolutions(4,4));
+	*/
+	b.totalSol();
+
 
 	//System.out.println(b.countSolutions());
     }
