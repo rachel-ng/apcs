@@ -15,15 +15,22 @@ public class Recursion {
     }
     
     public int fib (int n) {
+	int sum = 0;
+	int a = 0;
+	int b = 1;
+	int c = a;
+	
 	if (n < 0) {
 	    throw new IllegalArgumentException();
 	}
-	if (n <= 1) {
-	    return n;
+	while (n > 1) {
+	    sum = a + b;
+	    c = a;
+	    a = b;
+	    b = c + a;
+	    n--;
 	}
-	else {
-	    return n + fib(n - 1);
-	}
+	return sum;
     }
     
     public double sqrt (double n) {
@@ -36,7 +43,7 @@ public class Recursion {
 	    return 0;
 	}
 
-	return halpSqrt
+	return halpSqrt(n,0);
     }
 
     public double halpSqrt (double n, double guess) {
@@ -80,4 +87,5 @@ public class Recursion {
 	    return halpPrime(n, mult + 1);
 	}
     }
+
 }
