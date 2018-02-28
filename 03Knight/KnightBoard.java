@@ -1,8 +1,6 @@
 public class KnightBoard {
     private int[][] board;
-    private int[] movesR = new int[] {-2, -2, 2, 2, -1, -1, 1, 1};
-    private int[] movesC = new int[] {-1, 1, -1, 1, -2, 2, -2, 2}; 
-    
+    private int[][] moves = new int[][] {{-2, -1}, {-2, 1}, {2, -1}, {2, 1}, {-1, -2}, {-1, 2}, {1, -2}, {1, 2}};    
 	
     public KnightBoard(int startingRows,int startingCols) {
 	if (startingRows < 0 || startingCols < 0) {
@@ -85,29 +83,16 @@ public class KnightBoard {
 	if (level == board.length * board[0].length) {
 	    return true;
 	}
-	for (int i = 0; i < movesR.length; i++) {
-	    if (addKnight(row + movesR[i], col + movesC[i], level ++)) {
-		if (solveH(row + movesR[i], col + movesC[i], level ++)) {
+	for (int m = 0; m < moves.length; m++) {
+	    if (addKnight(row + moves[m][0], col + moves[m][1], level++)) {
+		if (solveH(row + moves[m][0], col + moves[m][1], level++)) {
 		    return true;
 		}
-		else {
-		    board[row][col] = 0;
-		}
 	    }
-	    removeKnight(row + movesR[i],col +movesC[i]);
+	    //System.out.println(toString());
+	    removeKnight(row + moves[m][0],col + moves[m][1]);
 	}
-	return false;
-    }
-
-    private boolean full() {
-	for (int r = 0; r < board.length; r++) {
-	    for (int c = 0; c < board[r].length; c++) {
-		if (board[r][c] == 0) {
-		    return false;
-		}
-	    }
-	}
-	return true;
+       	return false;
     }
 
     public int countSolutions(int startingRow, int startingCol) {
@@ -129,12 +114,11 @@ public class KnightBoard {
 	if (level == board.length * board[0].length) {
 	    return 1;
 	}
-	for (int i = 0; i < movesR.length; i++) {
-	    if (addKnight(row + movesR[i], col + movesC[i], level ++)) {
-		sol += countSol(row + movesR[i], col + movesC[i], level ++);
+	for (int m = 0; m < moves.length; m++) {
+	    if (addKnight(row + moves[m][0], col + moves[m][1], level++)) {
+		sol += countSol(row + moves[m][0], col + moves[m][1], level++);
 	    }
-	    //System.out.println(toString());
-	    removeKnight(row + movesR[i],col +movesC[i]);
+	    removeKnight(row + moves[m][0],col + moves[m][1]);
 	}
 	return sol;
     }    
@@ -143,62 +127,23 @@ public class KnightBoard {
 	int totalSol = 0;
 	for (int i = 0; i < board.length; i++){
 	    for (int j = 0; j < board[0].length; j++){
+		System.out.println(countSolutions(i,j));
 		totalSol += countSolutions(i,j);
 	    }
 	}
-	System.out.println(totalSol);
     }
-
     
     public static void main (String[] args) { // My Driver
-	KnightBoard b = new KnightBoard(3,4);
+	KnightBoard a = new KnightBoard(5,5);
+	KnightBoard b = new KnightBoard(5,5);
 
+	System.out.println(a.toString());
 	System.out.println(b.toString());
 
-	/*
-	System.out.println(b.addKnight(0,0,1));
-	System.out.println(b.toString());
-	System.out.println(b.addKnight(1,2,2));
-	System.out.println(b.toString());
-	System.out.println(b.addKnight(0,1,3));
-	System.out.println(b.toString());
-	System.out.println(b.addKnight(3,3,4));
-	System.out.println(b.toString());
-	System.out.println(b.addKnight(3,2,5));
-	System.out.println(b.toString());
-	System.out.println(b.removeKnight(3,2));
-	System.out.println("is this full? " + b.full());
-	System.out.println(b.toString());
-	*/
+	System.out.println("solveable? " + a.solve(0,0) + ". ");
+	System.out.println(a);
 	
-	System.out.println(b.countSolutions(0,0));
-	System.out.println(b.countSolutions(0,1));
-	System.out.println(b.countSolutions(0,2));
-	System.out.println(b.countSolutions(0,3));
-	//System.out.println(b.countSolutions(0,4));
-	System.out.println(b.countSolutions(1,0));
-	System.out.println(b.countSolutions(1,1));
-	System.out.println(b.countSolutions(1,2));
-	System.out.println(b.countSolutions(1,3));
-	//System.out.println(b.countSolutions(1,4));
-	System.out.println(b.countSolutions(2,0));
-	System.out.println(b.countSolutions(2,1));
-	System.out.println(b.countSolutions(2,2));
-	System.out.println(b.countSolutions(2,3));
-	//System.out.println(b.countSolutions(2,4));
-	//System.out.println(b.countSolutions(3,0));
-	//System.out.println(b.countSolutions(3,1));
-	//System.out.println(b.countSolutions(3,2));
-	//System.out.println(b.countSolutions(3,3));
-	//System.out.println(b.countSolutions(3,4));
-	//System.out.println(b.countSolutions(4,0));
-	//System.out.println(b.countSolutions(4,1));
-	//System.out.println(b.countSolutions(4,2));
-	//System.out.println(b.countSolutions(4,3));
-	//System.out.println(b.countSolutions(4,4));
-
 	b.totalSol();
-
 
 	//System.out.println(b.countSolutions());
     }
