@@ -1,30 +1,37 @@
+import java.io.File;
 import java.util.*;
 import java.io.*;
+
 public class Maze{
 
     private char[][] maze;
     private boolean animate;//false by default
 
-    private int[][] moves = {{1,0}, {-1,0}, {0, 1}, {0, -1}};
+    private int[][] move = {{1,0}, {-1,0}, {0,1}, {0,-1}};
 
-    /*Constructor loads a maze text file, and sets animate to false by default.
+    public Maze(String filename) throws FileNotFoundException{
+	File text = new File(filename);
+	Scanner inf = new Scanner(text);
+	
+	while(inf.hasNextLine()){
+	    String line = inf.nextLine();
+	    System.out.println(line);
+	}
+	try {
+	    
+	    for (int r = 0; r < maze.length; r++) {
+		for (int c = 0; c < maze[r].length; c++) {
+		    if (board[r][c] == "S") {
+			
+		    }
+		    if (board[r][c] == "E") {
 
-      1. The file contains a rectangular ascii maze, made with the following 4 characters:
-      '#' - Walls - locations that cannot be moved onto
-      ' ' - Empty Space - locations that can be moved onto
-      'E' - the location of the goal (exactly 1 per file)
-
-      'S' - the location of the start(exactly 1 per file)
-
-      2. The maze has a border of '#' around the edges. So you don't have to check for out of bounds!
-
-
-      3. When the file is not found OR the file is invalid (not exactly 1 E and 1 S) then: print a meaningful error and exit the program.
-
-    */
-
-    public Maze(String filename){
-        //COMPLETE CONSTRUCTOR
+		    }
+		}
+	    }
+	} catch (IllegalStateException e) {
+	    System.err.println(filename + " not found, try again");
+	}
 	setAnimate(false);
     }
     
@@ -55,11 +62,12 @@ public class Maze{
       Since the constructor exits when the file is not found or is missing an E or S, we can assume it exists.
 
     */
+    /*
     public int solve(){
-	for (int r = 0; r < board.length; r++) {
-	    for (int c = 0; c < board[0].length; c++) {
-		if (board[r][c] == "S") {
-		    board[r][c] = @;
+	for (int r = 0; r < maze.length; r++) {
+	    for (int c = 0; c < maze[0].length; c++) {
+		if (maze[r][c] == "S") {
+		    maze[r][c] = "@";
 		}
 	    }
 	}
@@ -74,7 +82,8 @@ public class Maze{
             //return solve(???,???);
 	return 0;
     }
-
+    */
+    
     /*
       Recursive Solve function:
 
