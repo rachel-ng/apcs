@@ -12,23 +12,35 @@ public class Maze{
     public Maze(String filename) throws FileNotFoundException{
 	File text = new File(filename);
 	Scanner inf = new Scanner(text);
-	
+	int ln = 0;
+	int cha = 0;
+
 	while(inf.hasNextLine()){
+	    ln++;
 	    String line = inf.nextLine();
-	    System.out.println(line);
+	    if (ln == 0) {
+		for (int i = 0; i < line.length(); i++) {
+		    cha++;
+		}
+	    }	
+	    System.out.println(line + " " + cha);
 	}
+	
+
 	try {
-	    
+	    /*
 	    for (int r = 0; r < maze.length; r++) {
 		for (int c = 0; c < maze[r].length; c++) {
-		    if (board[r][c] == "S") {
+		    if (maze[r][c] == "S") {
 			
 		    }
-		    if (board[r][c] == "E") {
+		    if (maze[r][c] == "E") {
 
 		    }
 		}
 	    }
+	    */
+
 	} catch (IllegalStateException e) {
 	    System.err.println(filename + " not found, try again");
 	}
