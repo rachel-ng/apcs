@@ -1,6 +1,6 @@
-import java.io.File;
 import java.util.*;
 import java.io.*;
+import java.io.File;
 
 public class Maze{
 
@@ -8,6 +8,7 @@ public class Maze{
     private boolean animate;//false by default
 
     private int[][] move = {{1,0}, {-1,0}, {0,1}, {0,-1}};
+    private int[] ss = new int[2];
 
     public Maze(String filename) throws FileNotFoundException{
 	animate = false;
@@ -16,30 +17,56 @@ public class Maze{
 	Scanner inf = new Scanner(text);
 
 	String str = "";
-	int r = 0;
-	int c = 0;
+	int row = 0;
+	int col = 0;
 
 	while(inf.hasNextLine()){
-	    r++;
+	    row++;
 	    String line = inf.nextLine();
 	    str += line + "\n";
-	    c = line.length();
+	    col = line.length();
 	}
 
-	maze = new char[ln][ch];
+	maze = new char[row][col];
 
 	int nch = 0;
 	int sc = 0;
 	int ec = 0;
 
-	for (int 
+	for (int r = 0; r < maze.length; r++) {
+	    for (int c = 0; c < maze[0].length; c++) {
+		if (str.charAt(nch) == 'S') {
+		    ss[0] = r;
+		    ss[1] = c;
+		    sc++;
+		}
+		if (str.charAt(nch) == 'E') {
+		    ec++;
+		}
+		if (str.charAt(nch) == '\n') {
+		    nch++;
+		}
+		maze[r][c] = str.charAt(nch);
+		nch++;
+	    }
+	}
 	
 	if (sc != 1 && ec != 1) {
 	    throw new IllegalArgumentException("exactly 1 s and 1 e ONLY");
 	}
     }
     
-
+    public String toString() {
+	String str = "";
+	for (int r = 0; r < maze.length; r++) {
+	    for (int c = 0; c < maze[0].length; c++) {
+		str += maze[r][c];
+	    }
+	    str += "\n";
+	}
+	return str; 
+    }
+    
     private void wait(int millis){
          try {
              Thread.sleep(millis);
@@ -57,68 +84,52 @@ public class Maze{
     public void clearTerminal(){ //erase terminal, go to top left of screen.
 	System.out.println("\033[2J\033[1;1H");
     }
-
-
-
-    /*Wrapper Solve Function returns the helper function
-
-      Note the helper function has the same name, but different parameters.
-      Since the constructor exits when the file is not found or is missing an E or S, we can assume it exists.
-
-    */
-    /*
+    
     public int solve(){
+
+	int row = ss[0];
+	int col = ss[1];
+
+	/*
 	for (int r = 0; r < maze.length; r++) {
 	    for (int c = 0; c < maze[0].length; c++) {
-		if (maze[r][c] == "S") {
-		    maze[r][c] = "@";
+		if (maze[r][c] == 'S') {
+		    maze[r][c] = ' ';
+		    row = r;
+		    col = c; 
 		}
 	    }
 	}
-            //find the location of the S. 
+	*/
 
 
-            //erase the S
-
-
-            //and start solving at the location of the s.
-
-            //return solve(???,???);
-	return 0;
+	maze[row][col] = ' ';
+	return solve(row, col, 0);
     }
-    */
-    
-    /*
-      Recursive Solve function:
 
-      A solved maze has a path marked with '@' from S to E.
-
-      Returns the number of @ symbols from S to E when the maze is solved,
-      Returns -1 when the maze has no solution.
-
-
-      Postcondition:
-
-        The S is replaced with '@' but the 'E' is not.
-
-        All visited spots that were not part of the solution are changed to '.'
-
-            Note: This is not required based on the algorithm, it is just nice visually to see.
-        All visited spots that are part of the solution are changed to '@'
-    */
-    private int solve(int row, int col){ //you can add more parameters since this is private
-
-
-        //automatic animation! You are welcome.
+    private int solve(int row, int col, int coun){
+	// ty for animate 
         if(animate){
             clearTerminal();
             System.out.println(this);
             wait(20);
         }
 
-        //COMPLETE SOLVE
+	if (maze[row][col] =='E') {
+	    return coun; 
+	}
+	
+	for (int i = 0; i < 4; i++) {
+	    if (maze[row + move[i][0]][col + move[i][1]] == ' ' || maze[row + move[i][0]][col + move[i][1]] == 'E') {
+		maze[row + move[i][0]][col + move[i][1]] = '@';
+		if(solve(row + move[i][0],col + move[i][1],coun++) != -1) {
+		    return solve(row + move[i][0],col + move[i][1],coun++);
+		}
+	    }
+	    maze[row][col] = '.';
+	}
 
-        return -1; //so it compiles
+        return -1;
     }
 
 
