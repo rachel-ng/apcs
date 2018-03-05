@@ -112,21 +112,17 @@ public class Maze{
         if(animate){
             clearTerminal();
             System.out.println(this);
-            wait(20);
+            wait(400);
         }
-
-	if (maze[row][col] =='E') {
-	    return coun; 
-	}
 	
 	for (int i = 0; i < 4; i++) {
-	    if (maze[row + move[i][0]][col + move[i][1]] == ' ' || maze[row + move[i][0]][col + move[i][1]] == 'E') {
+	    if (maze[row + move[i][0]][col + move[i][1]] == 'E'
+	    if (maze[row + move[i][0]][col + move[i][1]] == ' ') {
 		maze[row + move[i][0]][col + move[i][1]] = '@';
 		if(solve(row + move[i][0],col + move[i][1],coun++) != -1) {
 		    return solve(row + move[i][0],col + move[i][1],coun++);
 		}
 	    }
-	    maze[row][col] = '.';
 	}
 
         return -1;
