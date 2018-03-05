@@ -10,41 +10,33 @@ public class Maze{
     private int[][] move = {{1,0}, {-1,0}, {0,1}, {0,-1}};
 
     public Maze(String filename) throws FileNotFoundException{
+	animate = false;
+	
 	File text = new File(filename);
 	Scanner inf = new Scanner(text);
-	int ln = 0;
-	int cha = 0;
+
+	String str = "";
+	int r = 0;
+	int c = 0;
 
 	while(inf.hasNextLine()){
-	    ln++;
+	    r++;
 	    String line = inf.nextLine();
-	    if (ln == 0) {
-		for (int i = 0; i < line.length(); i++) {
-		    cha++;
-		}
-	    }	
-	    System.out.println(line + " " + cha);
+	    str += line + "\n";
+	    c = line.length();
 	}
+
+	maze = new char[ln][ch];
+
+	int nch = 0;
+	int sc = 0;
+	int ec = 0;
+
+	for (int 
 	
-
-	try {
-	    /*
-	    for (int r = 0; r < maze.length; r++) {
-		for (int c = 0; c < maze[r].length; c++) {
-		    if (maze[r][c] == "S") {
-			
-		    }
-		    if (maze[r][c] == "E") {
-
-		    }
-		}
-	    }
-	    */
-
-	} catch (IllegalStateException e) {
-	    System.err.println(filename + " not found, try again");
+	if (sc != 1 && ec != 1) {
+	    throw new IllegalArgumentException("exactly 1 s and 1 e ONLY");
 	}
-	setAnimate(false);
     }
     
 
