@@ -52,7 +52,7 @@ public class Recursion {
 	double s = (guess * guess) / n;
 	
 	if (Math.abs(n - sq) > Math.abs(n - s)) {
-	    if (Math.abs(n - sq) == 0.00000001) {
+	    if (Math.abs(n - sq) == 0.00000000001) {
 		return better;
 	    }
 	    else {
