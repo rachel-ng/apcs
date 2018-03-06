@@ -55,6 +55,34 @@ public class Maze{
 	    throw new IllegalArgumentException("exactly 1 s and 1 e ONLY");
 	}
     }
+
+    public boolean add (int row, int col) {
+	if (maze[row][col] == ' ') {
+	    maze[row][col] = '@';
+	    return true;
+	}
+	if (maze[row][col] == '@') {
+	    return false;
+	}
+	if (maze[row][col] == '#' || maze[row][col] == '.') {
+	    return false;
+	}
+	return false;
+    }
+    
+    public boolean surrounded (int row, int col) {
+	int coun = 0;
+	int at = 0;
+	for (int i = 0; i < 4; i++) {
+	    if (maze[row + move[i][0]][col + move[i][1]] == '#' || maze[row + move[i][0]][col + move[i][1]] == '.') {
+		coun++;
+	    }
+	    if (maze[row + move[i][0]][col + move[i][1]] == '@') {
+		at++;
+	    }
+	}
+	return coun > 2 || at > 1;
+    }
     
     public String toString() {
 	String str = "";
@@ -103,30 +131,46 @@ public class Maze{
 	*/
 
 
-	maze[row][col] = ' ';
-	return solve(row, col, 0);
+	maze[row][col] = '@';
+	return solve(row, col);
     }
-
-    private int solve(int row, int col, int coun){
+    
+    private int solve(int row, int col){
 	// ty for animate 
         if(animate){
             clearTerminal();
             System.out.println(this);
-            wait(400);
+            wait(50);
         }
 	
 	for (int i = 0; i < 4; i++) {
-	    if (maze[row + move[i][0]][col + move[i][1]] == 'E'
-	    if (maze[row + move[i][0]][col + move[i][1]] == ' ') {
+	    if (maze[row + move[i][0]][col + move[i][1]] == 'E') {
+		return numsAt();
+	    }
+	    if (add(row + move[i][0],col + move[i][1])) {
 		maze[row + move[i][0]][col + move[i][1]] = '@';
-		if(solve(row + move[i][0],col + move[i][1],coun++) != -1) {
-		    return solve(row + move[i][0],col + move[i][1],coun++);
-		}
+		return solve(row + move[i][0],col + move[i][1]);
+	    }
+	    if (surrounded(row,col) && maze[row + move[i][0]][col + move[i][1]] == '@') {
+		maze[row][col] = '.';
+		//maze[row + move[i][0]][col + move[i][1]] = '.';
+		return solve(row + move[i][0],col + move[i][1]);
 	    }
 	}
 
         return -1;
     }
 
+    public int numsAt() {
+	int coun = 0;
+	for (int r = 0; r < maze.length; r++) {
+	    for (int c = 0; c < maze[0].length; c++) {
+		if (maze[r][c] == '@') {
+		    coun++;
+		}
+	    }
+	}
+	return coun;
+    }
 
 }
