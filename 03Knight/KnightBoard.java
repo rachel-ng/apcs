@@ -80,7 +80,7 @@ public class KnightBoard {
     }
 
     private boolean solveH(int row, int col, int level) {
-	if (level == board.length * board[0].length) {
+	if (level > board.length * board[0].length) {
 	    return true;
 	}
 	for (int m = 0; m < moves.length; m++) {
@@ -131,6 +131,7 @@ public class KnightBoard {
 		totalSol += countSolutions(i,j);
 	    }
 	}
+	System.out.println(totalSol);
     }
     
     public static void main (String[] args) { // My Driver
