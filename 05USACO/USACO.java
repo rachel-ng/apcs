@@ -52,12 +52,20 @@ public class USACO {
 
     private static int silverH(String filename) {
 	
-	char[][] field; 
+	char[][] field;
+	int[][] past;
+	int[][] current;
+
+	int[] input = new int[3];
 	
 	File text = new File(filename);
 	Scanner f = new Scanner(text);
 
 	String str;
+
+	while(f.hasNextInt) {
+	    for (int i = 0; i < 3; i++) {
+		input[i] = f.ha
 
 	
     }
