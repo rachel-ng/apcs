@@ -23,17 +23,42 @@ public class USACO {
 
     private static int bronzeH(String filename) {
 	int vol = 0;
-	int[][];
+	int[][] field;
 
+	int 
+
+	File text = new File(filename);
+	Scanner f = new Scanner(text);
+
+	String str;
+
+	while(f.hasNextInt()) {
+	    for (f.) {
+	    }
+	}
+	    
+		     
 	
 	
 	return vol;
     }
     
     public static int silver(String filename) {
-
+	return silverH(filename);
     }
 
+    private static int silverH(String filename) {
+	
+	char[][] field; 
+	
+	File text = new File(filename);
+	Scanner f = new Scanner(text);
+
+	String str;
+
+	
+    }
+	    
     public static void main(String args[]) throws FileNotFoundException {
 
     }
