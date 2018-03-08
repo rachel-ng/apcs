@@ -25,7 +25,9 @@ public class USACO {
 	int vol = 0;
 	int[][] field;
 
-	int 
+	int l = 1; // # lines
+
+	int R, C, E, N; 
 
 	File text = new File(filename);
 	Scanner f = new Scanner(text);
@@ -33,7 +35,8 @@ public class USACO {
 	String str;
 
 	while(f.hasNextInt()) {
-	    for (f.) {
+	    if (l == 1) {
+		
 	    }
 	}
 	    
