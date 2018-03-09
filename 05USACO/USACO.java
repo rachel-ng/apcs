@@ -3,19 +3,6 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class USACO {
-
-    private String read (String filename) {
-	File text = new File(filename);
-	Scanner inf = new Scanner(text);
-
-	String str;
-	
-	while(inf.hasNextLine()){
-            str += inf.nextLine();
-	}
-
-	return str;
-    }
     
     public static int bronze(String filename) {
 	return bronzeH(filename);
@@ -25,7 +12,8 @@ public class USACO {
 	int vol = 0;
 	int[][] field;
 
-	int[] input = new int[4]; 
+	int[] input = new int[4];
+	int[] stomp = new int[9];
 
 	int l = 1; // # lines
 
@@ -61,7 +49,7 @@ public class USACO {
 
 	int[] input = new int[3];
 	int N, M, T;
-	int[][] mooove = new int[2][2]; 
+	int[] mooove = new int[4]; 
 	
 	int l = 1; // # lines
 	
@@ -70,25 +58,30 @@ public class USACO {
 
 	String str;
 
-	while(f.hasNextInt()) {
-	    if (l == 1) {
-		for (int i = 0; i < 3; i++) {
-		    input[i] = f.hasNextInt();
+	while(f.hasNextLine()) {
+	    while(l == 0 && f.hasNextInt()) {
+		    for (int i = 0; i < 3; i++) {
+			input[i] = f.nextInt();
+		    }
+		    N = input[0];
+		    M = input[1];
+		    T = input[2];
+		    field = new char[N][M];
+	    }
+	    while(l == N + 2 && f.hasNextInt()) {
+		for (int i = 0; i < 4; i++) {
+		    mooove[i] = f.nextInt();
 		}
-		N = input[0];
-		M = input[1];
-		T = input[2];
-		field[N][M];
+		l++;
 	    }
-	    if ( l == N + 2) {
-		for (int i = 0, x = 0; i < 4; i++if (i < 1) {
-			
+	    if (l > 1 && l < N + 2) {
+		for (int i = 0; i < N; i++) {
+		    field[i] = f.nextLine().toCharArray();
+		}
 	    }
-	    l++;
 	}
-	
     }
-	    
+    
     public static void main(String args[]) throws FileNotFoundException {
 
     }
