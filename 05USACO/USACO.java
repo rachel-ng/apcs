@@ -25,9 +25,9 @@ public class USACO {
 	int vol = 0;
 	int[][] field;
 
-	int l = 1; // # lines
+	int[] input = new int[4]; 
 
-	int R, C, E, N; 
+	int l = 1; // # lines
 
 	File text = new File(filename);
 	Scanner f = new Scanner(text);
@@ -36,8 +36,11 @@ public class USACO {
 
 	while(f.hasNextInt()) {
 	    if (l == 1) {
-		
+		for (int i = 0; i < 4; i++) {
+		    input[i] = f.hasNextInt();
+		}
 	    }
+	    l++; 
 	}
 	    
 		     
@@ -56,7 +59,11 @@ public class USACO {
 	int[][] past;
 	int[][] current;
 
-	int[] input = new int[3]; 
+	int[] input = new int[3];
+	int N, M, T;
+	int[][] mooove = new int[2][2]; 
+	
+	int l = 1; // # lines
 	
 	File text = new File(filename);
 	Scanner f = new Scanner(text);
@@ -64,9 +71,21 @@ public class USACO {
 	String str;
 
 	while(f.hasNextInt()) {
-	    for (int i = 0; i < 3; i++) {
-		input[i] = f.hasNextInt();
-
+	    if (l == 1) {
+		for (int i = 0; i < 3; i++) {
+		    input[i] = f.hasNextInt();
+		}
+		N = input[0];
+		M = input[1];
+		T = input[2];
+		field[N][M];
+	    }
+	    if ( l == N + 2) {
+		for (int i = 0, x = 0; i < 4; i++if (i < 1) {
+			
+	    }
+	    l++;
+	}
 	
     }
 	    
