@@ -56,16 +56,16 @@ public class USACO {
 	int[][] past;
 	int[][] current;
 
-	int[] input = new int[3];
+	int[] input = new int[3]; 
 	
 	File text = new File(filename);
 	Scanner f = new Scanner(text);
 
 	String str;
 
-	while(f.hasNextInt) {
+	while(f.hasNextInt()) {
 	    for (int i = 0; i < 3; i++) {
-		input[i] = f.ha
+		input[i] = f.hasNextInt();
 
 	
     }
