@@ -135,8 +135,4 @@ public class USACO {
     public static boolean inPasture(int cR, int cC, int r, int c) {
 	return cR >= 0 && cC >= 0 && cR < r && cC < c;
     }
-    
-    public static void main(String args[]) throws FileNotFoundException {
-
-    }
 }
