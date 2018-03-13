@@ -9,32 +9,63 @@ public class USACO {
     }
 
     private static int bronzeH(String filename) {
-	int vol = 0;
-	int[][] field;
+	
+	try {
+	    File text = new File(filename);
+	    Scanner f = new Scanner(text);
+	    
+	    int R = f.nextInt(); // rows
+	    int C = f.nextInt(); // cols
+	    int E = f.nextInt(); // elevation
+	    int N = f.nextInt(); // num instructions
+	    
+	    int[][] lake[R][C];
 
-	int[] input = new int[4];
-	int[] stomp = new int[9];
+	    for (int r = 0; r < R; r++) {
+		for (int c = 0; c < C; c++) {
+		    lake[r][c] = f.nextInt();
+		}
+	    
+	    for (int n = 0; n < N; n++) {
 
-	int l = 1; // # lines
+		int R_s = f.nextInt();
+		int C_s = f.nextInt();
+		int D_s = f.nextInt();
 
-	File text = new File(filename);
-	Scanner f = new Scanner(text);
+		int max = 0; 
 
-	String str;
-
-	while(f.hasNextInt()) {
-	    if (l == 1) {
-		for (int i = 0; i < 4; i++) {
-		    input[i] = f.hasNextInt();
+		for (int r = 0; r < 3; r++) {
+		    for (int c = 0; c < 3; c++) {
+			if (lake[R_s + r][C_s + c] > max) {
+			    max = lake[R_s + r][C_s + c];
+			}
+		    }
+		}
+		for (int r = 0; r < 3; r++) {
+		    for (int c = 0; c < 3; c++) {
+			if (lake[R_s + r][C_s + c] > max - D_s) {
+			    lake[R_s + r][C_s + c] = max - D_s; 
+			}
+		    }
 		}
 	    }
-	    l++; 
-	}
+
+	    int depth = 0;
+	    for (int r = 0; r < R; r++) {
+		for (int c = 0; c < C; c++) {
+		    if (E > lake[r][c]) {
+			depth += E - lake[r][c];
+		    }
+		}
+	    }
 	    
+	    return depth * 72 * 72;
 		     
+	}catch(Exception e){
+	    System.exit(1);
+	}
 	
-	
-	return vol;
+	return 0;
     }
     
     public static int silver(String filename) {
@@ -42,44 +73,67 @@ public class USACO {
     }
 
     private static int silverH(String filename) {
-	
-	char[][] field;
-	int[][] past;
-	int[][] current;
+	try{
+	    
+	    File text = new File(filename);
+	    Scanner f = new Scanner(text);
+	    
+	    String str;
+	    
+	    int N = f.nextInt(); // rows
+	    int M = f.nextInt(); // cols
+	    int T = f.nextInt(); // time
 
-	int[] input = new int[3];
-	int N, M, T;
-	int[] mooove = new int[4]; 
-	
-	int l = 1; // # lines
-	
-	File text = new File(filename);
-	Scanner f = new Scanner(text);
-
-	String str;
-
-	while(f.hasNextLine()) {
-	    while(l == 0 && f.hasNextInt()) {
-		    for (int i = 0; i < 3; i++) {
-			input[i] = f.nextInt();
+	    int[][] mooove = {{1,0}, {-1,0}, {0,1}, {0,-1}};
+	    int[] m = new int[4];
+	    
+	    char[][] pasture = new char[N];
+	    int[][] past = new int[N][M];
+	    int[][] current = new int[N][M];
+	    
+	    while (f.hasNextLine()) {
+		while (f.hasNextInt()) {
+		    for (int i = 0; i < 4; i++) {
+			m[i] = f.hasNextInt(); // where to move
 		    }
-		    N = input[0];
-		    M = input[1];
-		    T = input[2];
-		    field = new char[N][M];
-	    }
-	    while(l == N + 2 && f.hasNextInt()) {
-		for (int i = 0; i < 4; i++) {
-		    mooove[i] = f.nextInt();
 		}
-		l++;
-	    }
-	    if (l > 1 && l < N + 2) {
-		for (int i = 0; i < N; i++) {
-		    field[i] = f.nextLine().toCharArray();
+		
+		for (int i = 0; i < N + 1; i++) {
+		    pasture[i] = f.nextLine().toCharArray(); //string > char array
 		}
 	    }
+
+	    past[m[0]][m[1]] = 1;
+	    current[m[0]][m[1]] = 1;
+
+	    for (int t = 0; t < T; t++) {
+		for (int r = 0; r < R; r++) {
+		    for (int c = 0; c < C; c++) {
+			if (pasture[r][c] != '*') {
+			    int sum = 0;
+				for (int i = 0; i < 4; i++) {
+				    if (inPasture(r + mooove[i][0],c + mooove[i][1],R,C)) {
+					sum += past[r + mooove[i][0]][c + moooove[i][1]];
+				    }
+				}
+				current[r][c] = sum;
+			}
+		    }
+		}
+		past = current;
+		current = new int[R][C];
+	    }
+
+	    return past[m[2]][m[3]];
+		
+	}catch(Exception e) {
+	    System.exit(1)
 	}
+	return 0;
+    }
+
+    public static boolean inPasture(int cR, int cC, int r, int c) {
+	return cR >= 0 && cC >= 0 && cR < r && cC < c;
     }
     
     public static void main(String args[]) throws FileNotFoundException {
