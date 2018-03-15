@@ -1,8 +1,8 @@
 import java.util.Random;
 
-public class quick{
+public class Quick{
 
-    public static int so (int[] data, int st, int end) {
+    public static int sort (int[] data, int st, int end) {
 	Random rand = new Random();
 	int n = rand.nextInt(end - st + 1) + st;
 	int pivot = data[n];
@@ -25,10 +25,14 @@ public class quick{
 	return e;
     }
 
-    public static void swap(int[] array, int a, int b) {
+    public static void swap(int[]array, int a, int b) {
 	int c = array[a];
 	array[a] = array[b];
 	array[b] = c;
+    }
+
+    public static int quickselect(int[]art, int k) {
+	return 1; 
     }
 
     public static String toString(int[] data){
@@ -44,19 +48,19 @@ public class quick{
     }
     
     public static void main(String[]args){
-	int[]ary = { 2, 10, 15, 23, 0,  5};  //sorted :  {0,2,5,10,15,23}
+	int[]ary = {999,999,999,4,1,0,3,2,999,999,999};
 
 	System.out.println(toString(ary));
-	System.out.println(so(ary,0,5));
+	System.out.println(sort(ary,0,9));
 	System.out.println(toString(ary));
 	
 	/*
-	select(ary,0);
-	select(ary,1);
-	select(ary,2);
-	select(ary,3);
-	select(ary,4);
-	select(ary,5);
+	quickselect(ary,0);
+	quickselect(ary,1);
+	quickselect(ary,2);
+	quickselect(ary,3);
+	quickselect(ary,4);
+	quickselect(ary,5);
 	*/
     }
 }
