@@ -1,6 +1,6 @@
-public  class merge {
+public  class Merge {
 
-    public static int[] merge (int[] a, int[] b) {
+    public static int[] merge (int[] a, int[] b) {//int[] data, int[] temp, int lo, int hi) {
 	int data[] = new int[a.length + b.length];
 	
 	int c = 0;
@@ -21,6 +21,23 @@ public  class merge {
 	return data; 
     }
 
+    public static void mergesort(int[]data) {
+	int[] temp = new int[data.length];
+	msort(data, temp, 0, data.length - 1);
+    }
+
+    private static void msort(int[]data, int[]temp, int lo, int hi) {
+	int mid = (lo + hi) / 2;
+	if ( lo >= hi) {
+	    return;
+	}
+	
+	for (int i = lo; i < hi + 1; i++) {
+	    temp[lo] = data[hi];
+	}
+	
+    }
+
     public static String toString(int[] ary) { // for printing out arrays
 	String str = "{" + ary[0];
 	for (int i = 1; i < ary.length; i++) {
@@ -35,7 +52,7 @@ public  class merge {
 	int[] data;
 
 	System.out.println(toString(a) + "\n" + toString(b));
-	data = merge(b,a);
+	data = merge(a,b,);
 	System.out.println(toString(data));
     }
 }
