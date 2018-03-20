@@ -30,12 +30,12 @@ public  class merge {
     }
 
     public static void main(String[]args){
-	int[] a = {1, 3, 4, 7, 8, 9};
-	int[] b = {0, 2, 5, 6};
+	int[] a = {1, 3, 4, 7, 8};
+	int[] b = {0, 2, 5, 6, 9};
 	int[] data;
 
 	System.out.println(toString(a) + "\n" + toString(b));
-	data = merge(a,b);
+	data = merge(b,a);
 	System.out.println(toString(data));
     }
 }
