@@ -1,21 +1,30 @@
 public  class Merge {
 
-    public static int[] merge (int[] a, int[] b) {//int[] data, int[] temp, int lo, int hi) {
-	int data[] = new int[a.length + b.length];
+    public static void swap (int[] data, int a, int b) {
+	int c = data[a];
+	data[a] = data[b];
+	data[b] = c;
+    }
+    
+    public static int[] merge (int[] data, int[] temp, int lo, int hi) {
+	int mid = (lo + hi) / 2;
+	int midd = ((lo + hi) / 2) + 1; 
 	
-	int c = 0;
-	int d = 0;
+	int l = hi - lo + 1;
 	
-	for (int i = 0; i < data.length; i++) {
-	    if (a[c] < b[d]) {
-		data[i] = a[c];
-		c++;
-	    }
-	    else if (b[d] < a[c]) {
-		data[i] = b[d];
-		d++;
-	    }
-	    System.out.println(toString(data));
+	for (int i = 0; i < l; i++) {
+	    if (lo <= mid) {
+		if (midd <= hi) {
+		    if (data[lo] <= data[midd]) {
+			lo++;
+		    }
+		    else {
+			swap(data, lo, midd);
+			midd++;
+		    }
+		}
+		else {
+		    data[
 	}
 
 	return data; 
@@ -35,6 +44,9 @@ public  class Merge {
 	for (int i = lo; i < hi + 1; i++) {
 	    temp[lo] = data[hi];
 	}
+
+	msort(temp, data, lo, mid);
+	msort(temp, data, mid + 1, hi);
 	
     }
 
@@ -52,7 +64,7 @@ public  class Merge {
 	int[] data;
 
 	System.out.println(toString(a) + "\n" + toString(b));
-	data = merge(a,b,);
+	data = merge(a,b);
 	System.out.println(toString(data));
     }
 }
