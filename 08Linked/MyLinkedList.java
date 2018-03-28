@@ -61,7 +61,10 @@ public class MyLinkedList {
     }
 
     public boolean add (int index, int value) {
-	if (!in(index)) {
+	if (in(index)) {
+
+	}
+	else {
 	    throw new IllegalArgumentException();
 	}
     }
