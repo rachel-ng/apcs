@@ -9,25 +9,31 @@ public  class Merge {
     public static int[] merge (int[] data, int[] temp, int lo, int hi) {
 	int mid = (lo + hi) / 2;
 	int midd = ((lo + hi) / 2) + 1; 
-	
-	int l = hi - lo + 1;
-	
-	for (int i = 0; i < l; i++) {
+		
+	for (int i = lo; i < hi + 1; i++) {
 	    if (lo <= mid) {
 		if (midd <= hi) {
 		    if (data[lo] <= data[midd]) {
+			temp[i] = data[lo];
 			lo++;
 		    }
-		    else {
-			swap(data, lo, midd);
+		    else if (data[midd] < data[lo]){
+			temp[i] = data[midd];
 			midd++;
 		    }
 		}
 		else {
-		    data[
+		    temp[i] = data[lo];
+		    lo++;
+		}
+	    }
+	    else if (midd <= hi){
+		temp[i] = data[midd];
+		midd++;
+	    }
 	}
 
-	return data; 
+	return temp; 
     }
 
     public static void mergesort(int[]data) {
@@ -37,16 +43,17 @@ public  class Merge {
 
     private static void msort(int[]data, int[]temp, int lo, int hi) {
 	int mid = (lo + hi) / 2;
-	if ( lo >= hi) {
+	if (lo >= hi) {
 	    return;
 	}
 	
-	for (int i = lo; i < hi + 1; i++) {
-	    temp[lo] = data[hi];
+	for (int i = lo; i <= hi + 1; i++) {
+	    temp[i] = data[i];
 	}
 
 	msort(temp, data, lo, mid);
 	msort(temp, data, mid + 1, hi);
+	merge(data,temp,lo,hi);
 	
     }
 
@@ -59,12 +66,13 @@ public  class Merge {
     }
 
     public static void main(String[]args){
-	int[] a = {1, 3, 4, 7, 8};
-	int[] b = {0, 2, 5, 6, 9};
-	int[] data;
+	int[] data = {1, 3, 4, 7, 8, 0, 3, 5, 6, 9};
+	int[] dataa = new int[10];
 
-	System.out.println(toString(a) + "\n" + toString(b));
-	data = merge(a,b);
 	System.out.println(toString(data));
+	System.out.println(toString(dataa));
+	merge(data, dataa, 0, 9);
+	System.out.println(toString(data));
+	System.out.println(toString(dataa));
     }
 }
