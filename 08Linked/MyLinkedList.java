@@ -56,12 +56,18 @@ public class MyLinkedList {
 	return length;
     }
 
+    public boolean in (int index) {
+	return index < length;
+    }
+
     public boolean add (int index, int value) {
-	
+	if (!in(index)) {
+	    throw new IllegalArgumentException();
+	}
     }
 
     public boolean remove (int index) {
-	if (index > length - 1) {
+	if (!in(index)) {
 	    throw new IllegalArgumentException();
 	}
     }
