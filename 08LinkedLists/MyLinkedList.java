@@ -35,11 +35,10 @@ public class MyLinkedList {
 	}
     }
     
-    /*
     private Node getNode (int index) {
-	
+	Node n = index;
+	return n; 
     }
-    */
     
     public MyLinkedList () {
 	start = null;
