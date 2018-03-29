@@ -83,7 +83,10 @@ public class MyLinkedList {
 
     public boolean add (Integer newData) {
 	if (start == null) {
-	    
+	    return true; 
+	}
+	else {
+	    end 
 	}
 	return false; 
     }
