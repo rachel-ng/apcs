@@ -2,14 +2,14 @@ import java.util.*;
 
 public class MyLinkedList {
 
-    private Node start,end;
+    private Node start, end;
     private int size;
 
     private class Node{
 	private Node next, prev;
-	private int data;
+	private Integer data;
 
-	public Node (int data) {
+	public Node (Integer data) {
 	    this.data = data;
 	}
 	
@@ -17,7 +17,7 @@ public class MyLinkedList {
 	    return next; 
 	}
 
-	private Node setNext (int n) {
+	private void setNext (Node n) {
 	    next = n; 
 	}
 	
@@ -25,15 +25,15 @@ public class MyLinkedList {
 	    return prev;
 	}
 
-	private Node setPrev (int n) {
+	private void setPrev (Node n) {
 	    prev = n; 
 	}
 	
-	private int getValue () {
+	private Integer getValue () {
 	    return data;
 	}
 
-	private void setValue (int n) {
+	private void setValue (Integer n) {
 	    data = n;
 	}
 	
@@ -85,13 +85,13 @@ public class MyLinkedList {
 
     public Integer get(int index) { // exceptions
 	if (index == 0) {
-	    return start;
+	    return start.getValue();
 	}
-	else if (index == length - 1) {
-	    return end;
+	else if (index == size - 1) {
+	    return end.getValue();
 	}
 	else {
-	    return getNode(index);
+	    return getNode(index).getValue();
 	}
     }
 
@@ -113,7 +113,7 @@ public class MyLinkedList {
 	Node n = new Node(value);
 	
 	if (size == 0) {
-	    first = n; 
+	    start= n; 
 	}
 	else {
 	    n.setPrev(end);
