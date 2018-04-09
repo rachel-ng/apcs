@@ -59,9 +59,11 @@ public class MyLinkedList {
 	
 	if (size > 0) {
 	    Node n = start;
-	    str += n;
 	    while(n != null) {
-		str += ", " + n;
+		str += n.getValue();
+		if (n.getNext() != null) {
+		    str += ", ";
+		}
 		n = n.getNext();
 	    }
 	}
@@ -109,11 +111,10 @@ public class MyLinkedList {
     }
 
     public boolean add (Integer value) {
-
 	Node n = new Node(value);
 	
 	if (size == 0) {
-	    start= n; 
+	    start = n; 
 	}
 	else {
 	    n.setPrev(end);
@@ -124,32 +125,48 @@ public class MyLinkedList {
 	size++;
 	return true;
     }
-
+    
     public void add (int index, Integer value) {
-	if (index == 0) {
 
-	}
-	if (index == size) {
-
-	}
-	if (in(index)) {
-	    
-	}
-	else if (!in(index)) {
+	if (!in(index)) {
 	    throw new IllegalArgumentException();
 	}
-    }
+	
+	Node n = new Node(value);
+	if (index == 0) {
+	    start.getNext().setPrev(n);
+	    n.setNext(start.getNext());
+	    start = n;
+	}
+	if (index == size - 1) {
+	    end.getPrev().setNext(n);
+	    n.setPrev(end.getPrev());
+	    end = n;
+	}
+	if (in(index)) {
+	    Node r = start;
+	    
+	    for (int i = 0; i < index; i++) {
+		r = r.getNext();
+	    }
 
+	    
+	    n.setPrev(r.getPrev());
+	    n.setNext(r.getNext());
+	    r.getPrev().setNext(n);
+	    r.getNext().setPrev(n);
+	    r = n;
+	    
+	}
+    }
+    
     public boolean remove (Integer value) {
 	Node n = start; 
 
 	while (n != null) {
 	    if (n.getValue() == value) {
-		Node prev = n.getPrev(); 
-		Node next = n.getNext();
-		prev.setNext(next);
-		next.setPrev(prev);
-
+		n.getPrev().setNext(n.getNext());
+		n.getNext().setPrev(n.getPrev());
 		return true;
 	    }
 	    else {
@@ -165,7 +182,7 @@ public class MyLinkedList {
 	    throw new IllegalArgumentException();
 	}
 	else {
-
+	    
 	}
 	return true;
     }
@@ -175,6 +192,20 @@ public class MyLinkedList {
 	MyLinkedList a = new MyLinkedList(); 
 	
 	System.out.println(a.size());
+	System.out.println(a.toString());
+	a.add(Integer.valueOf(1));
+	System.out.println(a.toString());
+	a.add(Integer.valueOf(2));
+	System.out.println(a.toString());
+	a.add(Integer.valueOf(3));
+	System.out.println(a.toString());
+	a.add(1,Integer.valueOf(5));
+	System.out.println(a.toString());
+	a.add(Integer.valueOf(4));
+	System.out.println(a.toString());
+	a.add(1,Integer.valueOf(2));
+	System.out.println(a.toString());
+	a.remove(Integer.valueOf(2));
 	System.out.println(a.toString());
     }
     
