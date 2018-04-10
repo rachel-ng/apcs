@@ -188,11 +188,21 @@ public class MyLinkedListImproved<T> {
     
     public boolean remove (T value) {
 	Node n = start; 
-
+	
 	while (n != null) {
 	    if (n.getValue() == value) {
-		n.getPrev().setNext(n.getNext());
-		n.getNext().setPrev(n.getPrev());
+		if (n == start) {
+		    n.getNext().setPrev(n.getPrev());
+		    n = start;
+		}
+		if (n == end) {
+		    n.getPrev().setNext(n.getNext());
+		    n = end;
+		}
+		else if (n != start && n != end) {
+		    n.getPrev().setNext(n.getNext());
+		    n.getNext().setPrev(n.getPrev());
+		}
 		size--; 
 		return true;
 	    }
@@ -231,10 +241,13 @@ public class MyLinkedListImproved<T> {
     }
     
     public static void main(String[]args){
+
+	System.out.println("\n\n\n\n\nINTEGERS");
+	
 	MyLinkedListImproved<Integer> a = new MyLinkedListImproved<>();
 	
 	System.out.println(a.toString() + ", " + a.size()); // toString + size
-				   
+
 	// test add (boolean, adds to end)
 	System.out.println("\n\n\ntest add (boolean, adds to end)");
 	System.out.println(a.toString());
@@ -337,6 +350,10 @@ public class MyLinkedListImproved<T> {
 	a.clear();
 	System.out.println(a.toString());
 
+	
+	
+	System.out.println("\n\n\n\n\nSTRINGS");
+	
 	MyLinkedListImproved<String> b = new MyLinkedListImproved<>();
 	System.out.println(b.toString() + ", " + b.size()); // toString + size
 
@@ -349,15 +366,25 @@ public class MyLinkedListImproved<T> {
 	System.out.println(b.toString());
 	b.add("die");
 	System.out.println(b.toString());
-
+	b.add("just");
+	System.out.println(b.toString());
+	b.add("kidding");
+	System.out.println(b.toString());
+	
 	System.out.println("\n" + b.toString() + ", " + b.size()); 
 
 	// test add (void, inserts)
 	System.out.println("\n\n\ntest add (void, inserts)");
 	System.out.println(b.toString());
+	b.add(4,")");
+	System.out.println(b.toString() + ", " + b.size());
 	b.add(1,"kinda");
 	System.out.println(b.toString() + ", " + b.size());
+	b.add(4,"(");
+	System.out.println(b.toString() + ", " + b.size());
 	b.add(2,"want");
+	System.out.println(b.toString() + ", " + b.size());
+	b.add(6,"I'm");
 	System.out.println(b.toString() + ", " + b.size());
 	b.add(4,"to");
 	System.out.println(b.toString() + ", " + b.size());
@@ -369,6 +396,10 @@ public class MyLinkedListImproved<T> {
 	System.out.println(b.toString());
 	System.out.println("set 3 (wanna) -> cry");
 	System.out.println(b.set(3,"cry"));
+	System.out.println("set 5 (die) -> cry");
+	System.out.println(b.set(5,"cry"));
+	System.out.println("set 6 (() -> ,");
+	System.out.println(b.set(6,","));
 	System.out.println(b.toString());
 
 	System.out.println("\n" + b.toString() + ", " + b.size());
@@ -384,7 +415,9 @@ public class MyLinkedListImproved<T> {
 	// test remove (boolean, value)
 	System.out.println("\n\n\ntest remove (boolean, value)");
 	System.out.println(b.toString());
-	System.out.println("remove 6: " + b.remove("cry"));
+	System.out.println("remove cry: " + b.remove("cry"));
+	System.out.println(b.toString());
+	System.out.println("remove ): " + b.remove(")"));
 	System.out.println(b.toString());
 
 	System.out.println("\n" + b.toString() + ", " + b.size());
@@ -394,6 +427,8 @@ public class MyLinkedListImproved<T> {
 	System.out.println(b.toString());
 	System.out.println("remove 1: " + b.remove(1));
 	System.out.println(b.toString() + ", " + b.size());
+	System.out.println("remove 6: " + b.remove(6));
+	System.out.println(b.toString() + ", " + b.size());
 
 	System.out.println("\n" + b.toString() + ", " + b.size());
 
@@ -401,7 +436,21 @@ public class MyLinkedListImproved<T> {
 	System.out.println("\n\n\ntest clear");
 	System.out.println(b.toString());
 	b.clear();
-	System.out.println(b.toString());	
+	System.out.println(b.toString());
+
+
+	
+	System.out.println("\n\n\n\n\nMORE STUFF");
+
+	System.out.println("phase 1 make it work with generics");
+	MyLinkedListImproved<String> n = new MyLinkedListImproved<>();
+        n.add("fish");
+	System.out.println(n);
+	
+	MyLinkedListImproved<Integer> m = new MyLinkedListImproved<>();
+        m.add(new Integer(0));
+	System.out.println(m);
+	
     }
     
 }
