@@ -190,13 +190,13 @@ public class MyLinkedListImproved<T> {
 	Node n = start; 
 	
 	while (n != null) {
-	    if (n.getValue() == value) {
+	    if (n.getValue().equals(value)) {
 		if (n == start) {
 		    n.getNext().setPrev(n.getPrev());
 		    n = start;
 		}
 		if (n == end) {
-		    n.getPrev().setNext(n.getNext());
+		    n.getPrev().setNext(n);
 		    n = end;
 		}
 		else if (n != start && n != end) {
@@ -226,7 +226,7 @@ public class MyLinkedListImproved<T> {
 	}
 	if (index == size - 1) {
 	    Node n = new Node(end.getPrev().getValue());
-	    n.setPrev(end.getPrev().getPrev());
+	    n.setPrev(end.getPrev());
 	    n.getPrev().setNext(n);
 	    end = n;
 	    size--;
@@ -360,15 +360,15 @@ public class MyLinkedListImproved<T> {
 	// test add (boolean, adds to end)
 	System.out.println("\n\n\ntest add (boolean, adds to end)");
 	System.out.println(b.toString());
-	b.add("i");
+	b.add("cries");
 	System.out.println(b.toString());
-	b.add("wanna");
+	b.add("dies");
 	System.out.println(b.toString());
-	b.add("die");
+	b.add("dies");
 	System.out.println(b.toString());
-	b.add("just");
+	b.add("cries");
 	System.out.println(b.toString());
-	b.add("kidding");
+	b.add("cries");
 	System.out.println(b.toString());
 	
 	System.out.println("\n" + b.toString() + ", " + b.size()); 
@@ -376,17 +376,17 @@ public class MyLinkedListImproved<T> {
 	// test add (void, inserts)
 	System.out.println("\n\n\ntest add (void, inserts)");
 	System.out.println(b.toString());
-	b.add(4,")");
+	b.add(4,"cries");
 	System.out.println(b.toString() + ", " + b.size());
-	b.add(1,"kinda");
+	b.add(1,"dies");
 	System.out.println(b.toString() + ", " + b.size());
-	b.add(4,"(");
+	b.add(4,"cries");
 	System.out.println(b.toString() + ", " + b.size());
-	b.add(2,"want");
+	b.add(2,"dies");
 	System.out.println(b.toString() + ", " + b.size());
-	b.add(6,"I'm");
+	b.add(6,"dies");
 	System.out.println(b.toString() + ", " + b.size());
-	b.add(4,"to");
+	b.add(4,"dies");
 	System.out.println(b.toString() + ", " + b.size());
 	
 	System.out.println("\n" + b.toString() + ", " + b.size()); 
@@ -394,12 +394,12 @@ public class MyLinkedListImproved<T> {
 	// test set (T)
 	System.out.println("\n\n\ntest set (T)");
 	System.out.println(b.toString());
-	System.out.println("set 3 (wanna) -> cry");
-	System.out.println(b.set(3,"cry"));
-	System.out.println("set 5 (die) -> cry");
-	System.out.println(b.set(5,"cry"));
-	System.out.println("set 6 (() -> ,");
-	System.out.println(b.set(6,","));
+	System.out.println("set 3 (dies) -> cries");
+	System.out.println(b.set(3,"cries"));
+	System.out.println("set 5 (dies) -> cries");
+	System.out.println(b.set(5,"cries"));
+	System.out.println("set 7 (dies) -> cries");
+	System.out.println(b.set(6,"cries"));
 	System.out.println(b.toString());
 
 	System.out.println("\n" + b.toString() + ", " + b.size());
@@ -412,22 +412,30 @@ public class MyLinkedListImproved<T> {
 
 	System.out.println("\n" + b.toString() + ", " + b.size());
 
+	/*
+	
 	// test remove (boolean, value)
 	System.out.println("\n\n\ntest remove (boolean, value)");
 	System.out.println(b.toString());
-	System.out.println("remove cry: " + b.remove("cry"));
+	System.out.println("remove cries: " + b.remove("cries"));
 	System.out.println(b.toString());
-	System.out.println("remove ): " + b.remove(")"));
+	System.out.println("remove dies: " + b.remove("dies"));
 	System.out.println(b.toString());
 
 	System.out.println("\n" + b.toString() + ", " + b.size());
 
+	*/
+
 	// test remove (boolean, index)
 	System.out.println("\n\n\ntest remove (boolean, index)");
 	System.out.println(b.toString());
+	System.out.println("remove 0: " + b.remove(0));
+	System.out.println(b.toString() + ", " + b.size());
 	System.out.println("remove 1: " + b.remove(1));
 	System.out.println(b.toString() + ", " + b.size());
 	System.out.println("remove 6: " + b.remove(6));
+	System.out.println(b.toString() + ", " + b.size());
+	System.out.println("remove 7: " + b.remove(7));
 	System.out.println(b.toString() + ", " + b.size());
 
 	System.out.println("\n" + b.toString() + ", " + b.size());
