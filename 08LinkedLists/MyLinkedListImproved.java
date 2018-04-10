@@ -44,12 +44,6 @@ public class MyLinkedListImproved<T> {
 	private String sNode () {
 	    return "[" + prev + ", " + data + ", " + next + "]";
 	}
-
-	// returns something like this
-	// [null, 1, MyLinkedList$Node@7852e922] (first)
-	// [MyLinkedList$Node@4e25154f, 2, MyLinkedList$Node@70dea4e] (middle)
-	// [MyLinkedList$Node@70dea4e, 4, null] (last)
-	// i'm weak i'm not even using it 
     }
     
     public MyLinkedListImproved () {
@@ -75,7 +69,7 @@ public class MyLinkedListImproved<T> {
 	return str + "]";
     }
 
-    public String toString (Node n) { // for printing Nodes
+    public String toString (Node n) {
 	return "[prev, " + n.getValue() + ", next]";
     }
 
@@ -89,7 +83,7 @@ public class MyLinkedListImproved<T> {
 	return size;
     }
 
-    private Node getNode (int index) { // has exceptions
+    private Node getNode (int index) {
 	if (index >= size) {
 	    throw new IndexOutOfBoundsException();
 	}
@@ -100,11 +94,10 @@ public class MyLinkedListImproved<T> {
 	    n = n.getNext();
 	}
 
-	return n; 
-    } // gets the node
-    // n.getNode(index) -> gives you the specific node
+	return n;
+    }
     
-    public T get(int index) { // has exceptions
+    public T get(int index) {
 	if (index < 0 || index >= size) {
 	    throw new IndexOutOfBoundsException();
 	}
@@ -117,12 +110,10 @@ public class MyLinkedListImproved<T> {
 	else {
 	    return getNode(index).getValue();
 	}
-    } // gets the value of the node
-    // n.get(index) -> gives you the value of a specific node
-    // - utilizes getNode
+    }
     
     
-    public T set (int index, T newValue) { // has exceptions
+    public T set (int index, T newValue) {
 	if (index < 0 || index >= size) {
 	    throw new IndexOutOfBoundsException();
 	}
@@ -132,7 +123,6 @@ public class MyLinkedListImproved<T> {
 	n.setValue(newValue);
 	return old; 
     }
-    // just changes the value of a Node and returns the old value
 
     public int indexOf (T value) {
 	Node n = start;
@@ -290,10 +280,11 @@ public class MyLinkedListImproved<T> {
 	System.out.println("index of 7: " + a.indexOf(7));
 	System.out.println("index of 8: " + a.indexOf(8));
 	System.out.println("index of 9: " + a.indexOf(9));
+	
 	System.out.println("\n" + a.toString() + ", " + a.size()); 
 	
-	// test set (Integer)
-	System.out.println("\n\n\ntest set (Integer)");
+	// test set (T)
+	System.out.println("\n\n\ntest set (T)");
 	System.out.println(a.toString());
 	System.out.println("set 9 (7) -> 8");
 	System.out.println(a.set(9,Integer.valueOf(8)));
@@ -304,10 +295,9 @@ public class MyLinkedListImproved<T> {
 
 	System.out.println("\n" + a.toString() + ", " + a.size());
 	
-	// test getNode (Node) + get (Integer)
-	System.out.println("\n\n\ntest getNode (Node) + get (Integer");
-	//System.out.println(a.getNode(0).sNode()); // works too!
-	for (int i = 0; i < a.size(); i++) { // ah yes, a for loop for testing getNode and get because i'm lazy
+	// test getNode (Node) + get (T)
+	System.out.println("\n\n\ntest getNode (Node) + get (T)");
+	for (int i = 0; i < a.size(); i++) {
 	    System.out.println("get " + i + ": " + a.get(i) + "\t" + a.toString(a.getNode(i)));
 	}
 
@@ -347,7 +337,71 @@ public class MyLinkedListImproved<T> {
 	a.clear();
 	System.out.println(a.toString());
 
-	System.out.println("\n\n\n");
+	MyLinkedListImproved<String> b = new MyLinkedListImproved<>();
+	System.out.println(b.toString() + ", " + b.size()); // toString + size
+
+	// test add (boolean, adds to end)
+	System.out.println("\n\n\ntest add (boolean, adds to end)");
+	System.out.println(b.toString());
+	b.add("i");
+	System.out.println(b.toString());
+	b.add("wanna");
+	System.out.println(b.toString());
+	b.add("die");
+	System.out.println(b.toString());
+
+	System.out.println("\n" + b.toString() + ", " + b.size()); 
+
+	// test add (void, inserts)
+	System.out.println("\n\n\ntest add (void, inserts)");
+	System.out.println(b.toString());
+	b.add(1,"kinda");
+	System.out.println(b.toString() + ", " + b.size());
+	b.add(2,"want");
+	System.out.println(b.toString() + ", " + b.size());
+	b.add(4,"to");
+	System.out.println(b.toString() + ", " + b.size());
+	
+	System.out.println("\n" + b.toString() + ", " + b.size()); 
+
+	// test set (T)
+	System.out.println("\n\n\ntest set (T)");
+	System.out.println(b.toString());
+	System.out.println("set 3 (wanna) -> cry");
+	System.out.println(b.set(3,"cry"));
+	System.out.println(b.toString());
+
+	System.out.println("\n" + b.toString() + ", " + b.size());
+
+	// test getNode (Node) + get (T)
+	System.out.println("\n\n\ntest getNode (Node) + get (T)");
+	for (int i = 0; i < b.size(); i++) {
+	    System.out.println("get " + i + ": " + b.get(i) + "\t" + b.toString(b.getNode(i)));
+	}
+
+	System.out.println("\n" + b.toString() + ", " + b.size());
+
+	// test remove (boolean, value)
+	System.out.println("\n\n\ntest remove (boolean, value)");
+	System.out.println(b.toString());
+	System.out.println("remove 6: " + b.remove("cry"));
+	System.out.println(b.toString());
+
+	System.out.println("\n" + b.toString() + ", " + b.size());
+
+	// test remove (boolean, index)
+	System.out.println("\n\n\ntest remove (boolean, index)");
+	System.out.println(b.toString());
+	System.out.println("remove 1: " + b.remove(1));
+	System.out.println(b.toString() + ", " + b.size());
+
+	System.out.println("\n" + b.toString() + ", " + b.size());
+
+	// test clear
+	System.out.println("\n\n\ntest clear");
+	System.out.println(b.toString());
+	b.clear();
+	System.out.println(b.toString());	
     }
     
 }

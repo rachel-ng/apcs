@@ -346,8 +346,7 @@ public class MyLinkedList {
 	System.out.println(a.toString());
 	a.clear();
 	System.out.println(a.toString());
-
-	System.out.println("\n\n\n");
+	
     }
     
 }
