@@ -1,15 +1,15 @@
 import java.util.*;
 
-public class MyLinkedList {
+public class MyLinkedListImproved<T> {
 
     private Node start, end;
     private int size;
 
     private class Node{
 	private Node next, prev;
-	private Integer data;
+	private T data;
 
-	public Node (Integer data) {
+	public Node (T data) {
 	    this.data = data;
 	}
 	
@@ -29,11 +29,11 @@ public class MyLinkedList {
 	    prev = n; 
 	}
 	
-	private Integer getValue () {
+	private T getValue () {
 	    return data;
 	}
 
-	private void setValue (Integer n) {
+	private void setValue (T n) {
 	    data = n;
 	}
 	
@@ -52,7 +52,7 @@ public class MyLinkedList {
 	// i'm weak i'm not even using it 
     }
     
-    public MyLinkedList () {
+    public MyLinkedListImproved () {
 	start = null;
 	end = null;
 	size = 0;
@@ -104,7 +104,7 @@ public class MyLinkedList {
     } // gets the node
     // n.getNode(index) -> gives you the specific node
     
-    public Integer get(int index) { // has exceptions
+    public T get(int index) { // has exceptions
 	if (index < 0 || index >= size) {
 	    throw new IndexOutOfBoundsException();
 	}
@@ -122,19 +122,19 @@ public class MyLinkedList {
     // - utilizes getNode
     
     
-    public Integer set (int index, Integer newValue) { // has exceptions
+    public T set (int index, T newValue) { // has exceptions
 	if (index < 0 || index >= size) {
 	    throw new IndexOutOfBoundsException();
 	}
 	
 	Node n = getNode(index);
-	Integer old = n.getValue();
+	T old = n.getValue();
 	n.setValue(newValue);
 	return old; 
     }
     // just changes the value of a Node and returns the old value
 
-    public int indexOf (int value) {
+    public int indexOf (T value) {
 	Node n = start;
 	int i = 0;
 	
@@ -149,7 +149,7 @@ public class MyLinkedList {
 	return -1; 
     }
 
-    public boolean add (Integer value) {
+    public boolean add (T value) {
 	Node n = new Node(value);
 	
 	if (size == 0) {
@@ -165,7 +165,7 @@ public class MyLinkedList {
 	return true;
     }
     
-    public void add (int index, Integer value) {
+    public void add (int index, T value) {
 	if (size == 0 || index < 0 || index > size) {
 	    throw new IndexOutOfBoundsException();
 	}
@@ -196,7 +196,7 @@ public class MyLinkedList {
 	}
     }
     
-    public boolean remove (Integer value) {
+    public boolean remove (T value) {
 	Node n = start; 
 
 	while (n != null) {
@@ -241,7 +241,7 @@ public class MyLinkedList {
     }
     
     public static void main(String[]args){
-	MyLinkedList a = new MyLinkedList();
+	MyLinkedListImproved<Integer> a = new MyLinkedListImproved<>();
 	
 	System.out.println(a.toString() + ", " + a.size()); // toString + size
 				   
