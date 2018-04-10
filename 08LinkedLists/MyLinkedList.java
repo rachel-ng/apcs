@@ -7,10 +7,10 @@ public class MyLinkedList {
 
     public boolean testing; // set to false so functions don't print a ton of extra code
     /* 
-    if (testing) {
-	System.out.println();
-	System.out.println("");
-    }			   
+       if (testing) {
+       System.out.println();
+       System.out.println("");
+       }			   
     */
 
     private class Node{
@@ -65,12 +65,6 @@ public class MyLinkedList {
 	size = 0;
     }
 
-    public void clear () {
-	start = null;
-	end = null;
-	size = 0; 
-    }
-
     public String toString () {
 	String str = "[";
 	
@@ -88,11 +82,21 @@ public class MyLinkedList {
 	return str + "]";
     }
 
-    public String toString (Node n) { // a toString that takes a Node and prints it out
+    public String toString (Node n) { // for printing Nodes
 	return "[prev, " + n.getValue() + ", next]";
     }
+
+    public void clear () {
+	start = null;
+	end = null;
+	size = 0; 
+    }
+
+    public int size () {
+	return size;
+    }
     
-    private Node getNode (int index) {
+    private Node getNode (int index) { // has exceptions
 	if (!in(index) || index >= size) {
 	    throw new IndexOutOfBoundsException();
 	}
@@ -123,13 +127,10 @@ public class MyLinkedList {
     
     
     public Integer set (int index, Integer value) { // has exceptions
-	Node n = new Node(value);
+	Node n = getNode(index);
+	n.setValue(value);
 	return value; 
     } 
-    
-    public int size () {
-	return size;
-    }
 
     public boolean in (int index) { // returns true if "in", returns false if not
 	return index < size;
@@ -157,20 +158,20 @@ public class MyLinkedList {
 	}
 
 	Node n = new Node(value);
-	
+
 	if (index == 0) {
-	    Node s = start;	    
-	    n.setNext(s);
-	    s.setPrev(n);
-	    start = n; 
+	    n.setNext(start);
+	    start.setPrev(n);
+	    start = n;
+	    size++;
 	}
-	
-	else if (index == size - 1) {
-	    n.setPrev(end);
-	    end.setNext(n);
-	    end = n;
+	if (index == size - 1) {
+	    end.getPrev().setNext(n);
+	    n.setNext(end);
+	    end.setPrev(n);
+	    size++;
 	}
-	else if (index != 0 && in(index)) {
+	else if (index != 0 && index != size - 1 && in(index)) { // I now have trust issues
 	    Node b = getNode(index); // next (index + 1 -> index + 1)
 	    Node a = b.getPrev(); // prev (index - 1 -> index - 1)
 	    
@@ -178,16 +179,16 @@ public class MyLinkedList {
 	    n.setNext(b);
 	    a.setNext(n);
 	    b.setPrev(n);
-	    
-	    /* this replaced the Node that was at the index rather than inserting it rip
-	    n.setPrev(r.getPrev());
-	    n.setNext(r.getNext());
-	    r.getPrev().setNext(n);
-	    r.getNext().setPrev(n);
-	    r = n;
+	    size++;
+		
+	    /* this replaced at the index rather than inserting it rip
+	       n.setPrev(r.getPrev());
+	       n.setNext(r.getNext());
+	       r.getPrev().setNext(n);
+	       r.getNext().setPrev(n);
+	       r = n;
 	    */
 	}
-	size++; 
     }
     
     public boolean remove (Integer value) {
@@ -226,8 +227,9 @@ public class MyLinkedList {
 				   
 	// test add (boolean, adds to end)
 	System.out.println("\ntest add (boolean, adds to end)");
-	a.add(Integer.valueOf(1));
 	System.out.println(a.toString());
+	a.add(Integer.valueOf(1));
+	System.out.println(a.toString());	
 	a.add(Integer.valueOf(3));
 	System.out.println(a.toString());
 	a.add(Integer.valueOf(4));
@@ -236,42 +238,43 @@ public class MyLinkedList {
 	System.out.println(a.toString());
 	a.add(Integer.valueOf(7));
 	System.out.println(a.toString());
+	a.add(Integer.valueOf(9));
+	System.out.println(a.toString());
 
 	System.out.println("\n" + a.toString() + ", " + a.size()); // toString + size
 	
 	// test add (void, inserts)
 	System.out.println("\ntest add (void, inserts)");
+	System.out.println(a.toString());
 	a.add(0,Integer.valueOf(0));
-	System.out.println(a.toString());
-	System.out.println(a.size() + "\n");
+	System.out.println(a.toString() + ", " + a.size());
 	a.add(2,Integer.valueOf(2));
-	System.out.println(a.toString());
-	System.out.println(a.size() + "\n");
-	a.add(5,Integer.valueOf(6));
-	System.out.println(a.toString());
-	System.out.println(a.size() + "\n");
-
+	System.out.println(a.toString() + ", " + a.size());
+	a.add(6,Integer.valueOf(6));
+	System.out.println(a.toString() + ", " + a.size());
+	a.add(7,Integer.valueOf(7));
+	System.out.println(a.toString() + ", " + a.size());
+	a.add(9,Integer.valueOf(9));
+	System.out.println(a.toString() + ", " + a.size());
+	
 	System.out.println("\n" + a.toString() + ", " + a.size()); // toString + size
 	
 	// test set (Integer)
 	System.out.println("\ntest set (Integer)");
+	System.out.println(a.toString());
+	a.set(8,Integer.valueOf(8));
+	System.out.println(a.toString());
+	a.set(10,Integer.valueOf(10));
+	System.out.println(a.toString());
 
 	System.out.println("\n" + a.toString() + ", " + a.size()); // toString + size
 	
 	// test getNode (Node) + get (Integer)
 	System.out.println("\ntest getNode (Node) + get (Integer)");
-	//System.out.println(a.getNode(0).sNode());
-	System.out.println(a.toString(a.getNode(0)));
-	System.out.println("get 0: " + a.get(0));
-	//System.out.println(a.getNode(1).sNode());
-	System.out.println(a.toString(a.getNode(1)));
-	System.out.println("get 1: " +a.get(1));
-	//System.out.println(a.getNode(2).sNode()); 
-	System.out.println(a.toString(a.getNode(2)));
-	System.out.println("get 2: " +a.get(2));
-	//System.out.println(a.getNode(3).sNode());
-	System.out.println(a.toString(a.getNode(3)));
-	System.out.println("get 3: " +a.get(3));
+	//System.out.println(a.getNode(0).sNode()); // works but I worked too hard on the other one to not use it
+	for (int i = 0; i < a.size(); i++) { // ah yes, a for loop for testing getNode and get because i'm lazy
+	    System.out.println("get " + i + ": " + a.get(i) + "\t" + a.toString(a.getNode(i)));
+	}
 
 	// test remove (boolean, value)
 	System.out.println("\ntest remove (boolean, value)");
@@ -294,7 +297,7 @@ public class MyLinkedList {
 	a.clear();
 	System.out.println(a.toString());
 
-	System.out.println("\n\n\n\n\n\n\n\n\n");
+	System.out.println("\n\n\n");
     }
     
 }
