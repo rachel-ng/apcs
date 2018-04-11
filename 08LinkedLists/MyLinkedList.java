@@ -336,6 +336,8 @@ public class MyLinkedList {
 	System.out.println(a.toString() + ", " + a.size());
 	System.out.println("remove 2: " + a.remove(2));
 	System.out.println(a.toString() + ", " + a.size());
+	System.out.println("remove 6: " + a.remove(6));
+	System.out.println(a.toString() + ", " + a.size());
 	System.out.println("remove 5: " + a.remove(5));
 	System.out.println(a.toString() + ", " + a.size());
 	
