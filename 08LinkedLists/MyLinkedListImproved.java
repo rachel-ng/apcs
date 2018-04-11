@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class MyLinkedListImproved<T extends Comparable<T>> implements Iterable<T> {
+public class MyLinkedListImproved<T> {//extends Comparable<T>> implements Iterator<T> {
 
     private Node start, end;
     private int size;
@@ -188,7 +188,21 @@ public class MyLinkedListImproved<T extends Comparable<T>> implements Iterable<T
     
     public boolean remove (T value) {
 	Node n = start; 
+
+	while (n != null) {
+	    if (n.getValue() == value) {
+		n.getPrev().setNext(n.getNext());
+		n.getNext().setPrev(n.getPrev());
+		size--; 
+		return true;
+	    }
+	    else {
+		n = n.getNext();
+	    }
+	}
+	return false;
 	
+	/*
 	while (n != null) {
 	    if (n.getValue().equals(value)) {
 		if (n == start) {
@@ -211,6 +225,7 @@ public class MyLinkedListImproved<T extends Comparable<T>> implements Iterable<T
 	    }
 	}
 	return false;
+	*/
     }
     
     public boolean remove (int index) {
@@ -227,7 +242,7 @@ public class MyLinkedListImproved<T extends Comparable<T>> implements Iterable<T
 	if (index == size - 1) {
 	    Node n = new Node(end.getPrev().getValue());
 	    n.setPrev(end.getPrev());
-	    n.getPrev().setNext(n);
+	    end.getPrev().setNext(n);
 	    end = n;
 	    size--;
 	}	
@@ -239,5 +254,121 @@ public class MyLinkedListImproved<T extends Comparable<T>> implements Iterable<T
 	}
 	return true;
     }
-        
+
+    public int max() {
+	if (size == 0) {
+	    return -1;
+	}
+	return -1;
+    }
+
+    public int min() {
+	if (size == 0) {
+	    return -1;
+	}
+	return -1;
+    }
+
+    public static void main(String[]args){
+	MyLinkedListImproved<String> n = new MyLinkedListImproved<>();
+	n.add("fish");
+	System.out.println(n);
+	
+	MyLinkedListImproved<Integer> m = new MyLinkedListImproved<>();
+	m.add(new Integer(0));
+	System.out.println(m);
+
+		MyLinkedListImproved<String> b = new MyLinkedListImproved<>();
+	System.out.println(b.toString() + ", " + b.size()); // toString + size
+
+	// test add (boolean, adds to end)
+	System.out.println("\n\n\ntest add (boolean, adds to end)");
+	System.out.println(b.toString());
+	b.add("cries");
+	System.out.println(b.toString());
+	b.add("dies");
+	System.out.println(b.toString());
+	b.add("dies");
+	System.out.println(b.toString());
+	b.add("cries");
+	System.out.println(b.toString());
+	b.add("cries");
+	System.out.println(b.toString());
+	
+	System.out.println("\n" + b.toString() + ", " + b.size()); 
+
+	// test add (void, inserts)
+	System.out.println("\n\n\ntest add (void, inserts)");
+	System.out.println(b.toString());
+	b.add(4,"cries");
+	System.out.println(b.toString() + ", " + b.size());
+	b.add(1,"dies");
+	System.out.println(b.toString() + ", " + b.size());
+	b.add(4,"cries");
+	System.out.println(b.toString() + ", " + b.size());
+	b.add(2,"dies");
+	System.out.println(b.toString() + ", " + b.size());
+	b.add(6,"dies");
+	System.out.println(b.toString() + ", " + b.size());
+	b.add(4,"dies");
+	System.out.println(b.toString() + ", " + b.size());
+	
+	System.out.println("\n" + b.toString() + ", " + b.size()); 
+
+	// test set (T)
+	System.out.println("\n\n\ntest set (T)");
+	System.out.println(b.toString());
+	System.out.println("set 3 (dies) -> cries");
+	System.out.println(b.set(3,"cries"));
+	System.out.println("set 5 (dies) -> cries");
+	System.out.println(b.set(5,"cries"));
+	System.out.println("set 7 (dies) -> cries");
+	System.out.println(b.set(6,"cries"));
+	System.out.println(b.toString());
+
+	System.out.println("\n" + b.toString() + ", " + b.size());
+
+	// test getNode (Node) + get (T)
+	System.out.println("\n\n\ntest getNode (Node) + get (T)");
+	for (int i = 0; i < b.size(); i++) {
+	    System.out.println("get " + i + ": " + b.get(i) + "\t" + b.toString(b.getNode(i)));
+	}
+
+	System.out.println("\n" + b.toString() + ", " + b.size());
+
+	/*
+	
+	// test remove (boolean, value)
+	System.out.println("\n\n\ntest remove (boolean, value)");
+	System.out.println(b.toString());
+	System.out.println("remove cries: " + b.remove("cries"));
+	System.out.println(b.toString());
+	System.out.println("remove dies: " + b.remove("dies"));
+	System.out.println(b.toString());
+
+	System.out.println("\n" + b.toString() + ", " + b.size());
+
+	*/
+
+	// test remove (boolean, index)
+	System.out.println("\n\n\ntest remove (boolean, index)");
+	System.out.println(b.toString());
+	System.out.println("remove 0: " + b.remove(0));
+	System.out.println(b.toString() + ", " + b.size());
+	System.out.println("remove 1: " + b.remove(1));
+	System.out.println(b.toString() + ", " + b.size());
+	System.out.println("remove 6: " + b.remove(6));
+	System.out.println(b.toString() + ", " + b.size());
+	System.out.println("remove 7: " + b.remove(7));
+	System.out.println(b.toString() + ", " + b.size());
+
+	System.out.println("\n" + b.toString() + ", " + b.size());
+
+	// test clear
+	System.out.println("\n\n\ntest clear");
+	System.out.println(b.toString());
+	b.clear();
+	System.out.println(b.toString());
+	
+    }
 }
