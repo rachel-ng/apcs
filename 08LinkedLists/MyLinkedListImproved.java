@@ -313,20 +313,16 @@ public class MyLinkedListImproved<T extends Comparable<T>> implements Iterable<T
 	}
 
 	private boolean hasNext () {
-	    return n.getNext() != null;
+	    return (n.getNext().getValue() != null);
 	}
 
-	private Node next () {
-	    if (n.getNext() == null || !hasNext()) {
+	private T next () {
+	    if (n.getNext() == null) {
 		throw new NoSuchElementException();
 	    }
 	    else {
 		return n.getNext();
 	    }
-	}
-
-	private void remove () {
-	    throw new UnsupportedOperationException();
 	}
     }
 	
