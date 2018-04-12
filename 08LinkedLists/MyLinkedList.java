@@ -158,9 +158,9 @@ public class MyLinkedList {
 	else {
 	    n.setPrev(end);
 	    end.setNext(n);
-	    end = n;
 	}
 
+	end = n;
 	size++;
 	return true;
     }
