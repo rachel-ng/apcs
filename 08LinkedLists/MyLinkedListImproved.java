@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class MyLinkedListImproved<T> { //extends Comparable<T>> implements Iterable<T> {
+public class MyLinkedListImproved<T extends Comparable<T>> implements Iterable<T> {
 
     private Node start, end;
     private int size;
@@ -296,43 +296,39 @@ public class MyLinkedListImproved<T> { //extends Comparable<T>> implements Itera
 
     public int compareTo (T n) {
 	return -1;
-	//return T.compare(this.getValue(), n.getValue());
+	//return T.compare(this, n);
+    }
+    
+    public Iterator<T> iterator () {
+	return new Listerator();
     }
 
-    /*
-    
-      public Iterator<T> iterator () {
-      return Listerator();
-      }
+    private class Listerator implements Iterator<T>{
+	private MyLinkedListImproved l;
+	private Node n;
 
-      private class Listerator implements Iterator<T>{
-      private MyLinkedListImproved l;
-      private Node n;
+	public Listerator () {
+	    this.l = l;
+	    n = l.getNode(0);
+	}
 
-      public Listerator () {
-      n = l.getNode(0);
-      }
+	private boolean hasNext () {
+	    return n.getNext() != null;
+	}
 
-      private boolean hasNext () {
-      return n.getNext() != null;
-      }
+	private Node next () {
+	    if (n.getNext() == null || !hasNext()) {
+		throw new NoSuchElementException();
+	    }
+	    else {
+		return n.getNext();
+	    }
+	}
 
-      private Node next () {
-      if (n.getNext() == null) {
-      throw new NoSuchElementException();
-      }
-      else {
-      return n.getNext();
-      }
-      }
-
-      private void remove () {
-      throw new UnsupportedOperationException();
-      }
-	
-      }
-
-    */
+	private void remove () {
+	    throw new UnsupportedOperationException();
+	}
+    }
 	
     public static void main(String[]args){
 	MyLinkedListImproved<String> n = new MyLinkedListImproved<>();
