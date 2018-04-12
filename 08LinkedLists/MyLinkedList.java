@@ -158,9 +158,9 @@ public class MyLinkedList {
 	else {
 	    n.setPrev(end);
 	    end.setNext(n);
+	    end = n;
 	}
 
-	end = n;
 	size++;
 	return true;
     }
@@ -249,6 +249,7 @@ public class MyLinkedList {
 	    n.getPrev().setNext(n.getNext());
 	    n.getNext().setPrev(n.getPrev());
 	    size--;
+	    return true;
 	}
 	return true;
     }
