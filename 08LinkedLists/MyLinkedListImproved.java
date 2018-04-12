@@ -37,11 +37,11 @@ public class MyLinkedListImproved<T> { //extends Comparable<T>> implements Itera
 	    data = n;
 	}
 	
-	private String toString (Node n) { // I can't tell whether I'm just stupid or if I just can't get this to work right
+	private String toString (Node n) {
 	    return "" + data;
 	}
 
-	private String sNode () {
+	private String sNode () { // also known as sadness 
 	    return "[" + prev + ", " + data + ", " + next + "]";
 	}
     }
@@ -63,6 +63,23 @@ public class MyLinkedListImproved<T> { //extends Comparable<T>> implements Itera
 		    str += ", ";
 		}
 		n = n.getNext();
+	    }
+	}
+	
+	return str + "]";
+    }
+
+    public String backString () { // toString but backwards
+	String str = "[";
+	
+	if (size > 0) {
+	    Node n = end;
+	    while(n != null) {
+		str += n.getValue();
+		if (n.getPrev() != null) {
+		    str += ", ";
+		}
+		n = n.getPrev();
 	    }
 	}
 	
@@ -275,36 +292,36 @@ public class MyLinkedListImproved<T> { //extends Comparable<T>> implements Itera
 
     /*
     
-    public Iterator<T> iterator () {
-	return Listerator();
-    }
+      public Iterator<T> iterator () {
+      return Listerator();
+      }
 
-    private class Listerator implements Iterator<T>{
-	private MyLinkedListImproved l;
-	private Node n;
+      private class Listerator implements Iterator<T>{
+      private MyLinkedListImproved l;
+      private Node n;
 
-	public Listerator () {
-	    n = l.getNode(0);
-	}
+      public Listerator () {
+      n = l.getNode(0);
+      }
 
-	private boolean hasNext () {
-	    return n.getNext() != null;
-	}
+      private boolean hasNext () {
+      return n.getNext() != null;
+      }
 
-	private Node next () {
-	    if (n.getNext() == null) {
-		throw new NoSuchElementException();
-	    }
-	    else {
-		return n.getNext();
-	    }
-	}
+      private Node next () {
+      if (n.getNext() == null) {
+      throw new NoSuchElementException();
+      }
+      else {
+      return n.getNext();
+      }
+      }
 
-	private void remove () {
-	    throw new UnsupportedOperationException();
-	}
+      private void remove () {
+      throw new UnsupportedOperationException();
+      }
 	
-    }
+      }
 
     */
 	
@@ -317,7 +334,100 @@ public class MyLinkedListImproved<T> { //extends Comparable<T>> implements Itera
 	m.add(new Integer(0));
 	System.out.println(m);
 
-		MyLinkedListImproved<String> b = new MyLinkedListImproved<>();
+
+	
+	MyLinkedListImproved<Integer> a = new MyLinkedListImproved<>();
+	System.out.println(a.toString() + ", " + a.size()); // toString + size
+	
+	// test add (boolean, adds to end)
+	System.out.println("\n\ntest add (boolean, adds to end)");
+	System.out.println(a.toString());
+	int[] addValue = new int[] {1, 1, 2, 3, 4, 5, 7, 9, 11};
+	for (int i : addValue) {
+	    a.add(Integer.valueOf(i));
+	    System.out.println(i + " ->\t" + a.toString());
+	}
+
+	System.out.println("\n" + a.toString() + ", " + a.size() + "\n" + a.backString());	
+	// test add (void, inserts)
+	System.out.println("\n\ntest add (void, inserts)");
+	System.out.println(a.toString());
+	a.add(0,Integer.valueOf(0));
+	System.out.println(a.toString() + ", " + a.size());
+	a.add(3,Integer.valueOf(2));
+	System.out.println(a.toString() + ", " + a.size());
+	a.add(8,Integer.valueOf(6));
+	System.out.println(a.toString() + ", " + a.size());
+	a.add(9,Integer.valueOf(7));
+	System.out.println(a.toString() + ", " + a.size());
+	a.add(11,Integer.valueOf(9));
+	System.out.println(a.toString() + ", " + a.size());
+	
+	System.out.println("\n" + a.toString() + ", " + a.size() + "\n" + a.backString());
+
+	// test indexOf (int) 
+	System.out.println("\n\ntest indexOf (int)");
+	System.out.println(a.toString());
+	int[] indexOfInt = new int[] {2, 7, 8, 9};
+	for (int i : indexOfInt) {
+	    System.out.println("index of " + i + ": " + a.indexOf(i));
+	}
+	
+	System.out.println("\n" + a.toString() + ", " + a.size() + "\n" + a.backString());
+
+	// test set (Integer)
+	System.out.println("\n\ntest set (Integer)");
+	System.out.println(a.toString());	
+	System.out.println("set 10 (" + a.set(10,Integer.valueOf(8)) + ") -> 8");
+	System.out.println(a.toString());
+	System.out.println("set 12 (" + a.set(12,Integer.valueOf(10)) + ") -> 10");
+	System.out.println(a.toString());
+
+	System.out.println("\n" + a.toString() + ", " + a.size() + "\n" + a.backString());
+
+	// test getNode (Node) + get (Integer)
+	System.out.println("\n\ntest getNode (Node) + get (Integer");
+	for (int i = 0; i < a.size(); i++) {
+	    System.out.println("get " + i + ": " + a.get(i) + "\t" + a.toString(a.getNode(i)));
+	}
+
+	System.out.println("\n" + a.toString() + ", " + a.size() + "\n" + a.backString());
+
+	// test remove (boolean, value)
+	System.out.println("\n\ntest remove (boolean, value)");
+	System.out.println(a.toString());
+        Integer[] removeValue = new Integer[] {0, 6, 7, 9, 11};
+	for (int i : removeValue) {
+	    System.out.println("remove " + i + ": " + a.remove(Integer.valueOf(i)));
+	    if (i == 0) { System.out.println("-> removes start"); }
+	    if (i == a.size() - 1) { System.out.println("-> removes end"); }
+	    System.out.println(a.toString());	
+	}
+	
+	System.out.println("\n" + a.toString() + ", " + a.size() + "\n" + a.backString());
+	
+	// test remove (boolean, index)
+	System.out.println("\n\ntest remove (boolean, index)");
+	System.out.println(a.toString());
+	int[] removeIndex = new int[] {7, 0, 6, 2};
+	for (int i : removeIndex) {
+	    System.out.println("remove " + i + ": " + a.remove(i));
+	    if (i == 0) { System.out.println("-> removes start"); }
+	    if (i == a.size() - 1) { System.out.println("-> removes end"); }
+	}
+
+	System.out.println("\n" + a.toString() + ", " + a.size() + "\n" + a.backString());
+	
+	// test clear
+	System.out.println("\n\ntest clear");
+	System.out.println(a.toString());
+	a.clear();
+	System.out.println(a.toString());
+	System.out.println("\n\n\n\n");
+
+
+	
+	MyLinkedListImproved<String> b = new MyLinkedListImproved<>();
 	System.out.println(b.toString() + ", " + b.size()); // toString + size
 
 	// test add (boolean, adds to end)
@@ -336,7 +446,7 @@ public class MyLinkedListImproved<T> { //extends Comparable<T>> implements Itera
 	b.add("goodbye");
 	System.out.println(b.toString());
 	
-	System.out.println("\n" + b.toString() + ", " + b.size()); 
+	System.out.println("\n" + b.toString() + ", " + b.size() + "\n" + b.backString());
 
 	// test add (void, inserts)
 	System.out.println("\n\n\ntest add (void, inserts)");
@@ -354,8 +464,8 @@ public class MyLinkedListImproved<T> { //extends Comparable<T>> implements Itera
 	b.add(4,"dies");
 	System.out.println(b.toString() + ", " + b.size());
 	
-	System.out.println("\n" + b.toString() + ", " + b.size()); 
-
+	System.out.println("\n" + b.toString() + ", " + b.size() + "\n" + b.backString());
+	
 	// test set (T)
 	System.out.println("\n\n\ntest set (T)");
 	System.out.println(b.toString());
@@ -370,7 +480,7 @@ public class MyLinkedListImproved<T> { //extends Comparable<T>> implements Itera
 	System.out.println(b.get(9));
 	System.out.println(b.toString());
 
-	System.out.println("\n" + b.toString() + ", " + b.size());
+	System.out.println("\n" + b.toString() + ", " + b.size() + "\n" + b.backString());
 
 	// test getNode (Node) + get (T)
 	System.out.println("\n\n\ntest getNode (Node) + get (T)");
@@ -378,33 +488,28 @@ public class MyLinkedListImproved<T> { //extends Comparable<T>> implements Itera
 	    System.out.println("get " + i + ": " + b.get(i) + "\t" + b.toString(b.getNode(i)));
 	}
 
-	System.out.println("\n" + b.toString() + ", " + b.size());
-
+	System.out.println("\n" + b.toString() + ", " + b.size() + "\n" + b.backString());
+	
 	// test remove (boolean, value)
 	System.out.println("\n\n\ntest remove (boolean, value)");
 	System.out.println(b.toString());
-	System.out.println("remove cries: " + b.remove("cries"));
-	System.out.println(b.toString() + ", " + b.size());
-	System.out.println("remove dies: " + b.remove("dies"));
-	System.out.println(b.toString() + ", " + b.size());
-	System.out.println("remove cries: " + b.remove("cries"));
-	System.out.println(b.toString() + ", " + b.size());
-	System.out.println("remove goodbye: " + b.remove("goodbye"));
-	System.out.println(b.toString() + ", " + b.size());
+	String[] removeVal = new String[] {"cries", "dies", "cries", "goodbye"};
+	for (String i : removeVal) {
+	    System.out.println("remove " + i + ": " + b.remove(i));
+	    System.out.println(b.toString() + ", " + b.size());
+	}
 
-	System.out.println("\n" + b.toString() + ", " + b.size());
-	
+	System.out.println("\n" + b.toString() + ", " + b.size() + "\n" + b.backString());	
 	// test remove (boolean, index)
 	System.out.println("\n\n\ntest remove (boolean, index)");
 	System.out.println(b.toString());
-	System.out.println("remove 0: " + b.remove(0));
-	System.out.println(b.toString() + ", " + b.size());
-	System.out.println("remove 6: " + b.remove(6));
-	System.out.println(b.toString() + ", " + b.size());
-	System.out.println("remove 1: " + b.remove(1));
-	System.out.println(b.toString() + ", " + b.size());
-
-	System.out.println("\n" + b.toString() + ", " + b.size());
+	int[] removeInd = new int[] {0, 6, 1};
+	for (int i : removeInd) {
+	    System.out.println("remove " + i + ": " + b.remove(i));
+	    System.out.println(b.toString() + ", " + b.size());
+	}
+	
+	System.out.println("\n" + b.toString() + ", " + b.size() + "\n" + b.backString()); 
 	
 	// test clear
 	System.out.println("\n\n\ntest clear");
