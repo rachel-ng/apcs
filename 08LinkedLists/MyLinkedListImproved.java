@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class MyLinkedListImproved<T extends Comparable<T>> implements Iterable<T> {
+public class MyLinkedListImproved<T> { //extends Comparable<T>> implements Iterable<T> {
 
     private Node start, end;
     private int size;
@@ -187,45 +187,34 @@ public class MyLinkedListImproved<T extends Comparable<T>> implements Iterable<T
     }
     
     public boolean remove (T value) {
-	Node n = start; 
+	Node n = start;
 
-	while (n != null) {
-	    if (n.getValue() == value) {
-		n.getPrev().setNext(n.getNext());
-		n.getNext().setPrev(n.getPrev());
-		size--; 
-		return true;
-	    }
-	    else {
-		n = n.getNext();
-	    }
-	}
-	return false;
-	
-	/*
 	while (n != null) {
 	    if (n.getValue().equals(value)) {
 		if (n == start) {
-		    n.getNext().setPrev(n.getPrev());
-		    n = start;
+		    start = n.getNext();
+		    n.getNext().setPrev(null);
+		    size--; 
+		    return true;
 		}
 		if (n == end) {
-		    n.getPrev().setNext(n);
-		    n = end;
+		    end = n.getPrev();
+		    n.getPrev().setNext(null);
+		    size--; 
+		    return true;
 		}
-		else if (n != start && n != end) {
+		else if (n != start && n != end){
 		    n.getPrev().setNext(n.getNext());
 		    n.getNext().setPrev(n.getPrev());
+		    size--; 
+		    return true;
 		}
-		size--; 
-		return true;
 	    }
 	    else {
 		n = n.getNext();
 	    }
 	}
 	return false;
-	*/
     }
     
     public boolean remove (int index) {
@@ -234,25 +223,25 @@ public class MyLinkedListImproved<T extends Comparable<T>> implements Iterable<T
 	}
 
 	if (index == 0) {
-	    Node n = new Node(get(1));
-	    n.setNext(getNode(1).getNext());
-	    start = n;
+	    start = start.getNext();
+	    start.setPrev(null);
 	    size--;
+	    return true;
 	}
 	if (index == size - 1) {
-	    Node n = new Node(end.getPrev().getValue());
-	    n.setPrev(end.getPrev());
-	    end.getPrev().setNext(n);
-	    end = n;
+	    end = end.getPrev();
+	    end.setNext(null);
 	    size--;
+	    return true;
 	}	
 	else if (index != 0 && index != size - 1 && index < size) {
 	    Node n = getNode(index);
 	    n.getPrev().setNext(n.getNext());
 	    n.getNext().setPrev(n.getPrev());
 	    size--;
+	    return true;
 	}
-	return true;
+	return false;
     }
 
     public int max () {
@@ -284,6 +273,8 @@ public class MyLinkedListImproved<T extends Comparable<T>> implements Iterable<T
 	//return T.compare(this.getValue(), n.getValue());
     }
 
+    /*
+    
     public Iterator<T> iterator () {
 	return Listerator();
     }
@@ -315,6 +306,8 @@ public class MyLinkedListImproved<T extends Comparable<T>> implements Iterable<T
 	
     }
 
+    */
+	
     public static void main(String[]args){
 	MyLinkedListImproved<String> n = new MyLinkedListImproved<>();
 	n.add("fish");
@@ -339,6 +332,8 @@ public class MyLinkedListImproved<T extends Comparable<T>> implements Iterable<T
 	b.add("cries");
 	System.out.println(b.toString());
 	b.add("cries");
+	System.out.println(b.toString());
+	b.add("goodbye");
 	System.out.println(b.toString());
 	
 	System.out.println("\n" + b.toString() + ", " + b.size()); 
@@ -366,10 +361,13 @@ public class MyLinkedListImproved<T extends Comparable<T>> implements Iterable<T
 	System.out.println(b.toString());
 	System.out.println("set 3 (dies) -> cries");
 	System.out.println(b.set(3,"cries"));
+	System.out.println(b.get(3));
 	System.out.println("set 5 (dies) -> cries");
 	System.out.println(b.set(5,"cries"));
-	System.out.println("set 7 (dies) -> cries");
-	System.out.println(b.set(6,"cries"));
+	System.out.println(b.get(5));
+	System.out.println("set 9 (cries) -> dies");
+	System.out.println(b.set(9,"dies"));
+	System.out.println(b.get(9));
 	System.out.println(b.toString());
 
 	System.out.println("\n" + b.toString() + ", " + b.size());
@@ -382,39 +380,45 @@ public class MyLinkedListImproved<T extends Comparable<T>> implements Iterable<T
 
 	System.out.println("\n" + b.toString() + ", " + b.size());
 
-	/*
-	
 	// test remove (boolean, value)
 	System.out.println("\n\n\ntest remove (boolean, value)");
 	System.out.println(b.toString());
 	System.out.println("remove cries: " + b.remove("cries"));
-	System.out.println(b.toString());
+	System.out.println(b.toString() + ", " + b.size());
 	System.out.println("remove dies: " + b.remove("dies"));
-	System.out.println(b.toString());
+	System.out.println(b.toString() + ", " + b.size());
+	System.out.println("remove cries: " + b.remove("cries"));
+	System.out.println(b.toString() + ", " + b.size());
+	System.out.println("remove goodbye: " + b.remove("goodbye"));
+	System.out.println(b.toString() + ", " + b.size());
 
 	System.out.println("\n" + b.toString() + ", " + b.size());
-
-	*/
-
+	
 	// test remove (boolean, index)
 	System.out.println("\n\n\ntest remove (boolean, index)");
 	System.out.println(b.toString());
 	System.out.println("remove 0: " + b.remove(0));
 	System.out.println(b.toString() + ", " + b.size());
-	System.out.println("remove 1: " + b.remove(1));
-	System.out.println(b.toString() + ", " + b.size());
 	System.out.println("remove 6: " + b.remove(6));
 	System.out.println(b.toString() + ", " + b.size());
-	System.out.println("remove 7: " + b.remove(7));
+	System.out.println("remove 1: " + b.remove(1));
 	System.out.println(b.toString() + ", " + b.size());
 
 	System.out.println("\n" + b.toString() + ", " + b.size());
-
+	
 	// test clear
 	System.out.println("\n\n\ntest clear");
 	System.out.println(b.toString());
 	b.clear();
 	System.out.println(b.toString());
+	
+	// test min + max
+	System.out.println("\n\n\ntest min + max");
+	System.out.println(b.toString());
+	System.out.println("\nmin: ");
+	System.out.println(b.min());
+	System.out.println("\nmax: ");
+	System.out.println(b.max());
 	
     }
 }
