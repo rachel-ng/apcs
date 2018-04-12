@@ -41,9 +41,6 @@ public class MyLinkedListImproved<T> { //extends Comparable<T>> implements Itera
 	    return "" + data;
 	}
 
-	private String sNode () { // also known as sadness 
-	    return "[" + prev + ", " + data + ", " + next + "]";
-	}
     }
     
     public MyLinkedListImproved () {
@@ -277,13 +274,25 @@ public class MyLinkedListImproved<T> { //extends Comparable<T>> implements Itera
 	
 	return ind;
     }
+    // probably use compareTo
 
     public int min () {
 	if (size == 0) {
 	    return -1;
 	}
+
+	Node n = start;
+	T max = start.getValue();
+	int i = 0;
+	int ind = 0;
+
+	while (n != null) {
+	    
+	}
+	
 	return -1;
     }
+    // probably use compareTo
 
     public int compareTo (T n) {
 	return -1;
@@ -518,12 +527,10 @@ public class MyLinkedListImproved<T> { //extends Comparable<T>> implements Itera
 	System.out.println(b.toString());
 	
 	// test min + max
-	System.out.println("\n\n\ntest min + max");
-	System.out.println(b.toString());
-	System.out.println("\nmin: ");
-	System.out.println(b.min());
-	System.out.println("\nmax: ");
-	System.out.println(b.max());
+	System.out.println("\n\n\ntest min + max"); 
+	System.out.println(b.toString()); // yes i know this is an empty string, but it's not like it works anyways
+	System.out.println("min: " + b.min());
+	System.out.println("max: " + b.max());
 	
     }
 }
