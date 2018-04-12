@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class MyLinkedListImproved<T> {//extends Comparable<T>> implements Iterator<T> {
+public class MyLinkedListImproved<T extends Comparable<T>> implements Iterable<T> {
 
     private Node start, end;
     private int size;
@@ -255,18 +255,64 @@ public class MyLinkedListImproved<T> {//extends Comparable<T>> implements Iterat
 	return true;
     }
 
-    public int max() {
+    public int max () {
+	if (size == 0) {
+	    return -1;
+	}
+
+	Node n = start;
+	T max = start.getValue();
+	int i = 0;
+	int ind = 0;
+
+	while (n != null) {
+	    
+	}
+	
+	return ind;
+    }
+
+    public int min () {
 	if (size == 0) {
 	    return -1;
 	}
 	return -1;
     }
 
-    public int min() {
-	if (size == 0) {
-	    return -1;
-	}
+    public int compareTo (T n) {
 	return -1;
+	//return T.compare(this.getValue(), n.getValue());
+    }
+
+    public Iterator<T> iterator () {
+	return Listerator();
+    }
+
+    private class Listerator implements Iterator<T>{
+	private MyLinkedListImproved l;
+	private Node n;
+
+	public Listerator () {
+	    n = l.getNode(0);
+	}
+
+	private boolean hasNext () {
+	    return n.getNext() != null;
+	}
+
+	private Node next () {
+	    if (n.getNext() == null) {
+		throw new NoSuchElementException();
+	    }
+	    else {
+		return n.getNext();
+	    }
+	}
+
+	private void remove () {
+	    throw new UnsupportedOperationException();
+	}
+	
     }
 
     public static void main(String[]args){
