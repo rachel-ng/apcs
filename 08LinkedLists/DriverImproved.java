@@ -16,7 +16,7 @@ public class DriverImproved {
 	
 	MyLinkedListImproved<Integer> a = new MyLinkedListImproved<>();
 	System.out.println(a.toString() + ", " + a.size()); // toString + size
-	
+
 	// test add (boolean, adds to end)
 	System.out.println("\n\ntest add (boolean, adds to end)");
 	System.out.println(a.toString());
@@ -27,6 +27,8 @@ public class DriverImproved {
 	}
 
 	System.out.println("\n" + a.toString() + ", " + a.size() + "\n" + a.backString());	
+
+
 	// test add (void, inserts)
 	System.out.println("\n\ntest add (void, inserts)");
 	System.out.println(a.toString());
@@ -43,6 +45,7 @@ public class DriverImproved {
 	
 	System.out.println("\n" + a.toString() + ", " + a.size() + "\n" + a.backString());
 
+	
 	// test indexOf (int) 
 	System.out.println("\n\ntest indexOf (int)");
 	System.out.println(a.toString());
@@ -53,6 +56,7 @@ public class DriverImproved {
 	
 	System.out.println("\n" + a.toString() + ", " + a.size() + "\n" + a.backString());
 
+	
 	// test set (T)
 	System.out.println("\n\ntest set (T)");
 	System.out.println(a.toString());	
@@ -63,6 +67,7 @@ public class DriverImproved {
 
 	System.out.println("\n" + a.toString() + ", " + a.size() + "\n" + a.backString());
 
+	
 	// test getNode (Node) + get (T)
 	System.out.println("\n\ntest getNode (Node) + get (T)");
 	for (int i = 0; i < a.size(); i++) {
@@ -71,6 +76,7 @@ public class DriverImproved {
 
 	System.out.println("\n" + a.toString() + ", " + a.size() + "\n" + a.backString());
 
+	
 	// test remove (boolean, value)
 	System.out.println("\n\ntest remove (boolean, value)");
 	System.out.println(a.toString());
@@ -83,6 +89,7 @@ public class DriverImproved {
 	}
 	
 	System.out.println("\n" + a.toString() + ", " + a.size() + "\n" + a.backString());
+
 	
 	// test remove (boolean, index)
 	System.out.println("\n\ntest remove (boolean, index)");
@@ -95,6 +102,7 @@ public class DriverImproved {
 	}
 
 	System.out.println("\n" + a.toString() + ", " + a.size() + "\n" + a.backString());
+
 	
 	// test clear
 	System.out.println("\n\ntest clear");
@@ -111,21 +119,15 @@ public class DriverImproved {
 	// test add (boolean, adds to end)
 	System.out.println("\n\n\ntest add (boolean, adds to end)");
 	System.out.println(b.toString());
-	b.add("cries");
-	System.out.println(b.toString());
-	b.add("dies");
-	System.out.println(b.toString());
-	b.add("dies");
-	System.out.println(b.toString());
-	b.add("cries");
-	System.out.println(b.toString());
-	b.add("cries");
-	System.out.println(b.toString());
-	b.add("goodbye");
-	System.out.println(b.toString());
+	String[] addStr = new String[] {"cries", "dies", "dies", "cries", "cries", "goodbye"};
+	for (String i : addStr) {
+	    b.add(i);
+	    System.out.println(b.toString());
+	}
 	
 	System.out.println("\n" + b.toString() + ", " + b.size() + "\n" + b.backString());
 
+	
 	// test add (void, inserts)
 	System.out.println("\n\n\ntest add (void, inserts)");
 	System.out.println(b.toString());
@@ -143,6 +145,7 @@ public class DriverImproved {
 	System.out.println(b.toString() + ", " + b.size());
 	
 	System.out.println("\n" + b.toString() + ", " + b.size() + "\n" + b.backString());
+
 	
 	// test set (T)
 	System.out.println("\n\n\ntest set (T)");
@@ -160,6 +163,7 @@ public class DriverImproved {
 
 	System.out.println("\n" + b.toString() + ", " + b.size() + "\n" + b.backString());
 
+	
 	// test getNode (Node) + get (T)
 	System.out.println("\n\n\ntest getNode (Node) + get (T)");
 	for (int i = 0; i < b.size(); i++) {
@@ -167,6 +171,7 @@ public class DriverImproved {
 	}
 
 	System.out.println("\n" + b.toString() + ", " + b.size() + "\n" + b.backString());
+
 	
 	// test remove (boolean, value)
 	System.out.println("\n\n\ntest remove (boolean, value)");
@@ -178,6 +183,7 @@ public class DriverImproved {
 	}
 
 	System.out.println("\n" + b.toString() + ", " + b.size() + "\n" + b.backString());
+
 	
 	// test remove (boolean, index)
 	System.out.println("\n\n\ntest remove (boolean, index)");
@@ -190,33 +196,51 @@ public class DriverImproved {
 	
 	System.out.println("\n" + b.toString() + ", " + b.size() + "\n" + b.backString());
 
-	/*
-	// test clear
-	System.out.println("\n\n\ntest clear");
-	System.out.println(b.toString());
-	b.clear();
-	System.out.println(b.toString());
-
-	
-	// test min + max
-	System.out.println("\n\n\ntest min + max"); 
-	System.out.println(b.toString()); // yes i know this is an empty string, but it's not like it works anyways
-	System.out.println("min: " + b.min());
-	System.out.println("max: " + b.max());
-	*/
-	
-
-	
-	Iterator itr = b.iterator();
-	int count = 0;
 	
 	// test iterator (Iterator)
 	System.out.println("\n\n\ntest iterator (Iterator)");
 	System.out.println(b.toString());
+	Iterator itr = b.iterator();
+	int count = 0;
 	while (itr.hasNext()) {
 	    System.out.println(itr.next() + ", " + count);
 	    count++;
 	}
+
 	
+	// test clear
+	System.out.println("\n\n\ntest clear");
+	System.out.println(b.toString() + ", " + b.size());
+	b.clear();
+	System.out.println(b.toString() + ", " + b.size());
+
+	
+	// test min + max
+	System.out.println("\n\n\ntest min + max"); 
+	System.out.println(b.toString() + ", " + b.size()); // yes i know this is an empty string, but it's not like it works anyways
+	System.out.println("min: " + b.min());
+	System.out.println("max: " + b.max());
+
+	
+	
+	MyLinkedListImproved<Integer> c = new MyLinkedListImproved<>();
+	System.out.println(c.toString() + ", " + c.size()); // toString + size
+	MyLinkedListImproved<Integer> d = new MyLinkedListImproved<>();
+	System.out.println(d.toString() + ", " + d.size()); // toString + size
+
+	// test extend (T)
+	System.out.println("\n\n\ntest extend (T)");
+	System.out.println(c.toString() + ", " + d.toString());
+	for (int i = 0; i < 10; i++) { // create 2 linked lists
+	    c.add(Integer.valueOf(i));
+	    d.add(Integer.valueOf(i + 10));
+	}
+	System.out.println("C:\t" + c.toString() + ", " + c.size()); // toString + size
+	System.out.println("D:\t" + d.toString() + ", " + d.size()); // toString + size
+	
+	c.extend(d);
+	
+	System.out.println("\nC:\t" + c.toString() + ", " + c.size() + "\n\t" + c.backString() + ", " + c.size()); // toString + size
+	System.out.println("\nD:\t" + d.toString() + ", " + d.size() + "\n\t" + d.backString() + ", " + d.size()); // toString + size
     }
 }
