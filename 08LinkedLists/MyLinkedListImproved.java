@@ -302,9 +302,8 @@ public class MyLinkedListImproved<T extends Comparable<T>> implements Iterable<T
     }
     // probably use compareTo
 
-    public int compareTo (T n) {
+    public int compareTo (Node n) {
 	return -1;
-	//return T.compare(this, n);
     }
     
     public Iterator<T> iterator () {
@@ -338,16 +337,15 @@ public class MyLinkedListImproved<T extends Comparable<T>> implements Iterable<T
     }
 
     public void extend(MyLinkedListImproved<T> other){
-
-	this.end.setNext(other.getNode(0));
-	other.getNode(0).setPrev(this.end);
-	
-        //in O(1) runtime, move the elements from other onto the end of this
-        //The size of other is reduced to 0
-        //The size of this is now the combined sizes of both original lists
+	this.end.setNext(other.start);
+	other.start.setPrev(this.end);
+	this.size += other.size;
+	this.end = this.getNode(size - 1);
+	other.clear();
     }
 
     public static void main(String[]args){
 
     }
+    
 }
