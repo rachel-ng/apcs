@@ -1,118 +1,109 @@
+import java.util.*;
+
 public class DriverImproved {
 	
     public static void main(String[]args){
 
-	System.out.println("\n\n\n\n\nINTEGERS");
+	MyLinkedListImproved<String> n = new MyLinkedListImproved<>();
+	n.add("fish");
+	System.out.println(n);
+	
+	MyLinkedListImproved<Integer> m = new MyLinkedListImproved<>();
+	m.add(new Integer(0));
+	System.out.println(m);
+
+
 	
 	MyLinkedListImproved<Integer> a = new MyLinkedListImproved<>();
-	
 	System.out.println(a.toString() + ", " + a.size()); // toString + size
-
-	// test add (boolean, adds to end)
-	System.out.println("\n\n\ntest add (boolean, adds to end)");
-	System.out.println(a.toString());
-	a.add(Integer.valueOf(1));
-	System.out.println(a.toString());
-	a.add(Integer.valueOf(2));
-	System.out.println(a.toString());
-	a.add(Integer.valueOf(3));
-	System.out.println(a.toString());
-	a.add(Integer.valueOf(4));
-	System.out.println(a.toString());
-	a.add(Integer.valueOf(5));
-	System.out.println(a.toString());
-	a.add(Integer.valueOf(7));
-	System.out.println(a.toString());
-	a.add(Integer.valueOf(8));
-	System.out.println(a.toString());
-	a.add(Integer.valueOf(11));
-	System.out.println(a.toString());
-
-	System.out.println("\n" + a.toString() + ", " + a.size()); 
 	
+	// test add (boolean, adds to end)
+	System.out.println("\n\ntest add (boolean, adds to end)");
+	System.out.println(a.toString());
+	int[] addValue = new int[] {1, 1, 2, 3, 4, 5, 7, 9, 11};
+	for (int i : addValue) {
+	    a.add(Integer.valueOf(i));
+	    System.out.println(i + " ->\t" + a.toString());
+	}
+
+	System.out.println("\n" + a.toString() + ", " + a.size() + "\n" + a.backString());	
 	// test add (void, inserts)
-	System.out.println("\n\n\ntest add (void, inserts)");
+	System.out.println("\n\ntest add (void, inserts)");
 	System.out.println(a.toString());
 	a.add(0,Integer.valueOf(0));
 	System.out.println(a.toString() + ", " + a.size());
-	a.add(2,Integer.valueOf(2));
+	a.add(3,Integer.valueOf(2));
 	System.out.println(a.toString() + ", " + a.size());
-	a.add(7,Integer.valueOf(6));
+	a.add(8,Integer.valueOf(6));
 	System.out.println(a.toString() + ", " + a.size());
-	a.add(8,Integer.valueOf(7));
+	a.add(9,Integer.valueOf(7));
 	System.out.println(a.toString() + ", " + a.size());
 	a.add(11,Integer.valueOf(9));
 	System.out.println(a.toString() + ", " + a.size());
 	
-	System.out.println("\n" + a.toString() + ", " + a.size()); 
+	System.out.println("\n" + a.toString() + ", " + a.size() + "\n" + a.backString());
 
 	// test indexOf (int) 
-	System.out.println("\n\n\ntest indexOf (int)");
+	System.out.println("\n\ntest indexOf (int)");
 	System.out.println(a.toString());
-	System.out.println("index of 2: " + a.indexOf(2));
-	System.out.println("index of 7: " + a.indexOf(7));
-	System.out.println("index of 8: " + a.indexOf(8));
-	System.out.println("index of 9: " + a.indexOf(9));
+	int[] indexOfInt = new int[] {2, 7, 8, 9};
+	for (int i : indexOfInt) {
+	    System.out.println("index of " + i + ": " + a.indexOf(i));
+	}
 	
-	System.out.println("\n" + a.toString() + ", " + a.size()); 
-	
+	System.out.println("\n" + a.toString() + ", " + a.size() + "\n" + a.backString());
+
 	// test set (T)
-	System.out.println("\n\n\ntest set (T)");
+	System.out.println("\n\ntest set (T)");
+	System.out.println(a.toString());	
+	System.out.println("set 10 (" + a.set(10,Integer.valueOf(8)) + ") -> 8");
 	System.out.println(a.toString());
-	System.out.println("set 9 (7) -> 8");
-	System.out.println(a.set(9,Integer.valueOf(8)));
-	System.out.println(a.toString());
-	System.out.println("set 11 (9) -> 10");
-	System.out.println(a.set(11,Integer.valueOf(10)));
+	System.out.println("set 12 (" + a.set(12,Integer.valueOf(10)) + ") -> 10");
 	System.out.println(a.toString());
 
-	System.out.println("\n" + a.toString() + ", " + a.size());
-	
+	System.out.println("\n" + a.toString() + ", " + a.size() + "\n" + a.backString());
+
 	// test getNode (Node) + get (T)
-	System.out.println("\n\n\ntest getNode (Node) + get (T)");
+	System.out.println("\n\ntest getNode (Node) + get (T)");
 	for (int i = 0; i < a.size(); i++) {
-	    System.out.println("get " + i + ": " + a.get(i) + "\t" + a.toString(a.getNode(i)));
+	    System.out.println("get " + i + ": " + a.get(i) + "\t" + a.toString(i));
 	}
 
-	System.out.println("\n" + a.toString() + ", " + a.size());
+	System.out.println("\n" + a.toString() + ", " + a.size() + "\n" + a.backString());
 
 	// test remove (boolean, value)
-	System.out.println("\n\n\ntest remove (boolean, value)");
+	System.out.println("\n\ntest remove (boolean, value)");
 	System.out.println(a.toString());
-	System.out.println("remove 6: " + a.remove(Integer.valueOf(6)));
-	System.out.println(a.toString());
-	System.out.println("remove 7: " + a.remove(Integer.valueOf(7)));
-	System.out.println(a.toString());
-	System.out.println("remove 9: " + a.remove(Integer.valueOf(9)));
-	System.out.println(a.toString());
-
-	System.out.println("\n" + a.toString() + ", " + a.size());
+        Integer[] removeValue = new Integer[] {0, 6, 7, 9, 11};
+	for (int i : removeValue) {
+	    System.out.println("remove " + i + ": " + a.remove(Integer.valueOf(i)));
+	    if (i == 0) { System.out.println("-> removes start"); }
+	    if (i == a.size() - 1) { System.out.println("-> removes end"); }
+	    System.out.println(a.toString());	
+	}
+	
+	System.out.println("\n" + a.toString() + ", " + a.size() + "\n" + a.backString());
 	
 	// test remove (boolean, index)
-	System.out.println("\n\n\ntest remove (boolean, index)");
+	System.out.println("\n\ntest remove (boolean, index)");
 	System.out.println(a.toString());
-	System.out.println("remove 7: " + a.remove(7));
-	System.out.println(a.toString() + ", " + a.size());
-	System.out.println("remove 0: " + a.remove(0));
-	System.out.println(a.toString() + ", " + a.size());
-	System.out.println("remove 6: " + a.remove(6));
-	System.out.println(a.toString() + ", " + a.size());
-	System.out.println("remove 2: " + a.remove(2));
-	System.out.println(a.toString() + ", " + a.size());
-	System.out.println("remove 5: " + a.remove(5));
-	System.out.println(a.toString() + ", " + a.size());
-	
-	System.out.println("\n" + a.toString() + ", " + a.size());
+	int[] removeIndex = new int[] {7, 0, 6, 2};
+	for (int i : removeIndex) {
+	    System.out.println("remove " + i + ": " + a.remove(i));
+	    if (i == 0) { System.out.println("-> removes start"); }
+	    if (i == a.size() - 1) { System.out.println("-> removes end"); }
+	}
+
+	System.out.println("\n" + a.toString() + ", " + a.size() + "\n" + a.backString());
 	
 	// test clear
-	System.out.println("\n\n\ntest clear");
+	System.out.println("\n\ntest clear");
 	System.out.println(a.toString());
 	a.clear();
 	System.out.println(a.toString());
+	System.out.println("\n\n\n\n");
 
-	
-	
-	System.out.println("\n\n\n\n\nSTRINGS");
+
 	
 	MyLinkedListImproved<String> b = new MyLinkedListImproved<>();
 	System.out.println(b.toString() + ", " + b.size()); // toString + size
@@ -130,8 +121,10 @@ public class DriverImproved {
 	System.out.println(b.toString());
 	b.add("cries");
 	System.out.println(b.toString());
+	b.add("goodbye");
+	System.out.println(b.toString());
 	
-	System.out.println("\n" + b.toString() + ", " + b.size()); 
+	System.out.println("\n" + b.toString() + ", " + b.size() + "\n" + b.backString());
 
 	// test add (void, inserts)
 	System.out.println("\n\n\ntest add (void, inserts)");
@@ -149,74 +142,81 @@ public class DriverImproved {
 	b.add(4,"dies");
 	System.out.println(b.toString() + ", " + b.size());
 	
-	System.out.println("\n" + b.toString() + ", " + b.size()); 
-
+	System.out.println("\n" + b.toString() + ", " + b.size() + "\n" + b.backString());
+	
 	// test set (T)
 	System.out.println("\n\n\ntest set (T)");
 	System.out.println(b.toString());
 	System.out.println("set 3 (dies) -> cries");
 	System.out.println(b.set(3,"cries"));
+	System.out.println(b.get(3));
 	System.out.println("set 5 (dies) -> cries");
 	System.out.println(b.set(5,"cries"));
-	System.out.println("set 7 (dies) -> cries");
-	System.out.println(b.set(6,"cries"));
+	System.out.println(b.get(5));
+	System.out.println("set 9 (cries) -> dies");
+	System.out.println(b.set(9,"dies"));
+	System.out.println(b.get(9));
 	System.out.println(b.toString());
 
-	System.out.println("\n" + b.toString() + ", " + b.size());
+	System.out.println("\n" + b.toString() + ", " + b.size() + "\n" + b.backString());
 
 	// test getNode (Node) + get (T)
 	System.out.println("\n\n\ntest getNode (Node) + get (T)");
 	for (int i = 0; i < b.size(); i++) {
-	    System.out.println("get " + i + ": " + b.get(i) + "\t" + b.toString(b.getNode(i)));
+	    System.out.println("get " + i + ": " + b.get(i) + "\t" + b.toString(i));
 	}
 
-	System.out.println("\n" + b.toString() + ", " + b.size());
-
-	/*
+	System.out.println("\n" + b.toString() + ", " + b.size() + "\n" + b.backString());
 	
 	// test remove (boolean, value)
 	System.out.println("\n\n\ntest remove (boolean, value)");
 	System.out.println(b.toString());
-	System.out.println("remove cries: " + b.remove("cries"));
-	System.out.println(b.toString());
-	System.out.println("remove dies: " + b.remove("dies"));
-	System.out.println(b.toString());
+	String[] removeVal = new String[] {"cries", "dies", "cries", "goodbye"};
+	for (String i : removeVal) {
+	    System.out.println("remove " + i + ": " + b.remove(i));
+	    System.out.println(b.toString() + ", " + b.size());
+	}
 
-	System.out.println("\n" + b.toString() + ", " + b.size());
-
-	*/
-
+	System.out.println("\n" + b.toString() + ", " + b.size() + "\n" + b.backString());
+	
 	// test remove (boolean, index)
 	System.out.println("\n\n\ntest remove (boolean, index)");
 	System.out.println(b.toString());
-	System.out.println("remove 0: " + b.remove(0));
-	System.out.println(b.toString() + ", " + b.size());
-	System.out.println("remove 1: " + b.remove(1));
-	System.out.println(b.toString() + ", " + b.size());
-	System.out.println("remove 6: " + b.remove(6));
-	System.out.println(b.toString() + ", " + b.size());
-	System.out.println("remove 7: " + b.remove(7));
-	System.out.println(b.toString() + ", " + b.size());
+	int[] removeInd = new int[] {0, 6, 1};
+	for (int i : removeInd) {
+	    System.out.println("remove " + i + ": " + b.remove(i));
+	    System.out.println(b.toString() + ", " + b.size());
+	}
+	
+	System.out.println("\n" + b.toString() + ", " + b.size() + "\n" + b.backString());
 
-	System.out.println("\n" + b.toString() + ", " + b.size());
-
+	/*
 	// test clear
 	System.out.println("\n\n\ntest clear");
 	System.out.println(b.toString());
 	b.clear();
 	System.out.println(b.toString());
 
+	
+	// test min + max
+	System.out.println("\n\n\ntest min + max"); 
+	System.out.println(b.toString()); // yes i know this is an empty string, but it's not like it works anyways
+	System.out.println("min: " + b.min());
+	System.out.println("max: " + b.max());
+	*/
+	
 
 	
-	System.out.println("\n\n\n\n\nMORE STUFF");
-
-	System.out.println("phase 1 make it work with generics");
-	MyLinkedListImproved<String> n = new MyLinkedListImproved<>();
-	n.add("fish");
-	System.out.println(n);
+	Iterator itr = b.iterator();
+	int count = 0;
 	
-	MyLinkedListImproved<Integer> m = new MyLinkedListImproved<>();
-	m.add(new Integer(0));
-	System.out.println(m);
+	// test iterator (Iterator)
+	System.out.println("\n\n\ntest iterator (Iterator)");
+	System.out.println(b.toString());
+	while (itr.hasNext()) {
+	    System.out.println(itr.next() + ", " + count);
+	    count++;
+	}
+	
     }
 }
