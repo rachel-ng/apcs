@@ -301,10 +301,6 @@ public class MyLinkedListImproved<T extends Comparable<T>> implements Iterable<T
 	return -1;
     }
     // probably use compareTo
-
-    public int compareTo (Node n) {
-	return -1;
-    }
     
     public Iterator<T> iterator () {
 	return new Listerator();
