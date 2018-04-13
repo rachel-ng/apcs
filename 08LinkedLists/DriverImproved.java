@@ -11,11 +11,11 @@ public class DriverImproved {
 	MyLinkedListImproved<Integer> m = new MyLinkedListImproved<>();
 	m.add(new Integer(0));
 	System.out.println(m);
+	System.out.println("\n\n\n");
 
 
 	
 	MyLinkedListImproved<Integer> a = new MyLinkedListImproved<>();
-	System.out.println(a.toString() + ", " + a.size()); // toString + size
 
 	// test add (boolean, adds to end)
 	System.out.println("\n\ntest add (boolean, adds to end)");
@@ -59,10 +59,10 @@ public class DriverImproved {
 	
 	// test set (T)
 	System.out.println("\n\ntest set (T)");
-	System.out.println(a.toString());	
-	System.out.println("set 10 (" + a.set(10,Integer.valueOf(8)) + ") -> 8");
 	System.out.println(a.toString());
-	System.out.println("set 12 (" + a.set(12,Integer.valueOf(10)) + ") -> 10");
+	System.out.println("10: " + a.set(10,Integer.valueOf(8)) + " -> " + a.get(10));
+	System.out.println(a.toString());
+	System.out.println("12: " + a.set(12,Integer.valueOf(10)) + " -> " + a.get(12));
 	System.out.println(a.toString());
 
 	System.out.println("\n" + a.toString() + ", " + a.size() + "\n" + a.backString());
@@ -83,8 +83,6 @@ public class DriverImproved {
         Integer[] removeValue = new Integer[] {0, 6, 7, 9, 11};
 	for (int i : removeValue) {
 	    System.out.println("remove " + i + ": " + a.remove(Integer.valueOf(i)));
-	    if (i == 0) { System.out.println("-> removes start"); }
-	    if (i == a.size() - 1) { System.out.println("-> removes end"); }
 	    System.out.println(a.toString());	
 	}
 	
@@ -97,8 +95,7 @@ public class DriverImproved {
 	int[] removeIndex = new int[] {7, 0, 6, 2};
 	for (int i : removeIndex) {
 	    System.out.println("remove " + i + ": " + a.remove(i));
-	    if (i == 0) { System.out.println("-> removes start"); }
-	    if (i == a.size() - 1) { System.out.println("-> removes end"); }
+	    System.out.println(a.toString());
 	}
 
 	System.out.println("\n" + a.toString() + ", " + a.size() + "\n" + a.backString());
@@ -109,15 +106,14 @@ public class DriverImproved {
 	System.out.println(a.toString());
 	a.clear();
 	System.out.println(a.toString());
-	System.out.println("\n\n\n\n");
+	System.out.println("\n\n\n");
 
 
 	
 	MyLinkedListImproved<String> b = new MyLinkedListImproved<>();
-	System.out.println(b.toString() + ", " + b.size()); // toString + size
 
 	// test add (boolean, adds to end)
-	System.out.println("\n\n\ntest add (boolean, adds to end)");
+	System.out.println("\n\ntest add (boolean, adds to end)");
 	System.out.println(b.toString());
 	String[] addStr = new String[] {"cries", "dies", "dies", "cries", "cries", "goodbye"};
 	for (String i : addStr) {
@@ -129,7 +125,7 @@ public class DriverImproved {
 
 	
 	// test add (void, inserts)
-	System.out.println("\n\n\ntest add (void, inserts)");
+	System.out.println("\n\ntest add (void, inserts)");
 	System.out.println(b.toString());
 	b.add(4,"cries");
 	System.out.println(b.toString() + ", " + b.size());
@@ -148,24 +144,20 @@ public class DriverImproved {
 
 	
 	// test set (T)
-	System.out.println("\n\n\ntest set (T)");
+	System.out.println("\n\ntest set (T)");
 	System.out.println(b.toString());
-	System.out.println("set 3 (dies) -> cries");
-	System.out.println(b.set(3,"cries"));
-	System.out.println(b.get(3));
-	System.out.println("set 5 (dies) -> cries");
-	System.out.println(b.set(5,"cries"));
-	System.out.println(b.get(5));
-	System.out.println("set 9 (cries) -> dies");
-	System.out.println(b.set(9,"dies"));
-	System.out.println(b.get(9));
+	System.out.println("3: " + b.set(3,"cries") + " -> " + b.get(3));
+	System.out.println(b.toString());
+	System.out.println("5: " + b.set(5,"cries") + " -> " + b.get(5));
+	System.out.println(b.toString());
+	System.out.println("9: " + b.set(9,"dies") + " -> " + b.get(9));
 	System.out.println(b.toString());
 
 	System.out.println("\n" + b.toString() + ", " + b.size() + "\n" + b.backString());
 
 	
 	// test getNode (Node) + get (T)
-	System.out.println("\n\n\ntest getNode (Node) + get (T)");
+	System.out.println("\n\ntest getNode (Node) + get (T)");
 	for (int i = 0; i < b.size(); i++) {
 	    System.out.println("get " + i + ": " + b.get(i) + "\t" + b.toString(i));
 	}
@@ -174,7 +166,7 @@ public class DriverImproved {
 
 	
 	// test remove (boolean, value)
-	System.out.println("\n\n\ntest remove (boolean, value)");
+	System.out.println("\n\ntest remove (boolean, value)");
 	System.out.println(b.toString());
 	String[] removeVal = new String[] {"cries", "dies", "cries", "goodbye"};
 	for (String i : removeVal) {
@@ -186,7 +178,7 @@ public class DriverImproved {
 
 	
 	// test remove (boolean, index)
-	System.out.println("\n\n\ntest remove (boolean, index)");
+	System.out.println("\n\ntest remove (boolean, index)");
 	System.out.println(b.toString());
 	int[] removeInd = new int[] {0, 6, 1};
 	for (int i : removeInd) {
@@ -198,7 +190,7 @@ public class DriverImproved {
 
 	
 	// test iterator (Iterator)
-	System.out.println("\n\n\ntest iterator (Iterator)");
+	System.out.println("\n\ntest iterator (Iterator)");
 	System.out.println(b.toString());
 	Iterator itr = b.iterator();
 	int count = 0;
@@ -209,27 +201,26 @@ public class DriverImproved {
 
 	
 	// test clear
-	System.out.println("\n\n\ntest clear");
+	System.out.println("\n\ntest clear");
 	System.out.println(b.toString() + ", " + b.size());
 	b.clear();
 	System.out.println(b.toString() + ", " + b.size());
 
 	
 	// test min + max
-	System.out.println("\n\n\ntest min + max"); 
+	System.out.println("\n\ntest min + max"); 
 	System.out.println(b.toString() + ", " + b.size()); // yes i know this is an empty string, but it's not like it works anyways
 	System.out.println("min: " + b.min());
 	System.out.println("max: " + b.max());
+	System.out.println("\n\n\n");
 
 	
 	
 	MyLinkedListImproved<Integer> c = new MyLinkedListImproved<>();
-	System.out.println(c.toString() + ", " + c.size()); // toString + size
 	MyLinkedListImproved<Integer> d = new MyLinkedListImproved<>();
-	System.out.println(d.toString() + ", " + d.size()); // toString + size
 
 	// test extend (T)
-	System.out.println("\n\n\ntest extend (T)");
+	System.out.println("\n\ntest extend (T)");
 	System.out.println(c.toString() + ", " + d.toString());
 	for (int i = 0; i < 10; i++) { // create 2 linked lists
 	    c.add(Integer.valueOf(i));
