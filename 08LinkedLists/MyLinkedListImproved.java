@@ -271,55 +271,60 @@ public class MyLinkedListImproved<T extends Comparable<T>> implements Iterable<T
 	    return -1;
 	}
 
-	Node n = start;
 	T max = start.getValue();
-	int i = 0;
-	int ind = 0;
+	int index = 0;
+	int m = 0;
 
-	while (n != null) {
-	    
+	for (T i : this) {
+	    if (i.compareTo(max) < 0) {
+		max = i;
+		m = index;
+	    }
+	    index++;
 	}
 	
-	return ind;
+	return m;
     }
-    // probably use compareTo
 
     public int min () {
 	if (size == 0) {
 	    return -1;
 	}
 
-	Node n = start;
-	T max = start.getValue();
-	int i = 0;
-	int ind = 0;
+	T min = start.getValue();
+	int index = 0;
+	int m = 0;
 
-	while (n != null) {
-	    
+	for (T i : this) {
+	    if (i.compareTo(min) > 0) {
+		min = i;
+		m = index;
+	    }
+	    index++;
 	}
 	
-	return -1;
+	return m;
     }
-    // probably use compareTo
-    
+        
     public Iterator<T> iterator () {
-	return new Listerator();
+	return new Listerator(this);
     }
 
     private class Listerator implements Iterator<T>{
 	private MyLinkedListImproved l;
-	private Node n;
+	private Node n = null;
 
-	public Listerator () {
-	    this.n = start;
+	public Listerator (MyLinkedListImproved<T> list) {
+	    l = list;
+	    n = list.start;
 	}
 
 	public boolean hasNext () {
-	    return (n.getNext() != null);
+	    return n != null;
 	}
 
 	public T next () {
-	    if (this.hasNext()) {
+	    if (hasNext()) {
 		Node a = n;
 		n = n.getNext();
 		return a.getValue();

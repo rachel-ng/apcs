@@ -100,6 +100,27 @@ public class DriverImproved {
 
 	System.out.println("\n" + a.toString() + ", " + a.size() + "\n" + a.backString());
 
+
+	// test iterator (Iterator)
+	System.out.println("\n\ntest iterator (Iterator)");
+	System.out.println(a.toString());
+	Iterator it = a.iterator();
+	int coun = 0;
+	while (it.hasNext()) {
+	    System.out.println(it.next() + ", " + coun);
+	    coun++;
+	}
+
+	System.out.println("\n" + a.toString() + ", " + a.size() + "\n" + a.backString());
+
+
+	// test min + max
+	System.out.println("\n\ntest min + max"); 
+	System.out.println(a.toString() + ", " + a.size()); // yes i know this is an empty string, but it's not like it works anyways
+	System.out.println("min: " + a.min() + " (" + a.get(a.min()) + ")");
+	System.out.println("max: " + a.max() + " (" + a.get(a.max()) + ")");
+	System.out.println("\n\n\n");
+	
 	
 	// test clear
 	System.out.println("\n\ntest clear");
@@ -199,6 +220,18 @@ public class DriverImproved {
 	    count++;
 	}
 
+	System.out.println("\n" + b.toString() + ", " + b.size() + "\n" + b.backString());
+
+	
+	// test min + max
+	System.out.println("\n\ntest min + max"); 
+	System.out.println(b.toString() + ", " + b.size()); // yes i know this is an empty string, but it's not like it works anyways
+	System.out.println("min: " + b.min() + " (" + b.get(b.min()) + ")");
+	System.out.println("max: " + b.max() + " (" + b.get(b.max()) + ")");
+	System.out.println("\n\n\n");
+
+	System.out.println("\n" + b.toString() + ", " + b.size() + "\n" + b.backString());
+
 	
 	// test clear
 	System.out.println("\n\ntest clear");
@@ -206,15 +239,7 @@ public class DriverImproved {
 	b.clear();
 	System.out.println(b.toString() + ", " + b.size());
 
-	
-	// test min + max
-	System.out.println("\n\ntest min + max"); 
-	System.out.println(b.toString() + ", " + b.size()); // yes i know this is an empty string, but it's not like it works anyways
-	System.out.println("min: " + b.min());
-	System.out.println("max: " + b.max());
-	System.out.println("\n\n\n");
 
-	
 	
 	MyLinkedListImproved<Integer> c = new MyLinkedListImproved<>();
 	MyLinkedListImproved<Integer> d = new MyLinkedListImproved<>();
