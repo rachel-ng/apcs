@@ -2,91 +2,80 @@ import java.util.*;
 
 public class Calculator {
     
-    private class Stack<String> {
-	private LinkedList<String> data;
-	private int size = 0;
-
-	@SuppressWarnings("unchecked")
-	private Stack () {
-	    data = this.data;
-	}
-	
-	private void push (String s) { // add a new element to the list
-	    size++;
-	    data.add(s);
-	}
-
-	private String pop () { // remove and return an element
-	    size--;
-	    return data.remove(size - 1);
-	}
-
-	private String peek () { // return the element at the top 
-	    return data.get(size - 1);
-	}
-
-	private int size () {
-	    return size;
-	}
-	
-    }
-    
     public static double eval (String s){
-	Stack<String> data = new Stack<String>();
+	@SuppressWarnings("unchecked")
+	    Stack<String> data = new Stack();
+
+	System.out.println(s);
+	
 	String current = ""; 
 	for (int i = 0; i < s.length(); i++) {
+
 	    if (s.substring(i,i+1).equals(" ")) {
 		data.push(current);
+		
 		current = "";
 	    }
 	    else if (!s.substring(i,i+1).equals(" ")) {
 		current += s.substring(i,i+1);
+		if (current.equals("+") || current.equals("-") || current.equals("*") || current.equals("/") || current.equals("%")){
+		    double one = Double.parseDouble(data.pop());
+		    double two = Double.parseDouble(data.pop());
+		    String meh = process(current, one, two);
+		    data.push(meh);
+		}
 	    }
+
+	    //if(s.charAt(i) == ' '){
+	    /*
+	      else{
+	      data.push(current);
+	      }
+	      current = "";
+	      }
+
+	      else{
+	      current += s.charAt(i);
+	      }
+	      *
+
+	      }
+	      /*
+	      data.push(current);
+	      return process(data);
+	    */
+
 	}
-	data.push(current);
-	return process(data);
+	//double one = Double.parseDouble(data.pop());
+	//double two = Double.parseDouble(data.pop());
+	System.out.println(data.toString());
+	return Double.parseDouble(data.pop()); //Double.parseDouble(process(current, one, two));
+	
     }
 
-    public static double process (Stack<String> data) {
+    public static String process (String operator, double one, double two) {
 	double result = 0;
-	double one = Double.parseDouble(data.pop());
-	double two = Double.parseDouble(data.pop());
-	System.out.println(data.pop());
-
-	for (int i = 0; i < data.size(); i++) {
-	    if (data.pop() == "+") {
-		//one = Double.parseDouble(data.pop());
-		//two = Double.parseDouble(data.pop());
-		result = one + two;
-	    }
-	    /*
-	    if (data.pop() == "-") {
-		
-	    }
-	    if (data.pop() == "*") {
-		
-	    }
-	    if (data.pop() == "/") {
-		
-	    }
-	    if (data.pop() == "%") {
-		
-	    }
-	    else {
-		one = Double.parseDouble(data.pop());
-		System.out.println(one);
-		System.out.println(two);
-	    }
-	    */
+	if (operator == "+") {
+	    result = one + two;
 	}
-
-	//System.out.println(data.pop());
-	return result;
+	else if (operator == "-") {
+	    result = one - two;
+	}
+	else if (operator == "*") {
+	    result = one * two;
+	}
+	else if (operator == "/") {
+	    result = one / two;
+	}
+	else {
+	    result = one % two;
+	}
+	System.out.println(result + "");
+	return result + "";
     }
 
     public static void main(String[]args){
-	Calculator a = new Calculator();
-	System.out.println(a.eval("10 2.0 +"));
+	System.out.println(eval("10 2.0 +"));
     }
     
 }
