@@ -56,7 +56,6 @@ public class Calculator {
 	System.out.println(eval("11 3 - 4 + 2.5 *") + "\n");
 	System.out.println(eval("8 2 + 99 9 - * 2 + 9 -") + "\n");
 	System.out.println(eval("3 2 -") + "\n");
-	
     }
     
 }
