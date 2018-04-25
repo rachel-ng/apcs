@@ -2,80 +2,61 @@ import java.util.*;
 
 public class Calculator {
     
-    public static double eval (String s){
+    public static String eval (String s){
 	@SuppressWarnings("unchecked")
 	    Stack<String> data = new Stack();
-
-	System.out.println(s);
 	
 	String current = ""; 
 	for (int i = 0; i < s.length(); i++) {
-
+	    if (s.substring(i,i+1).equals("+") || s.substring(i,i+1).equals("-") || s.substring(i,i+1).equals("*") || s.substring(i,i+1).equals("/") || s.substring(i,i+1).equals("%")){
+		current = s.substring(i,i+1);
+		current = "" + process(current, Double.parseDouble(data.pop()), Double.parseDouble(data.pop()));
+		data.push(current);
+		System.out.println(current + " push");
+	    }
 	    if (s.substring(i,i+1).equals(" ")) {
 		data.push(current);
-		
+		System.out.println(current + " push");
 		current = "";
 	    }
-	    else if (!s.substring(i,i+1).equals(" ")) {
+	    else if (!(s.substring(i,i+1).equals("+") || s.substring(i,i+1).equals("-") || s.substring(i,i+1).equals("*") || s.substring(i,i+1).equals("/") || s.substring(i,i+1).equals("%") || s.substring(i,i+1).equals(" "))){
 		current += s.substring(i,i+1);
-		if (current.equals("+") || current.equals("-") || current.equals("*") || current.equals("/") || current.equals("%")){
-		    double one = Double.parseDouble(data.pop());
-		    double two = Double.parseDouble(data.pop());
-		    String meh = process(current, one, two);
-		    data.push(meh);
-		}
 	    }
-
-	    //if(s.charAt(i) == ' '){
-	    /*
-	      else{
-	      data.push(current);
-	      }
-	      current = "";
-	      }
-
-	      else{
-	      current += s.charAt(i);
-	      }
-	      *
-
-	      }
-	      /*
-	      data.push(current);
-	      return process(data);
-	    */
-
 	}
-	//double one = Double.parseDouble(data.pop());
-	//double two = Double.parseDouble(data.pop());
-	System.out.println(data.toString());
-	return Double.parseDouble(data.pop()); //Double.parseDouble(process(current, one, two));
+	return current;
 	
     }
 
-    public static String process (String operator, double one, double two) {
-	double result = 0;
-	if (operator == "+") {
-	    result = one + two;
+    public static double process (String operator, double b, double a) {
+	System.out.println(a + " " + operator + " " +  b);
+	if (operator.equals("+")) {
+	    System.out.println(a + b);
+	    return a + b;
 	}
-	else if (operator == "-") {
-	    result = one - two;
+	else if (operator.equals("-")) {
+	    System.out.println(a - b);
+	    return a - b;
 	}
-	else if (operator == "*") {
-	    result = one * two;
+	else if (operator.equals("*")){
+	    System.out.println(a * b);
+	    return a * b;
 	}
-	else if (operator == "/") {
-	    result = one / two;
+	else if (operator.equals("/")) {
+	    System.out.println(a / b);
+	    return a / b;
 	}
 	else {
-	    result = one % two;
+	    System.out.println(a % b);
+	    return a % b;
 	}
-	System.out.println(result + "");
-	return result + "";
     }
 
     public static void main(String[]args){
-	System.out.println(eval("10 2.0 +"));
+	System.out.println(eval("10 2.0 +") + "\n");
+	System.out.println(eval("11 3 - 4 + 2.5 *") + "\n");
+	System.out.println(eval("8 2 + 99 9 - * 2 + 9 -") + "\n");
+	System.out.println(eval("3 2 -") + "\n");
+	
     }
     
 }
