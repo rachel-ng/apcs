@@ -2,7 +2,7 @@ import java.util.*;
 
 public class Calculator {
     
-    public static String eval (String s){
+    public static double eval (String s){
 	@SuppressWarnings("unchecked")
 	    Stack<String> data = new Stack();
 	
@@ -12,7 +12,7 @@ public class Calculator {
 		current = "" + process(s.substring(i,i+1), Double.parseDouble(data.pop()), Double.parseDouble(data.pop()));
 		data.push(current);
 	    }
-	    else if (s.substring(i,i+1).equals(" ")) {
+	    else if (!(s.substring(i,i+1).equals("+") || s.substring(i,i+1).equals("-") || s.substring(i,i+1).equals("*") || s.substring(i,i+1).equals("/") || s.substring(i,i+1).equals("%")) && s.substring(i,i+1).equals(" ")) {
 		data.push(current);
 		current = "";
 	    }
@@ -20,7 +20,7 @@ public class Calculator {
 		current += s.substring(i,i+1);
 	    }
 	}
-	return data.pop();
+	return Double.parseDouble(data.pop());
 	
     }
 
