@@ -103,7 +103,7 @@ public class DriverImproved {
 
 	// test iterator (Iterator)
 	System.out.println("\n\ntest iterator (Iterator)");
-	System.out.println(a.toString());
+	System.out.println(a.toString());	
 	Iterator it = a.iterator();
 	int coun = 0;
 	while (it.hasNext()) {
@@ -228,19 +228,17 @@ public class DriverImproved {
 	System.out.println(b.toString() + ", " + b.size()); // yes i know this is an empty string, but it's not like it works anyways
 	System.out.println("min: " + b.min() + " (" + b.get(b.min()) + ")");
 	System.out.println("max: " + b.max() + " (" + b.get(b.max()) + ")");
-	System.out.println("\n\n\n");
 
 	System.out.println("\n" + b.toString() + ", " + b.size() + "\n" + b.backString());
 
-	
+
 	// test clear
 	System.out.println("\n\ntest clear");
 	System.out.println(b.toString() + ", " + b.size());
 	b.clear();
 	System.out.println(b.toString() + ", " + b.size());
+	System.out.println("\n\n\n");	
 
-
-	
 	MyLinkedListImproved<Integer> c = new MyLinkedListImproved<>();
 	MyLinkedListImproved<Integer> d = new MyLinkedListImproved<>();
 
@@ -258,5 +256,22 @@ public class DriverImproved {
 	
 	System.out.println("\nC:\t" + c.toString() + ", " + c.size() + "\n\t" + c.backString() + ", " + c.size()); // toString + size
 	System.out.println("\nD:\t" + d.toString() + ", " + d.size() + "\n\t" + d.backString() + ", " + d.size()); // toString + size
+	System.out.println("\n\n\n");
+
+	MyLinkedListImproved<Integer> nul = new MyLinkedListImproved<>();
+	
+	// do null lists work tho
+	System.out.println("\n\ntest null lists");
+	System.out.println(nul.toString());
+	for (int i = 0; i < 10; i++) {
+	    nul.add(null);
+	}
+	System.out.println(nul.toString());
+
+	MyLinkedListImproved<Node> nu = new MyLinkedListImproved<>();
+	nu.add(c);
+	System.out.println(nu.toString());
+	
+	System.out.println(nul.toString());	
     }
 }

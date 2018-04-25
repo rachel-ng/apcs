@@ -345,8 +345,8 @@ public class MyLinkedListImproved<T extends Comparable<T>> implements Iterable<T
 	other.clear();
     }
 
-      public static void main(String[]args){
+    public static void main(String[]args){
 
-      }
+    }
     
 }
