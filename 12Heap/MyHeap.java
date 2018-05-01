@@ -16,23 +16,26 @@ public class MyHeap{
     public class MyHeap (boolean m) {
 	data = new String[10];
 	max = m; 
-	size = 10;
+	size = 0;
     }
     // - true: construct empty max heap, false: construct empty min heap.
 
     // Methods
 
     public String toString (){
-	if(this==null){
-	    return"[]";
-	}else{
-	    return Arrays.toString(arr);
-	}
+
     }
 
-    public void add (String s) {
+    public void add (String value) {
 	if (data[0] == null) {
-	    data[0] = s;
+	    data[0] = value;
+	}
+	else if (size < data.length() - 1) {
+	    data[size] = value;
+	    size++;
+	}
+	else if (size == data.length() - 1) {
+	    
 	}
     }
 
@@ -48,6 +51,17 @@ public class MyHeap{
 	return size;
     }
 
+    public void resize () {
+	int re = data.length() * 2;
+	String[] ne = String[re];
+	
+	for (int i = 0; i < data.length(); i++) {
+	    ne[i] = data[i];
+	}
+
+	data = ne;
+    }
+    
     public static void swap (int a, int b, String[] data) {
 	String c = data[a];
 	data[a] = data[b];
