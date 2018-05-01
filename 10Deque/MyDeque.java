@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class MyDeque<E> {
 
     private E[] deq;  // LIFO
@@ -17,7 +19,7 @@ public class MyDeque<E> {
 	    throw new IllegalArgumentException();
 	}
 	
-	deq = (E[])new Object[10];
+	deq = (E[])new Object[initialCapacity];
 	front = -1;
 	back = -1;
 	size = initialCapacity;
@@ -32,13 +34,26 @@ public class MyDeque<E> {
 	    throw new NullPointerException();
 	}
 	if (front == -1) {
-	    
+	    deq[0] = thing;
+	    front = 0;
+	    back = 0;
 	}
+
     }
     
     public void addLast(E thing) {
 	if (thing == null) {
 	    throw new NullPointerException();
+	}
+	if (back < size - 1) {
+
+	}
+	else if (back + 1 < size){
+	    deq[back + 1] = thing;
+	    if (back + 1 >= size && front != 0) {
+		back = -1;
+	    }
+	    back++;
 	}
     }
 

@@ -45,7 +45,7 @@ public class MyHeap{
     }
 
     public int size () {
-
+	return size;
     }
 
     public static void swap (int a, int b, String[] data) {
