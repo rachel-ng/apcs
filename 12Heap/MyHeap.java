@@ -51,6 +51,18 @@ public class MyHeap{
 	return size;
     }
 
+    public int parent () {
+	(n - 1) / 2;
+    }
+    
+    public int LChild () {
+	2n + 1;
+    }
+
+    public int RChild () {
+	2n + 2;
+    }
+    
     public void resize () {
 	int re = data.length() * 2;
 	String[] ne = String[re];
