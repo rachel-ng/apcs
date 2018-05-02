@@ -16,13 +16,14 @@ public class MyHeap{
     public class MyHeap (boolean m) {
 	data = new String[10];
 	max = m; 
-	size = 10;
+	size = 0;
     }
     // - true: construct empty max heap, false: construct empty min heap.
 
     // Methods
 
     public String toString (){
+<<<<<<< HEAD
 	String str = "[";
 	for (int i = 0; i < size; i++) {
 	    str += data[i];
@@ -36,6 +37,21 @@ public class MyHeap{
     public void add (String s) {
 	if (size == data.length) {
 	    resize();
+=======
+
+    }
+
+    public void add (String value) {
+	if (data[0] == null) {
+	    data[0] = value;
+	}
+	else if (size < data.length() - 1) {
+	    data[size] = value;
+	    size++;
+	}
+	else if (size == data.length() - 1) {
+	    
+>>>>>>> 61ceec320c56c3cd4d25405d5b1f672778db5d78
 	}
 
 	data[size] = s;
@@ -73,7 +89,34 @@ public class MyHeap{
 	return size;
     }
 
+<<<<<<< HEAD
     public void swap (int a, int b, String[] data) {
+=======
+    public int parent () {
+	(n - 1) / 2;
+    }
+    
+    public int LChild () {
+	2n + 1;
+    }
+
+    public int RChild () {
+	2n + 2;
+    }
+    
+    public void resize () {
+	int re = data.length() * 2;
+	String[] ne = String[re];
+	
+	for (int i = 0; i < data.length(); i++) {
+	    ne[i] = data[i];
+	}
+
+	data = ne;
+    }
+    
+    public static void swap (int a, int b, String[] data) {
+>>>>>>> 61ceec320c56c3cd4d25405d5b1f672778db5d78
 	String c = data[a];
 	data[a] = data[b];
 	data[b] = c;
