@@ -12,8 +12,13 @@ public class RunningMedian {
     }
     // - makes an empty container for Doubles.
     
-    public void add(Double) {
-	
+    public void add(Double value) {
+	if (value > getMedian()) {
+	    min.add(value);
+	}
+	else if (value < getMedian() {
+		max.add(value);
+	    }
     }
     // - insert a Double into the data structure.
     
