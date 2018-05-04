@@ -3,21 +3,21 @@ import java.util.*;
 public class RunningMedian {
 
     private int size;
-    private MyHeap<Double> min, max;
+    private MyHeap<Double> smol, tol;
     
     public RunningMedian() {
-	min = new MyHeap<Double>(false);
-	max = new MyHeap<Double>();
+	smol = new MyHeap<Double>();
+	tol = new MyHeap<Double>(false);
 	size = 0;
     }
     // - makes an empty container for Doubles.
     
     public void add(Double value) {
 	if (value > getMedian()) {
-	    min.add(value);
+	    tol.add(value);
 	}
 	else if (value < getMedian() {
-		max.add(value);
+		smol.add(value);
 	    }
     }
     // - insert a Double into the data structure.
@@ -29,6 +29,14 @@ public class RunningMedian {
     
     public int size() {
 	return size;
+    }
+
+    public MyHeap getSmol () {
+	return smol;
+    }
+
+    public MyHeap getTol () {
+	return tol;
     }
     
 }
