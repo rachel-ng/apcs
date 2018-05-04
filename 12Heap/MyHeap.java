@@ -23,7 +23,6 @@ public class MyHeap{
     // Methods
 
     public String toString (){
-<<<<<<< HEAD
 	String str = "[";
 	for (int i = 0; i < size; i++) {
 	    str += data[i];
@@ -32,13 +31,6 @@ public class MyHeap{
 	    }
 	}
 	return str + "]"
-    }
-
-    public void add (String s) {
-	if (size == data.length) {
-	    resize();
-=======
-
     }
 
     public void add (String value) {
@@ -51,7 +43,6 @@ public class MyHeap{
 	}
 	else if (size == data.length() - 1) {
 	    
->>>>>>> 61ceec320c56c3cd4d25405d5b1f672778db5d78
 	}
 
 	data[size] = s;
@@ -89,10 +80,7 @@ public class MyHeap{
 	return size;
     }
 
-<<<<<<< HEAD
-    public void swap (int a, int b, String[] data) {
-=======
-    public int parent () {
+	public int parent () {
 	(n - 1) / 2;
     }
     
@@ -116,7 +104,6 @@ public class MyHeap{
     }
     
     public static void swap (int a, int b, String[] data) {
->>>>>>> 61ceec320c56c3cd4d25405d5b1f672778db5d78
 	String c = data[a];
 	data[a] = data[b];
 	data[b] = c;
