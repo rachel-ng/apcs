@@ -53,13 +53,13 @@ public class MyHeap <T extends Comparable<T>> {
     }
 
     public void up (int index) {
-	int p = (index - 1) /2;
+	int p = (index - 1) / 2;
 
-	if (max ) {
-
+	if (max && data[p] < data[index]) {
+	    swap(index, p, data);
 	}
-	if (max ) {
-
+	if (!max && data[p] > data[index]) {
+	    swap(index, p, data);
 	}
     }
 
@@ -67,19 +67,25 @@ public class MyHeap <T extends Comparable<T>> {
 	int l = index * 2 + 1;
 	int r = index * 2 + 2;
 
-	if (max ) {
-
+	if (max && data[r] > data[index]) {
+	    swap(index, r, data);
 	}
-	if (max ) {
-
+	if (max && data[l] > data[index]) {
+	    swap(index, l, data);
+	}
+	if (!max && data[r] < data[index]) {
+	    swap(index, r, data);
+	}
+	if (!max && data[l] < data[index]) {
+	    swap(index, l, data);
 	}
 	
     }
 
     public String remove () {
 	String s = peek();
-	swap(0, size - 1);
-	pushDown(0);	
+	swap(0, size - 1, data);
+	down(0);	
 	return s;
     }
     
@@ -91,18 +97,20 @@ public class MyHeap <T extends Comparable<T>> {
 	return size;
     }
 
-    public int parent () {
-	(n - 1) / 2;
+    /* n is the index
+    public int parent (int n) {
+	return (n - 1) / 2;
     }
     
-    public int LChild () {
-	2n + 1;
+    public int LChild (int n) {
+	return 2n + 1;
     }
 
-    public int RChild () {
-	2n + 2;
+    public int RChild (int n) {
+	return 2n + 2;
     }
-        
+    */
+    
     public static void swap (int a, int b, String[] data) {
 	String c = data[a];
 	data[a] = data[b];
