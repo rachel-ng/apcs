@@ -1,19 +1,21 @@
 import java.util.*;
 
-public class MyHeap {
-    private String[] data;
+public class MyHeap<T extends Comparable<T>> {
+    private T[] data;
     private boolean max, min;
     private int size;
-    
+
+    @SuppressWarnings("unchecked")
     public MyHeap () {
-	data = new String[10];
+	data = (T[])new Comparable[10];
 	size = 0;
 	max = true;
 	min = false;
     }
-    
+
+    @SuppressWarnings("unchecked")
     public MyHeap (boolean m) {
-	data = new String[10];
+	data = (T[])new Comparable[10];
 	size = 0;
 	max = m;
 	min = !m;
@@ -30,72 +32,66 @@ public class MyHeap {
 	return str + "]";
     }
     
-    public void add(String value){
-	if (data[0] == null) {
-	    data[0] = value;
-	    size++;
-	    return;
-	}
-	
-	if (size >= data.length - 1){
+    public void add(T value){
+	if (size == data.length){
 	    resize();
 	}
 	
 	data[size] = value;
+	up(size);
 	size++;
-	up(size - 1);
     }
 
     public void up (int index) {
-	int p = (index - 1) / 2;
+	int p = (index - 1) / 2; // parent
 	
-	if (max && data[index].compareTo(data[p]) > 0 && index != 0) {
-	    swap(index, p, data);
+	if (max && data[index].compareTo(data[p]) > 0) {
+	    swap(index, p);
 	    up(p);
 	}
-	if (min && data[index].compareTo(data[p]) < 0 && index != 0) {
-	    swap(index, p, data);
+	
+	if (min && data[index].compareTo(data[p]) < 0) {
+	    swap(index, p);
 	    up(p);
 	}
     }
     
     public void down (int index) {
-	int l = (index * 2) + 1;
-	int r = (index * 2) + 2;
+	int l = (index * 2) + 1; // wrong child
+	int r = (index * 2) + 2; // right child
 	
-	if (max) {
-	    if(data[index].compareTo(data[l]) < 0){
-		swap(index, l, data);
+	if (max) { // max heap
+	    if (data[index].compareTo(data[l]) < 0){
+		swap(index, l);
 		down(l);
 	    }
-	    if(data[index].compareTo(data[r]) < 0){
-		swap(index, r, data);
+	    if (data[index].compareTo(data[r]) < 0){
+		swap(index, r);
 		down(r);
 	    }
 	}
 	
-	if (min) {
-	    if(data[index].compareTo(data[l]) > 0){
-		swap(index, l, data);
+	if (min) { // min heap
+	    if (data[index].compareTo(data[l]) > 0){
+		swap(index, l);
 		down(l);
 	    }
-	    if (data[index].compareTo(data[r]) > 0){
-		swap(index, r, data);
+	    else if (data[index].compareTo(data[r]) > 0){
+		swap(index, r);
 		down(r);
 	    }
 	}
     }
 
-    public String remove(){
-	String s = peek();
-	data[0] = null;
-	swap(0, size - 1, data);
-	size--; 
-	down(0);	
+    public T remove(){
+	T s = peek();
+	swap(0, size - 1);
+	size--;
+	down(0);
 	return s;
     }
 
-    public String peek () {
+    public T peek () {
 	return data[0];
     }
     
@@ -103,14 +99,15 @@ public class MyHeap {
 	return size;
     }
 
-    public static void swap (int a, int b, String[] dat) {
-	String c = dat[a];
-	dat[a] = dat[b];
-	dat[b] = c;
+    public void swap (int a, int b) {
+	T c = data[a];
+	data[a] = data[b];
+	data[b] = c;
     }
 
+    @SuppressWarnings("unchecked")
     public void resize () {
-	String[] halp = new String[data.length * 2];
+	T[] halp = (T[])new Comparable[data.length * 2];
 	for (int i = 0; i < size; i++) {
 	    halp[i] = data[i];
 	}
