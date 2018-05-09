@@ -13,6 +13,14 @@ public class Maze{
   // '@' - part of solution
   // 'S' - starting space (do not replace this)
   public String toString(){
+      String str = "";
+      for (int r = 0; r < board.length; r++) {
+	  for (int c = 0; c < board[0].length; c++) {
+	      str += board[r][c];
+	  }
+	  str += "\n";
+      }
+      return str; 
   }
    
   // Work on this method as a group! 
