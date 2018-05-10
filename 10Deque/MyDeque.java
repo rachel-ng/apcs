@@ -2,27 +2,28 @@ import java.util.*;
 
 public class MyDeque<E> {
 
-    private E[] deq;  // LIFO
-    private int front, back;
+    private E[] data;  // LIFO
+    private int first, last;
     private int size;
 
     @SuppressWarnings("unchecked")
     public MyDeque() {
-	deq = (E[])new Object[10];
-	front = -1;
-	back = -1;
-	size = 10;
+	data = (E[])new Object[10];
+	first = 0;
+	last = 0;
+	size = 0;
     }
-    
+
+    @SuppressWarnings("unchecked")
     public MyDeque(int initialCapacity) {
 	if (initialCapacity < 0) {
 	    throw new IllegalArgumentException();
 	}
 	
-	deq = (E[])new Object[initialCapacity];
-	front = -1;
-	back = -1;
-	size = initialCapacity;
+	data = (E[])new Object[initialCapacity];
+	first = 0;
+	last = 0;
+	size = 0;
     }
 
     public int size() {
@@ -33,119 +34,180 @@ public class MyDeque<E> {
 	if (thing == null) {
 	    throw new NullPointerException();
 	}
-	if (front == -1) {
-	    deq[0] = thing;
-	    front = 0;
-	    back = 0;
+	else if (size == 0) {
+	    data[first] = thing;
+	}
+	else {
+	    if (size == data.length) {
+		resize();
+	    }
+	    first = Math.floorMod(first - 1, data.length);
+	    data[first] = thing;
 	}
 
+	size++;
     }
     
     public void addLast(E thing) {
 	if (thing == null) {
 	    throw new NullPointerException();
 	}
-	if (back < size - 1) {
+	else if (size == 0) {
+	    data[last] = thing;
+	}
 
-	}
-	else if (back + 1 < size){
-	    deq[back + 1] = thing;
-	    if (back + 1 >= size && front != 0) {
-		back = -1;
+	else {
+	    if (size == data.length){
+		resize();
 	    }
-	    back++;
+	    last = Math.floorMod(last + 1, data.length);
+	    data[last] = thing;
 	}
+	
+	size++;
     }
+    
 
     public E removeFirst() {
 	if (size == 0) {
 	    throw new NoSuchElementException();
 	}
+	
+	E thing = getFirst();
+	first = Math.floorMod(first + 1, data.length);
+	size--;
+	
+	return thing;
     }
 
     public E removeLast() {
 	if (size == 0) {
 	    throw new NoSuchElementException();
 	}
+	
+	E thing = getLast();
+	last = Math.floorMod(last - 1, data.length);
+	size--;
+	
+	return thing;
     }
 
     public E getFirst() {
 	if (size == 0) {
 	    throw new NoSuchElementException();
 	}
+	return data[first];
     }
     
     public E getLast() {
 	if (size == 0) {
 	    throw new NoSuchElementException();
 	}
+	return data[last];
     }
+    
+    @SuppressWarnings("unchecked")
+    public void resize () {
+	E[] halp = (E[])new Object[data.length*2];
 
+	int index = first;
+	int i = 0;
+	while(index != last){
+	    halp[i] = data[index];
+	    index = Math.floorMod(index+1, data.length);
+	    i++;
+	}
+	halp[i] = data[index];
+	data = halp;
+	first = 0;
+	last = size()-1;   
+    }
+    
     public String toString(){
-	String ans = "[";
-	if(start < end){
-	    for (int i = start; i <= end; i++){
-		ans += data[i] + " , ";
-	    }
+	String str = "";
+	int index = first;
+	while (index != last) {	    
+	    str += data[index] + ", ";
+	    index = Math.floorMod(index + 1, data.length);
 	}
-	else{
-	    for(int i = start; i < data.length; i++){
-		ans += data[i] + ", ";
-	    }
-	    for(int i = 0; i <= end; i++){
-		ans += data[i] + ", ";
-	    }
-	}
-	ans = ans.substring(0, ans.length() - 2) + "]";
-	return ans;
+	str += data[index];
+	return str;	
     }
 
-    public static void main(String[] args) {
-	MyDeque<String> a = new MyDeque<>(), a1 = new MyDeque<>();
-	ArrayList<String> b = new ArrayList<>();
-
-	int size = Integer.parseInt(args[0]);
-	for(int i = 0; i < size; i++){
-	    int temp = (int)(Math.random() * 1000);
-	    if(temp % 2 == 0){
-		a.addFirst("" + temp);
-		a1.addFirst("" + temp);
-		b.add(0, "" + temp);
-	    }
-	    else{
-		a.addLast("" + temp);
-		a1.addLast("" + temp);
-		b.add("" + temp);
-	    }
-	}
-
-	int index = 0;
-	boolean hasError = false;
-	String errorEvaluation = "Errors found at these indices: ";
-	for (String x : b){
-	    if (!(x.equals(a.getFirst()))){
-		System.out.println("The getFirst() function is incorrect at index " + index);
-		hasError = true;
-	    }
-	    if (!(x.equals(a.removeFirst()))){
-		System.out.println("There is an error at index " + index);
-		errorEvaluation += index + ", ";
-		hasError = true;
-	    }
-	    index++;
-	}
-
-
-	if(hasError){
-	    errorEvaluation = errorEvaluation.substring(0, errorEvaluation.length() - 2);
-	    System.out.println(errorEvaluation);
-	    System.out.println("MyDeque: " + a1);
-	    System.out.println("Actual Deque: " + b);
-	}
-	else{
-	    System.out.println("Your deque is bug-free!");
-	}
-    }
+    public static void main(String[]args){
 	
+	MyDeque<String> morty = new MyDeque<>(5);
+	
+	System.out.println("\n\nMORTY: " + morty.toString() + "\n\n");
+
+	morty.addFirst("gonna");
+	morty.addFirst("never");
+	morty.addFirst("cry");
+	morty.addFirst("you");
+	morty.addLast("say");
+	morty.addLast("goodbye");
+	morty.addLast("never");
+	morty.addLast("gonna");
+	morty.addFirst("make");
+	morty.addFirst("give");
+	morty.removeFirst();
+	morty.removeLast();
+	morty.removeLast();
+	morty.addLast("never");
+	morty.addFirst("gonna");
+	morty.addFirst("never");
+	morty.addLast("a");
+	morty.removeFirst();
+	morty.removeLast();
+	morty.addLast("gonna");
+	morty.addLast("tell");
+	morty.addFirst("never");
+	morty.addFirst("you");
+	morty.addFirst("desert");
+	morty.addFirst("and");
+	morty.addFirst("around");
+	morty.addFirst("turn");
+	morty.addLast("a");
+	morty.addFirst("gonna");
+	morty.addFirst("you");
+	morty.removeFirst();
+	morty.addFirst("tell");
+	morty.addLast("lie");
+	morty.removeFirst();
+	morty.addFirst("never");
+	morty.addFirst("down");
+	morty.addFirst("you");
+	morty.addLast("and");
+	morty.addFirst("let");
+	morty.addFirst("gonna");
+	morty.addFirst("never");
+	morty.addLast("hurt");
+	morty.addFirst("up");
+	morty.addFirst("you");
+	morty.addLast("hurt");
+	morty.addFirst("give");
+	morty.addFirst("gonna");
+	morty.addFirst("gonna");
+	morty.removeLast();
+	morty.addLast("you");
+	morty.removeFirst();
+	morty.addFirst("never");
+
+	System.out.println(morty.toString() + "\n\n");
+
+
+	String[] rick = new String[] {"never", "gonna", "give", "you", "up", "never", "gonna", "let", "you", "down", "never", "gonna", "turn", "around", "and", "desert", "you", "never", "gonna", "make", "you", "cry", "never", "gonna", "say", "goodbye", "never", "gonna", "tell", "a", "lie", "and", "hurt", "you"};
+	boolean roll = true;
+	
+	for (String i : rick) {
+	    if (!i.equals(morty.removeFirst())) {
+		roll = false;
+	    }
+	}
+	
+	if (roll) {
+	    System.out.println("YOU'VE JUST BEEN RICKROLLED\n\n");
+	}
+    }
     
 }
