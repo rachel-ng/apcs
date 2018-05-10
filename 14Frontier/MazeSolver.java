@@ -12,9 +12,10 @@ public class MazeSolver{
     }
 
     //mode: required to allow for alternate solve modes.
-    //0: BFS
-    //1: DFS
+    //0: BFS breadth first search
+    //1: DFS depth first search
     public boolean solve(int mode){
+	
 	//initialize your frontier
 	//while there is stuff in the frontier:
 	//  get the next location
