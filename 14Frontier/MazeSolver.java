@@ -3,6 +3,7 @@ import java.util.*;
 public class MazeSolver{
     private Maze maze;
     private Frontier frontier;
+    
     private int[][] move = {{1,0}, {-1,0}, {0,1}, {0,-1}};
     
     public MazeSolver(String mazeText){
@@ -22,11 +23,11 @@ public class MazeSolver{
 	
 	
 	if (mode == 0) {
-	    
+	    frontier = new FrontierQueue();
 	}
 
 	if (mode == 1) {
-	    
+	    frontier = new FrontierStack();
 	}
 	
 	//initialize your frontier
