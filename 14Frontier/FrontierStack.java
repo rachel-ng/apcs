@@ -1,12 +1,14 @@
+import java.util.*;
+
 public class FrontierStack implements Frontier {
 
-    Deque data = new Deque();
+    Deque<Location> data = new ArrayDeque<>();
     
-    public int next () { //Location next () {
-	return data.getLast();
+    public Location next () { //Location next () {
+	return data.removeLast();
     }
 
-    public void add (int n) { //Location n) {
+    public void add (Location n) { //Location n) {
 	data.addLast(n);
     }
 
@@ -16,19 +18,20 @@ public class FrontierStack implements Frontier {
 
     public static void main(String[] args) {
 
-	FrontierStack f  = new FrontierStack();
+	FrontierStack fs = new FrontierStack();
 
-	int[] nums =  {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+	Location a = new Location(0,0,null);
+	fs.add(a);
+	Location b = new Location(1,1,null);
+	fs.add(b);
+	Location c = new Location(2,2,null);
+	fs.add(c);
 
-	for (int i : nums) {
-	    f.add(i);
-	}
-
-	for (int i = 0; i < 10; i++) {
-	    System.out.println(f.hasNext());
-	    System.out.println(f.next());
-	}
+	System.out.println(fs.next());
+	System.out.println(fs.next());
+	System.out.println(fs.next());
 	
     }
     
 }
+

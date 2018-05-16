@@ -8,5 +8,7 @@ public class Location{
 	previous = prev;
     }
 
-    
+    public String toString () {
+	return x + "\t" + y;
+    }
 }
