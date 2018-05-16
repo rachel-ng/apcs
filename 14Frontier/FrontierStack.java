@@ -27,9 +27,13 @@ public class FrontierStack implements Frontier {
 	Location c = new Location(2,2,null);
 	fs.add(c);
 
+	System.out.println(fs.hasNext());
 	System.out.println(fs.next());
+	System.out.println(fs.hasNext());
 	System.out.println(fs.next());
+	System.out.println(fs.hasNext());
 	System.out.println(fs.next());
+	System.out.println(fs.hasNext());
 	
     }
     

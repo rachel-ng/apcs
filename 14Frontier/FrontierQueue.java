@@ -26,9 +26,13 @@ public class FrontierQueue implements Frontier {
 	Location c = new Location(2,2,null);
 	fq.add(c);
 
+	System.out.println(fq.hasNext());
 	System.out.println(fq.next());
+	System.out.println(fq.hasNext());
 	System.out.println(fq.next());
+	System.out.println(fq.hasNext());
 	System.out.println(fq.next());
+	System.out.println(fq.hasNext());
     }
     
 }
