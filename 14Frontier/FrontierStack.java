@@ -2,7 +2,7 @@ import java.util.*;
 
 public class FrontierStack implements Frontier {
 
-    Deque<Location> data = new ArrayDeque<>();
+    private Deque<Location> data = new ArrayDeque<>();
     
     public Location next () { //Location next () {
 	return data.removeLast();

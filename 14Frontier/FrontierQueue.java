@@ -2,7 +2,7 @@ import java.util.*;
 
 public class FrontierQueue implements Frontier {
 
-    Deque<Location> data = new ArrayDeque<>();
+    private Deque<Location> data = new ArrayDeque<>();
     
     public Location next () {
 	return data.removeFirst();

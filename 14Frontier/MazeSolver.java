@@ -3,6 +3,7 @@ import java.util.*;
 public class MazeSolver{
     private Maze maze;
     private Frontier frontier;
+    private boolean astar;
     
     private int[][] move = {{1,0}, {-1,0}, {0,1}, {0,-1}};
     
@@ -19,7 +20,7 @@ public class MazeSolver{
     //0: BFS breadth first search
     //1: DFS depth first search
     public boolean solve(int mode){
-
+	astar = false;
 	
 	
 	if (mode == 0) {
@@ -29,14 +30,45 @@ public class MazeSolver{
 	if (mode == 1) {
 	    frontier = new FrontierStack();
 	}
+
+	if (mode == 2) {
+	    frontier = new FrontierPriorityQueue();
+	}
+
+	else {
+	    frontier = new FrontierPriorityQueue();
+	    maze.setastart(true);
+	}
+
+	frontier.add(maze.getStart());
+	Location end = maze.getEnd();
 	
-	//initialize your frontier
-	//while there is stuff in the frontier:
-	//  get the next location
-	//  process the location to find the locations (use the maze to do this)
-	//  check if any locations are the end, if you found the end just return true!
-	//  add all the locations to the frontier
-	//when there are no more values in the frontier return false
+	while (frontier.hasNext()) {
+	    Location n = frontier.next();
+
+	    if (!n.equals(maze.getStart())) {
+		maze.set(next.getX(), next.getY(), '.');
+	    }
+
+	    Location[] neighbors = maze.getNeightbors(next);
+
+	    for (Location l : neighbors) {
+		if (l != null) {
+		    if (l.equals(end) {
+			    while (!n.equals(maze.getStart())) {
+				maze.set(n.getX(), n.getY(), '@');
+				n = n.getPrev();
+			    }
+
+			    return true;
+			}
+
+			frontier.add(l);
+			maze.set(l.getX(), l.getY(), '?');
+			}
+		}
+	}
+
 	return false;
     }
 
