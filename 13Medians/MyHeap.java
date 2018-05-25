@@ -7,10 +7,7 @@ public class MyHeap<T extends Comparable<T>> {
 
     @SuppressWarnings("unchecked")
     public MyHeap () {
-	data = (T[])new Comparable[10];
-	size = 0;
-	max = true;
-	min = false;
+	this(true);
     }
 
     @SuppressWarnings("unchecked")
@@ -45,17 +42,12 @@ public class MyHeap<T extends Comparable<T>> {
     public void up (int index) {
 	int p = (index - 1) / 2; // parent
 	
-	if (max && data[index].compareTo(data[p]) > 0) {
-	    swap(index, p);
-	    up(p);
-	}
-	
-	if (min && data[index].compareTo(data[p]) < 0) {
+	if (max && data[index].compareTo(data[p]) > 0 || min && data[index].compareTo(data[p]) < 0) {
 	    swap(index, p);
 	    up(p);
 	}
     }
-    
+
     public void down (int index) {
 	int l = (index * 2) + 1; // wrong child
 	int r = (index * 2) + 2; // right child
@@ -83,6 +75,7 @@ public class MyHeap<T extends Comparable<T>> {
 	}
     }
 
+    
     public T remove(){
 	T s = peek();
 	swap(0, size - 1);
@@ -107,7 +100,7 @@ public class MyHeap<T extends Comparable<T>> {
 
     @SuppressWarnings("unchecked")
     public void resize () {
-	T[] halp = (T[])new Comparable[data.length * 2];
+	T[] halp = (T[])new Comparable[size * 2];
 	for (int i = 0; i < size; i++) {
 	    halp[i] = data[i];
 	}
