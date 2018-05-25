@@ -3,41 +3,31 @@ import java.util.*;
 public class MazeSolver{
     private Maze maze;
     private Frontier frontier;
-    private boolean astar;
-    
-    private int[][] move = {{1,0}, {-1,0}, {0,1}, {0,-1}};
-    
+    private boolean aStar;
+        
     public MazeSolver(String mazeText){
 	maze = new Maze (mazeText);
     }
 
-    //Default to BFS
     public boolean solve(){
 	return solve(0);
     }
 
-    //mode: required to allow for alternate solve modes.
-    //0: BFS breadth first search
-    //1: DFS depth first search
     public boolean solve(int mode){
-	astar = false;
-	
+	aStar = false;
 	
 	if (mode == 0) {
 	    frontier = new FrontierQueue();
 	}
-
-	if (mode == 1) {
+	else if (mode == 1) {
 	    frontier = new FrontierStack();
 	}
-
-	if (mode == 2) {
+	else if (mode == 2) {
 	    frontier = new FrontierPriorityQueue();
 	}
-
 	else {
 	    frontier = new FrontierPriorityQueue();
-	    maze.setastart(true);
+	    maze.setAStar(true);
 	}
 
 	frontier.add(maze.getStart());
@@ -47,14 +37,14 @@ public class MazeSolver{
 	    Location n = frontier.next();
 
 	    if (!n.equals(maze.getStart())) {
-		maze.set(next.getX(), next.getY(), '.');
+		maze.set(n.getX(), n.getY(), '.');
 	    }
 
-	    Location[] neighbors = maze.getNeightbors(next);
+	    Location[] neighbors = maze.getNeighbors(n);
 
 	    for (Location l : neighbors) {
 		if (l != null) {
-		    if (l.equals(end) {
+		    if (l.equals(end)) {
 			    while (!n.equals(maze.getStart())) {
 				maze.set(n.getX(), n.getY(), '@');
 				n = n.getPrev();
@@ -71,16 +61,20 @@ public class MazeSolver{
 
 	return false;
     }
-
-    public void BFSolve () {
-	
-    }
-
-    public void DFSolve () {
-
-    }
     
     public String toString(){
 	return maze.toString();
+    }
+
+    public static void main(String[]args) {
+	MazeSolver x = new MazeSolver("test.txt");
+	MazeSolver y = new MazeSolver("test.txt");
+	MazeSolver z = new MazeSolver("test.txt");
+	System.out.println(x.solve(0));
+	System.out.println(x);
+	System.out.println(y.solve(1));
+	System.out.println(y);
+	System.out.println(z.solve(2));
+	System.out.println(z);
     }
 }
