@@ -1,138 +1,187 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 
 public class USACO {
     
-    public static int bronze(String filename) {
-	return bronzeH(filename);
-    }
-
-    private static int bronzeH(String filename) {
-	
+    public static int bronze (String filename) {
 	try {
-	    File text = new File(filename);
-	    Scanner f = new Scanner(text);
-	    
-	    int R = f.nextInt(); // rows
-	    int C = f.nextInt(); // cols
-	    int E = f.nextInt(); // elevation
-	    int N = f.nextInt(); // num instructions
-	    
-	    int[][] lake[R][C];
+	    File text = new File(filename);	    
+	    Scanner input = new Scanner(text);	  
 
+	    int R = input.nextInt();
+	    int C = input.nextInt();
+	    int E = input.nextInt();
+	    int N = input.nextInt();	    
+
+	    int[][] lake = new int[R][C];
 	    for (int r = 0; r < R; r++) {
 		for (int c = 0; c < C; c++) {
-		    lake[r][c] = f.nextInt();
-		}
-	    
-	    for (int n = 0; n < N; n++) {
-
-		int R_s = f.nextInt();
-		int C_s = f.nextInt();
-		int D_s = f.nextInt();
-
-		int max = 0; 
-
-		for (int r = 0; r < 3; r++) {
-		    for (int c = 0; c < 3; c++) {
-			if (lake[R_s + r][C_s + c] > max) {
-			    max = lake[R_s + r][C_s + c];
-			}
-		    }
-		}
-		for (int r = 0; r < 3; r++) {
-		    for (int c = 0; c < 3; c++) {
-			if (lake[R_s + r][C_s + c] > max - D_s) {
-			    lake[R_s + r][C_s + c] = max - D_s; 
-			}
-		    }
+		    lake[r][c] = input.nextInt();
 		}
 	    }
 
-	    int depth = 0;
-	    for (int r = 0; r < R; r++) {
+	    for (int n = N; n > 0; n--) {
+		int R_s = input.nextInt()-1;
+		int C_s = input.nextInt()-1;
+		int D_s = input.nextInt();
+		int[][] cowsAt = new int[][] {
+		    {0,0}, {0,1}, {0,2},
+		    {1,0}, {1,1}, {1,2},
+		    {2,0}, {2,1}, {2,2}
+		};
+
+	
+
+		for (int d = D_s; d > 0; d--) {
+		    int max = 0;
+		    for (int i[]: cowsAt) {
+			if (lake[R_s + i[0]][C_s + i[1]] > max) {
+			    max = lake[R_s + i[0]][C_s + i[1]];
+			}
+		    }
+
+		    for (int i[]: cowsAt) {
+			if (lake[R_s + i[0]][C_s + i[1]] ==  max) {
+			    lake[R_s + i[0]][C_s + i[1]]--;
+			}
+		    }
+		}		
+	    }
+
+	    int totalDepth = 0;
+	    for (int r = 0; r < R; r ++) {
 		for (int c = 0; c < C; c++) {
 		    if (E > lake[r][c]) {
-			depth += E - lake[r][c];
+			totalDepth += E - lake[r][c];
 		    }
 		}
 	    }
+	   
+	    return totalDepth * 72 *72;
 	    
-	    return depth * 72 * 72;
-		     
-	}catch(Exception e){
+	}catch (Exception e) {
 	    System.exit(1);
 	}
 	
 	return 0;
     }
-    
-    public static int silver(String filename) {
-	return silverH(filename);
-    }
 
-    private static int silverH(String filename) {
-	try{
+    
+    public static int silver (String filename) {
+	int numSol = 0;
+	try {
 	    
 	    File text = new File(filename);
-	    Scanner f = new Scanner(text);
-	    
-	    String str;
-	    
-	    int N = f.nextInt(); // rows
-	    int M = f.nextInt(); // cols
-	    int T = f.nextInt(); // time
+	    Scanner input = new Scanner(text);
 
-	    int[][] mooove = {{1,0}, {-1,0}, {0,1}, {0,-1}};
-	    int[] m = new int[4];
+	    int N = input.nextInt();
+	    int M = input.nextInt();
+	    int T = input.nextInt();
+
+	    input.nextLine();
+	    char[][] pasture = new char[N][M];
 	    
-	    char[][] pasture = new char[N];
-	    int[][] past = new int[N][M];
-	    int[][] current = new int[N][M];
-	    
-	    while (f.hasNextLine()) {
-		while (f.hasNextInt()) {
-		    for (int i = 0; i < 4; i++) {
-			m[i] = f.hasNextInt(); // where to move
-		    }
+	    for (int r = 0; r < N; r++) {
+		String line = input.nextLine();
+		for (int c = 0; c < M; c++) {
+		    pasture[r][c] = line.charAt(c);
+		    // System.out.println (toString (pasture));
 		}
 		
-		for (int i = 0; i < N + 1; i++) {
-		    pasture[i] = f.nextLine().toCharArray(); //string > char array
+	    }
+
+	    int R1 = input.nextInt()- 1;
+	    int C1 = input.nextInt()- 1;
+	    int R2 = input.nextInt()- 1;
+	    int C2 = input.nextInt()- 1;
+
+	    int[][] arr1 = new int[N][M];
+	    int[][] arr2 = new int[N][M];
+
+	    for (int r = 0; r < N; r++) {
+		for (int c = 0; c < M; c++) {
+		    if (pasture[r][c] == '*') {
+			arr1[r][c] = -1;
+			arr2[r][c] = -1;
+		    }
+		    else {
+			arr1[r][c] = 0;
+			arr2[r][c] = 0;
+		    }
 		}
 	    }
 
-	    past[m[0]][m[1]] = 1;
-	    current[m[0]][m[1]] = 1;
-
+	    arr1[R1][C1] = 1;
+	    arr2[R1][C1] = 1;
+	    
 	    for (int t = 0; t < T; t++) {
-		for (int r = 0; r < R; r++) {
-		    for (int c = 0; c < C; c++) {
-			if (pasture[r][c] != '*') {
-			    int sum = 0;
-				for (int i = 0; i < 4; i++) {
-				    if (inPasture(r + mooove[i][0],c + mooove[i][1],R,C)) {
-					sum += past[r + mooove[i][0]][c + moooove[i][1]];
-				    }
-				}
-				current[r][c] = sum;
-			}
-		    }
+		if (t%2 == 0) {
+		    move(arr1, arr2);		    
 		}
-		past = current;
-		current = new int[R][C];
+		else {
+		    move(arr2, arr1);
+		}	    
 	    }
-
-	    return past[m[2]][m[3]];
-		
-	}catch(Exception e) {
-	    System.exit(1)
+	    
+	    if (T % 2 == 0) {
+		return arr1[R2][C2];
+	    }
+	    return arr2[R2][C2];
+	    
+	}catch (Exception e) {
+	    System.exit (1);
 	}
+	    
 	return 0;
     }
 
-    public static boolean inPasture(int cR, int cC, int r, int c) {
-	return cR >= 0 && cC >= 0 && cR < r && cC < c;
+    public static void move(int[][] arr1, int[][]arr2) {
+	int[][] mooove = {{1,0}, {-1,0}, {0,1}, {0,-1}};
+	for (int r = 0; r < arr1.length; r++) {
+	    for (int c = 0; c < arr1[0].length; c++) {
+		if (arr1[r][c] > 0) {
+		    arr2[r][c] = 0;
+		}		
+		if (arr1[r][c] == 0) {
+		    arr2[r][c] = 0;
+		    for (int[] i: mooove) {
+			int row = r + i[0];
+			int col = c + i[1];
+
+			if (isValid(arr1, row, col)) {			    
+			    arr2[r][c] += arr1[row][col];
+			}
+		    }
+		}
+	    }
+	   
+	}	
     }
+
+    public static String toString (int[][] arr) {
+	String str = "";
+	for (int r = 0; r < arr.length; r++) {
+	    for (int c = 0; c < arr[r].length; c++) {
+		str += arr[r][c] + " ";
+	    }
+	    str += "\n";
+	}
+	return str;
+    }
+
+    public static String toString (char[][] arr) {
+	String str = "";
+	for (int r = 0; r < arr.length; r++) {
+	    for (int c = 0; c < arr[r].length; c++) {
+		str += arr[r][c] + " ";
+	    }
+	    str += "\n";
+	}
+	return str;
+    }
+
+    public static boolean isValid (int[][] arr, int r, int c) {
+	return (r < arr.length && r >= 0 && c < arr[0].length && c >= 0 && arr[r][c] != -1);
+    }
+
 }
